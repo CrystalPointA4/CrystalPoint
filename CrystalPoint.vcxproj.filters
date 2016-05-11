@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{842778c9-ff0f-4a6d-9c86-0a178ad40fcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Enemy">
+      <UniqueIdentifier>{1be14b84-6fa7-4cfb-94b9-666f3ee14198}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h">
@@ -58,6 +61,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WorldState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -97,6 +112,18 @@
     </ClCompile>
     <ClCompile Include="WorldState.cpp">
       <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Model\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

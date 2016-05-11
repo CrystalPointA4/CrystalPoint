@@ -1,4 +1,5 @@
 #include "Header.h"
+#include "Model.h"
 
 //Prototypes
 void bindFuncOpenGL(void);
@@ -11,7 +12,7 @@ static int Height;
 float lastFrameTime = 0;
 bool keys[255];
 
-vector<ObjModel*> models;
+vector<Model*> models;
 int currentModel = 0;
 
 struct Camera
@@ -169,5 +170,5 @@ void configureOpenGL()
 
 void loadModels() 
 {
-	models.push_back(new ObjModel("models/ship/shipA_OBJ.obj"));
+	models.push_back(new Model("models/ship/shipA_OBJ.obj"));
 }

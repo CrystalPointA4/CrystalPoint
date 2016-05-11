@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LoadingState.h" />
@@ -158,13 +159,17 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateHandler.h" />
+    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Weapon.h" />
     <ClInclude Include="WorldModel.h" />
     <ClInclude Include="WorldState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LoadingState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -172,8 +177,11 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateHandler.cpp" />
+    <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WorldModel.cpp" />
     <ClCompile Include="WorldState.cpp" />
   </ItemGroup>

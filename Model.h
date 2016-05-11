@@ -1,8 +1,60 @@
 #pragma once
+#include "Header.h"
+#include "ModelLoader.h"
+#include "Vector.h"
+
 class Model
 {
-public:
-	Model();
-	~Model();
-};
+private:
+	class Vertex
+	{
+	public:
+		int position;
+		int normal;
+		int texcoord;
+	};
 
+	class Face
+	{
+	public:
+		list<Vertex> vertices;
+	};
+
+	class Texture
+	{
+		GLuint index;
+	public:
+		Texture(const std::string &fileName);
+		void bind();
+	};
+
+	class MaterialInfo
+	{
+	public:
+		MaterialInfo();
+		std::string name;
+		Texture* texture;
+		bool hasTexture;
+	};
+
+	class ObjGroup
+	{
+	public:
+		std::string name;
+		int materialIndex;
+		list<Face> faces;
+	};
+
+	std::vector<Vec3f>	vertices;
+	std::vector<Vec3f>	normals;
+	std::vector<Vec2f>	texcoords;
+	std::vector<ObjGroup*> groups;
+	std::vector<MaterialInfo*> materials;
+
+	void loadMaterialFile(std::string fileName, std::string dirName);
+public:
+	Model(std::string filename);
+	~Model(void);
+
+	void draw();
+};

@@ -12,10 +12,9 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 #include <windows.h>
 #include <gl/GL.h>
 
-//Own files
-#include "Model.h"
-#include "ModelLoader.h"
+using namespace std;

@@ -1,10 +1,10 @@
 #pragma once
 #include "Header.h"
 
-class Controller
+class Weapon
 {
 public:
-	Controller();
-	~Controller();
+	Weapon();
+	~Weapon();
 };
 
