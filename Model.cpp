@@ -129,6 +129,15 @@ void Model::draw()
 			glEnable(GL_TEXTURE_2D);
 			materials[g->materialIndex]->texture->bind();
 		}
+		else
+		{
+			glDisable(GL_TEXTURE_2D);
+
+			float color[4] = { 1, 0, 0, 1 };
+			memcpy(color, materials[g->materialIndex]->diffuseColor.v, 3 * sizeof(float));
+			glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
+			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
+		}
 
 		glBegin(GL_TRIANGLES);
 		for (auto &f : g->faces)
@@ -192,6 +201,10 @@ void Model::loadMaterialFile(std::string fileName, std::string dirName)
 		{
 			currentMaterial->hasTexture = true;
 			currentMaterial->texture = new Texture(dirName + "/" + params[1]);
+		}
+		else if (params[0] == "kd")
+		{
+			currentMaterial->diffuseColor = Vec3f(atof(params[1].c_str()), atof(params[2].c_str()), atof(params[3].c_str()));
 		}
 		else
 			std::cout << "Didn't parse " << params[0] << " in material file" << std::endl;
