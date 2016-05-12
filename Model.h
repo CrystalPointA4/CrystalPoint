@@ -35,6 +35,14 @@ private:
 		std::string name;
 		Texture* texture;
 		bool hasTexture;
+
+		bool hasDiffuse;
+		Vec3f diffuseColor;
+		bool hasAmbient;
+		Vec3f ambientColor;
+		bool hasSpecular;
+		Vec3f specularColor;
+
 	};
 
 	class ObjGroup

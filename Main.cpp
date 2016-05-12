@@ -151,14 +151,18 @@ void configureOpenGL()
 
 	//Lighting
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 50.0 };
-	GLfloat light_position[] = { 30.0, 30.0, 30.0, 0.0 };
+	GLfloat mat_shininess[] = { 20.0 };
+	GLfloat light_position[] = { 30.0, 30.0, 30.0, 1.0 };
+	GLfloat light_diffuse[] = { 2.0, 2.0, 2.0, 1.0 };
+	GLfloat light_ambient[] = { 2.0, 2.0, 2.0, 1.0 };
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_SMOOTH);
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
