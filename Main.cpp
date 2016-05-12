@@ -17,9 +17,9 @@ int currentModel = 0;
 
 struct Camera
 {
-	float posX = -30;
-	float posY = -30;
-	float posZ = -30;
+	float posX = 0;
+	float posY = -10;
+	float posZ = 0;
 	float rotX = 0;
 	float rotY = 0;
 } camera;
@@ -48,10 +48,13 @@ void display()
 
 void move(float angle, float fac, bool heigth)
 {
-	camera.posX += (float)cos((camera.rotY + angle) / 180 * M_PI) * fac;
-	camera.posZ += (float)sin((camera.rotY + angle) / 180 * M_PI) * fac;
-	if(heigth)
-		camera.posY += (float)sin((camera.rotX + angle) / 180 * M_PI) * fac;
+	if (heigth)
+		camera.posY += angle*fac;
+	else
+	{
+		camera.posX += (float)cos((camera.rotY + angle) / 180 * M_PI) * fac;
+		camera.posZ += (float)sin((camera.rotY + angle) / 180 * M_PI) * fac;
+	}
 }
 
 void idle()
@@ -64,9 +67,10 @@ void idle()
 
 	if (keys['a']) move(0, deltaTime*speed, false);
 	if (keys['d']) move(180, deltaTime*speed, false);
-	if (keys['w']) move(90, deltaTime*speed, true);
-	if (keys['s']) move(270, deltaTime*speed, true);
-
+	if (keys['w']) move(90, deltaTime*speed, false);
+	if (keys['s']) move(270, deltaTime*speed, false);
+	if (keys['q']) move(1, deltaTime*speed, true);
+	if (keys['e']) move(-1, deltaTime*speed, true);
 	glutPostRedisplay();
 }
 
@@ -165,10 +169,10 @@ void configureOpenGL()
 
 	//Cursor
 	glutWarpPointer(Width / 2, Height / 2);
-	glutSetCursor(GLUT_CURSOR_NONE);
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
 }
 
 void loadModels() 
 {
-	models.push_back(new Model("models/ship/shipA_OBJ.obj"));
+	models.push_back(new Model("models/weapons/ZwaardMetTextures/TextureZwaard.obj"));
 }
