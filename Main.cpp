@@ -151,10 +151,10 @@ void configureOpenGL()
 
 	//Lighting
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 50.0 };
-	GLfloat light_position[] = { 30.0, 30.0, 30.0, 0.0 };
-	GLfloat light_diffuse[] = { 1.7, 1.7, 1.7, 1.0 };
-	GLfloat light_ambient[] = { 1.7, 1.7, 1.7, 1.0 };
+	GLfloat mat_shininess[] = { 20.0 };
+	GLfloat light_position[] = { 30.0, 30.0, 30.0, 1.0 };
+	GLfloat light_diffuse[] = { 2.0, 2.0, 2.0, 1.0 };
+	GLfloat light_ambient[] = { 2.0, 2.0, 2.0, 1.0 };
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_SMOOTH);
 
@@ -174,5 +174,5 @@ void configureOpenGL()
 
 void loadModels() 
 {
-	models.push_back(new Model("models/ship/Zwaard.obj"));
+	models.push_back(new Model("models/ship/shipA_OBJ.obj"));
 }
