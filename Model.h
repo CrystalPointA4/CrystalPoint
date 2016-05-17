@@ -1,7 +1,6 @@
 #pragma once
 #include "Header.h"
-#include "ModelLoader.h"
-#include "Vector.h"
+#include "ModelInstance.h"
 
 class Model
 {
@@ -59,10 +58,15 @@ private:
 	std::vector<ObjGroup*> groups;
 	std::vector<MaterialInfo*> materials;
 
+	std::vector<ModelInstance*> instances;
+
 	void loadMaterialFile(std::string fileName, std::string dirName);
 public:
 	Model(std::string filename);
+	Model(void);
 	~Model(void);
+
+	void AddInstance(ModelInstance* inst);
 
 	void draw();
 };

@@ -15,7 +15,7 @@ Player::~Player()
 	delete left;
 }
 
-void Player::Draw_Player(void)
+void Player::Display(void)
 {
 	if (right != nullptr)
 	{	

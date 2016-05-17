@@ -17,7 +17,7 @@ public:
 		float rotY = 0;
 	} eyes;	
 
-	void Draw_Player(void);
+	void Display(void);
 private:
 	int level;
 	int xp;

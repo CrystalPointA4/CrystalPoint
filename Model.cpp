@@ -3,6 +3,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+//Prototypes
+vector<string> split(string str, string sep);
+string replace(string str, string toReplace, string replacement);
+string toLower(string data);
+
 Model::Model(string fileName)
 {
 	std::string dirName = fileName;
@@ -112,13 +117,19 @@ Model::Model(string fileName)
 	groups.push_back(currentGroup);
 }
 
+Model::Model(void)
+{
+	Model("models/TextureZwaard.obj");
+}
 
 Model::~Model(void)
 {
 }
 
-
-
+void Model::AddInstance(ModelInstance* inst)
+{
+	instances.push_back(inst);
+}
 
 void Model::draw()
 {
@@ -152,17 +163,30 @@ void Model::draw()
 			}
 		}
 
-		glBegin(GL_TRIANGLES);
-		for (auto &f : g->faces)
+		for (auto &instance : instances)
 		{
-			for (auto &v : f.vertices)
+
+			glBegin(GL_TRIANGLES);
+			for (auto &f : g->faces)
 			{
-				glNormal3f(normals[v.normal].x, normals[v.normal].y, normals[v.normal].z);
-				glTexCoord2f(texcoords[v.texcoord].x, texcoords[v.texcoord].y);
-				glVertex3f(vertices[v.position].x, vertices[v.position].y, vertices[v.position].z);
+				for (auto &v : f.vertices)
+				{
+					glPushMatrix();
+
+					glTranslatef(instance->translation.x, instance->translation.y, instance->translation.z);
+					glRotatef(instance->rotation.x, 1, 0, 0);
+					glRotatef(instance->rotation.y, 0, 1, 0);
+					glRotatef(instance->rotation.z, 0, 0, 1);
+					glScalef(instance->scale.x, instance->scale.y, instance->scale.z);
+
+					glNormal3f(normals[v.normal].x, normals[v.normal].y, normals[v.normal].z);
+					glTexCoord2f(texcoords[v.texcoord].x, texcoords[v.texcoord].y);
+					glVertex3f(vertices[v.position].x, vertices[v.position].y, vertices[v.position].z);
+				}
 			}
+			glEnd();
+
 		}
-		glEnd();
 	}
 }
 
@@ -270,4 +294,40 @@ Model::Texture::Texture(const std::string & fileName)
 void Model::Texture::bind()
 {
 	glBindTexture(GL_TEXTURE_2D, index);
+}
+
+string replace(string str, string toReplace, string replacement)
+{
+	size_t index = 0;
+	while (true)
+	{
+		index = str.find(toReplace, index);
+		if (index == std::string::npos)
+			break;
+		str.replace(index, toReplace.length(), replacement);
+		++index;
+	}
+	return str;
+}
+
+vector<string> split(string str, string sep)
+{
+	std::vector<std::string> ret;
+	size_t index;
+	while (true)
+	{
+		index = str.find(sep);
+		if (index == std::string::npos)
+			break;
+		ret.push_back(str.substr(0, index));
+		str = str.substr(index + 1);
+	}
+	ret.push_back(str);
+	return ret;
+}
+
+inline string toLower(string data)
+{
+	std::transform(data.begin(), data.end(), data.begin(), ::tolower);
+	return data;
 }

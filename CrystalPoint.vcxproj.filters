@@ -25,12 +25,12 @@
     <Filter Include="Source Files\Model\Enemy">
       <UniqueIdentifier>{1be14b84-6fa7-4cfb-94b9-666f3ee14198}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Handler">
+      <UniqueIdentifier>{1b39afb7-b64b-458a-bba3-755631986211}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header.h">
@@ -75,13 +75,22 @@
     <ClInclude Include="Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModelInstance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InitState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateHandler.cpp">
-      <Filter>Source Files\State</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Source Files\State</Filter>
@@ -104,9 +113,6 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="ModelLoader.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="WorldModel.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
@@ -124,6 +130,21 @@
     </ClCompile>
     <ClCompile Include="Vector.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelInstance.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="StateHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelHandler.cpp">
+      <Filter>Source Files\Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsState.cpp">
+      <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="InitState.cpp">
+      <Filter>Source Files\State</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

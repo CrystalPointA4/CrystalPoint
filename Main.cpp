@@ -1,6 +1,8 @@
 #include "Header.h"
 #include "Model.h"
 #include "Player.h"
+#include "StateHandler.h"
+#include "State.h"
 
 //Prototypes
 void bindFuncOpenGL(void);
@@ -17,6 +19,7 @@ bool keys[255];
 //int currentModel = 0;
 
 Player *player;
+StateHandler *statehandler;
 
 void display()
 {
@@ -29,6 +32,7 @@ void display()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
 	/*glRotatef(player.eyes.rotX, 1, 0, 0);
 	glRotatef(player.eyes.rotY, 0, 1, 0);
 	glTranslatef(player.eyes.posX, player.eyes.posY, player.eyes.posZ);
@@ -42,7 +46,10 @@ void display()
 	glPopMatrix();*/
 
 	//Draw here	
-	player->Draw_Player();
+
+	statehandler->GetCurrentState()->Display();
+
+	player->Display();
 	
 	glutSolidCube(10.0);
 
@@ -67,6 +74,9 @@ void idle()
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
+	statehandler->GetCurrentState()->Keyboard(keys);
+	statehandler->GetCurrentState()->Idle(deltaTime);
+
 	float speed = 10;
 
 	if (keys['a']) move(0, deltaTime*speed, false);
@@ -85,10 +95,14 @@ void mousemotion(int x, int y)
 	int dy = y - Height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
 	{
-		player->eyes.rotY += dx / 10.0f;
-		player->eyes.rotX += dy / 10.0f;
+		statehandler->GetCurrentState()->MouseMove(x, y, dx, dy);
 		glutWarpPointer(Width / 2, Height / 2);
 	}
+}
+
+void mouse(int button, int type, int x, int y)
+{
+	statehandler->GetCurrentState()->MouseClick(button, type, x, y);
 }
 
 void keyboard(unsigned char key, int, int)
@@ -132,10 +146,9 @@ void bindFuncOpenGL()
 	//Keyboard
 	glutKeyboardFunc(keyboard);
 	glutKeyboardUpFunc(keyboardup);
-	//glutMouseFunc(mousefunc);
 
 	//Mouse
-	//glutMouseFunc(mouse);
+	glutMouseFunc(mouse);
 	glutPassiveMotionFunc(mousemotion);
 	
 }
@@ -186,5 +199,8 @@ void configureOpenGL()
 void loadModels() 
 {
 	player = new Player();
+	statehandler = new StateHandler();
+
+	statehandler->Navigate(statehandler->WORLD_STATE);
 	//models.push_back(new Model("models/weapons/ZwaardMetTextures/TextureZwaard.obj"));
 }

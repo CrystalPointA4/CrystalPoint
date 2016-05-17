@@ -1,10 +1,10 @@
 #pragma once
 #include "Header.h"
+#include "State.h"
 
-class MenuState
+class MenuState : public State
 {
 public:
 	MenuState();
 	~MenuState();
 };
-

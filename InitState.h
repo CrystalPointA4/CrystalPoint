@@ -2,10 +2,10 @@
 #include "Header.h"
 #include "State.h"
 
-class WorldState : public State
+class InitState : public State
 {
 public:
-	WorldState();
-	~WorldState();
+	InitState();
+	~InitState();
 };
 

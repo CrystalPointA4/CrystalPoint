@@ -17,4 +17,6 @@
 #include <windows.h>
 #include <gl/GL.h>
 
+#include "Vector.h"
+
 using namespace std;

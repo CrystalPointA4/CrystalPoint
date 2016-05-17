@@ -1,7 +1,8 @@
 #pragma once
 #include "Header.h"
+#include "State.h"
 
-class LoadingState
+class LoadingState : public State
 {
 public:
 	LoadingState();
