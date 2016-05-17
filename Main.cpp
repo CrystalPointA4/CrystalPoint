@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "Model.h"
+#include "Player.h"
 
 //Prototypes
 void bindFuncOpenGL(void);
@@ -12,17 +13,10 @@ static int Height;
 float lastFrameTime = 0;
 bool keys[255];
 
-vector<Model*> models;
-int currentModel = 0;
+//vector<Model*> models;
+//int currentModel = 0;
 
-struct Camera
-{
-	float posX = -30;
-	float posY = -30;
-	float posZ = -30;
-	float rotX = 0;
-	float rotY = 0;
-} camera;
+Player *player;
 
 void display()
 {
@@ -35,12 +29,22 @@ void display()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glRotatef(camera.rotX, 1, 0, 0);
-	glRotatef(camera.rotY, 0, 1, 0);
-	glTranslatef(camera.posX, camera.posY, camera.posZ);
+	/*glRotatef(player.eyes.rotX, 1, 0, 0);
+	glRotatef(player.eyes.rotY, 0, 1, 0);
+	glTranslatef(player.eyes.posX, player.eyes.posY, player.eyes.posZ);
 
-	//Draw here
+	glPushMatrix();
+	glScalef(0.5f, 0.5f, 0.5f);
+	glRotatef(180, 1, 0, 0);
+	glRotatef(45, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
 	models[currentModel]->draw();
+	glPopMatrix();*/
+
+	//Draw here	
+	player->Draw_Player();
+	
+	glutSolidCube(10.0);
 
 	glDisable(GL_TEXTURE_2D);
 	glutSwapBuffers();
@@ -48,10 +52,13 @@ void display()
 
 void move(float angle, float fac, bool heigth)
 {
-	camera.posX += (float)cos((camera.rotY + angle) / 180 * M_PI) * fac;
-	camera.posZ += (float)sin((camera.rotY + angle) / 180 * M_PI) * fac;
-	if(heigth)
-		camera.posY += (float)sin((camera.rotX + angle) / 180 * M_PI) * fac;
+	if (heigth)
+		player->eyes.posY += angle*fac;
+	else
+	{
+		player->eyes.posX += (float)cos((player->eyes.rotY + angle) / 180 * M_PI) * fac;
+		player->eyes.posZ += (float)sin((player->eyes.rotY + angle) / 180 * M_PI) * fac;
+	}
 }
 
 void idle()
@@ -64,8 +71,10 @@ void idle()
 
 	if (keys['a']) move(0, deltaTime*speed, false);
 	if (keys['d']) move(180, deltaTime*speed, false);
-	if (keys['w']) move(90, deltaTime*speed, true);
-	if (keys['s']) move(270, deltaTime*speed, true);
+	if (keys['w']) move(90, deltaTime*speed, false);
+	if (keys['s']) move(270, deltaTime*speed, false);
+	if (keys['q']) move(1, deltaTime*speed, true);
+	if (keys['e']) move(-1, deltaTime*speed, true);	
 
 	glutPostRedisplay();
 }
@@ -76,8 +85,8 @@ void mousemotion(int x, int y)
 	int dy = y - Height / 2;
 	if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
 	{
-		camera.rotY += dx / 10.0f;
-		camera.rotX += dy / 10.0f;
+		player->eyes.rotY += dx / 10.0f;
+		player->eyes.rotX += dy / 10.0f;
 		glutWarpPointer(Width / 2, Height / 2);
 	}
 }
@@ -85,8 +94,8 @@ void mousemotion(int x, int y)
 void keyboard(unsigned char key, int, int)
 {
 	if (key == 27)
-		exit(0);
-
+		exit(0);	
+	//std::cout << key << std::endl;
 	keys[key] = true;
 }
 
@@ -123,6 +132,7 @@ void bindFuncOpenGL()
 	//Keyboard
 	glutKeyboardFunc(keyboard);
 	glutKeyboardUpFunc(keyboardup);
+	//glutMouseFunc(mousefunc);
 
 	//Mouse
 	//glutMouseFunc(mouse);
@@ -137,6 +147,7 @@ void configureOpenGL()
 	glutInitWindowSize(800, 600);
 	glutCreateWindow("Crystal Point");
 	glutFullScreen();
+	//glutPositionWindow((glutGet(GLUT_SCREEN_WIDTH) / 2) - (glutGet(GLUT_WINDOW_WIDTH) / 2), (glutGet(GLUT_SCREEN_HEIGHT) / 2) - (glutGet(GLUT_WINDOW_HEIGHT) / 2));
 
 	//Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -149,7 +160,7 @@ void configureOpenGL()
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.01f);
 
-	//Lighting
+	Lighting
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat mat_shininess[] = { 20.0 };
 	GLfloat light_position[] = { 30.0, 30.0, 30.0, 1.0 };
@@ -169,10 +180,11 @@ void configureOpenGL()
 
 	//Cursor
 	glutWarpPointer(Width / 2, Height / 2);
-	glutSetCursor(GLUT_CURSOR_NONE);
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
 }
 
 void loadModels() 
 {
-	models.push_back(new Model("models/ship/shipA_OBJ.obj"));
+	player = new Player();
+	//models.push_back(new Model("models/weapons/ZwaardMetTextures/TextureZwaard.obj"));
 }
