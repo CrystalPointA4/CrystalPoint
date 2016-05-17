@@ -160,7 +160,7 @@ void configureOpenGL()
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.01f);
 
-	Lighting
+	//Lighting
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat mat_shininess[] = { 20.0 };
 	GLfloat light_position[] = { 30.0, 30.0, 30.0, 1.0 };

@@ -20,7 +20,7 @@ void Weapon::draw_weapon(void)
 	if (weaponModel != nullptr)
 	{				
 		glScalef(scale,scale,scale);
-		glRotatef(rotX, 1, 0, 0);
+		glRotatef(135, 1, 0, 0);
 		weaponModel->draw();		
 	}		
 }
