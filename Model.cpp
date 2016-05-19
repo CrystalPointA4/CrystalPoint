@@ -264,7 +264,6 @@ void Model::loadMaterialFile(std::string fileName, std::string dirName)
 
 Model::MaterialInfo::MaterialInfo()
 {
-	Texture *texture;
 	hasTexture = false;
 }
 

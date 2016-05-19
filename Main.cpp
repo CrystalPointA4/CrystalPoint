@@ -18,7 +18,7 @@ bool keys[255];
 //vector<Model*> models;
 //int currentModel = 0;
 
-Player *player;
+
 StateHandler *statehandler;
 
 void display()
@@ -49,24 +49,15 @@ void display()
 
 	statehandler->GetCurrentState()->Display();
 
-	player->Display();
+	//player->Display();
 	
-	glutSolidCube(10.0);
+	//glutSolidCube(10.0);
 
 	glDisable(GL_TEXTURE_2D);
 	glutSwapBuffers();
 }
 
-void move(float angle, float fac, bool heigth)
-{
-	if (heigth)
-		player->eyes.posY += angle*fac;
-	else
-	{
-		player->eyes.posX += (float)cos((player->eyes.rotY + angle) / 180 * M_PI) * fac;
-		player->eyes.posZ += (float)sin((player->eyes.rotY + angle) / 180 * M_PI) * fac;
-	}
-}
+
 
 void idle()
 {
@@ -74,17 +65,8 @@ void idle()
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
-	statehandler->GetCurrentState()->Keyboard(keys);
+	statehandler->GetCurrentState()->Keyboard(keys,deltaTime);
 	statehandler->GetCurrentState()->Idle(deltaTime);
-
-	float speed = 10;
-
-	if (keys['a']) move(0, deltaTime*speed, false);
-	if (keys['d']) move(180, deltaTime*speed, false);
-	if (keys['w']) move(90, deltaTime*speed, false);
-	if (keys['s']) move(270, deltaTime*speed, false);
-	if (keys['q']) move(1, deltaTime*speed, true);
-	if (keys['e']) move(-1, deltaTime*speed, true);	
 
 	glutPostRedisplay();
 }
@@ -197,8 +179,7 @@ void configureOpenGL()
 }
 
 void loadModels() 
-{
-	player = new Player();
+{	
 	statehandler = new StateHandler();
 
 	statehandler->Navigate(statehandler->WORLD_STATE);

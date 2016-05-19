@@ -27,7 +27,7 @@ void State::Display()
 {
 }
 
-void State::Keyboard(bool keys[255])
+void State::Keyboard(bool keys[255],float deltaTime)
 {
 }
 

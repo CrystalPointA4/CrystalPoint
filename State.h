@@ -13,7 +13,7 @@ public:
 	virtual void Idle(float delta);
 	virtual void Display();
 
-	virtual void Keyboard(bool keys[255]);
+	virtual void Keyboard(bool keys[255],float deltaTime);
 	virtual void MouseMove(int x, int y, int dx, int dy);
 	virtual void MouseClick(int button, int type, int x, int y);
 };

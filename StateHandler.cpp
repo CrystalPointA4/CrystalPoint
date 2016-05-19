@@ -8,7 +8,8 @@ StateHandler::StateHandler()
 	StateList.push_back(new SettingsState()); //SETTINGS_STATE
 	StateList.push_back(new WorldState()); //WORLD_STATE
 
-	CurrentState = INIT_STATE;
+	//CurrentState = INIT_STATE;
+	CurrentState = WORLD_STATE;
 }
 
 
