@@ -46,3 +46,8 @@ float& Vec2f::operator [](int index)
 {
 	return v[index];
 }
+
+Vec2f Vec2f::operator+(const Vec2f & other)
+{
+	return Vec2f(x + other.x, y+other.y);
+}

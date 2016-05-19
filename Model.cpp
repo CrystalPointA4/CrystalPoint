@@ -3,12 +3,17 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-//Prototypes
-vector<string> split(string str, string sep);
-string replace(string str, string toReplace, string replacement);
-string toLower(string data);
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
 
-Model::Model(string fileName)
+//Prototypes
+std::vector<std::string> split(std::string str, std::string sep);
+std::string replace(std::string str, std::string toReplace, std::string replacement);
+std::string toLower(std::string data);
+
+Model::Model(std::string fileName)
 {
 	std::string dirName = fileName;
 	if (dirName.rfind("/") != std::string::npos)
@@ -117,18 +122,9 @@ Model::Model(string fileName)
 	groups.push_back(currentGroup);
 }
 
-Model::Model(void)
-{
-	Model("models/TextureZwaard.obj");
-}
 
 Model::~Model(void)
 {
-}
-
-void Model::AddInstance(ModelInstance* inst)
-{
-	instances.push_back(inst);
 }
 
 void Model::draw()
@@ -163,30 +159,18 @@ void Model::draw()
 			}
 		}
 
-		for (auto &instance : instances)
+		glBegin(GL_TRIANGLES);
+		for (auto &f : g->faces)
 		{
-
-			glBegin(GL_TRIANGLES);
-			for (auto &f : g->faces)
+			for (auto &v : f.vertices)
 			{
-				for (auto &v : f.vertices)
-				{
-					glPushMatrix();
-
-					glTranslatef(instance->translation.x, instance->translation.y, instance->translation.z);
-					glRotatef(instance->rotation.x, 1, 0, 0);
-					glRotatef(instance->rotation.y, 0, 1, 0);
-					glRotatef(instance->rotation.z, 0, 0, 1);
-					glScalef(instance->scale.x, instance->scale.y, instance->scale.z);
-
-					glNormal3f(normals[v.normal].x, normals[v.normal].y, normals[v.normal].z);
-					glTexCoord2f(texcoords[v.texcoord].x, texcoords[v.texcoord].y);
-					glVertex3f(vertices[v.position].x, vertices[v.position].y, vertices[v.position].z);
-				}
+				glNormal3f(normals[v.normal].x, normals[v.normal].y, normals[v.normal].z);
+				glTexCoord2f(texcoords[v.texcoord].x, texcoords[v.texcoord].y);
+				glVertex3f(vertices[v.position].x, vertices[v.position].y, vertices[v.position].z);
 			}
-			glEnd();
-
 		}
+		glEnd();
+
 	}
 }
 
@@ -295,7 +279,7 @@ void Model::Texture::bind()
 	glBindTexture(GL_TEXTURE_2D, index);
 }
 
-string replace(string str, string toReplace, string replacement)
+std::string replace(std::string str, std::string toReplace, std::string replacement)
 {
 	size_t index = 0;
 	while (true)
@@ -309,7 +293,7 @@ string replace(string str, string toReplace, string replacement)
 	return str;
 }
 
-vector<string> split(string str, string sep)
+std::vector<std::string> split(std::string str, std::string sep)
 {
 	std::vector<std::string> ret;
 	size_t index;
@@ -325,8 +309,31 @@ vector<string> split(string str, string sep)
 	return ret;
 }
 
-inline string toLower(string data)
+inline std::string toLower(std::string data)
 {
 	std::transform(data.begin(), data.end(), data.begin(), ::tolower);
 	return data;
+}
+
+
+
+std::map<std::string, std::pair<Model*, int>> Model::cache;
+
+Model* Model::load(const std::string &fileName)
+{
+	if (cache.find(fileName) == cache.end())
+		cache[fileName] = std::pair<Model*, int>(new Model(fileName), 0);
+	cache[fileName].second++;
+	return cache[fileName].first;
+}
+
+void Model::unload(const std::string & fileName)
+{
+	assert(cache.find(fileName) != cache.end());
+	cache[fileName].second--;
+	if (cache[fileName].second == 0)
+	{
+		delete cache[fileName].first;
+		cache.erase(cache.find(fileName));
+	}
 }

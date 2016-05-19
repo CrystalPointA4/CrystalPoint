@@ -1,5 +1,4 @@
 #pragma once
-#include "Header.h"
 
 class Vec3f
 {
@@ -33,5 +32,6 @@ public:
 	Vec2f(float x, float y);
 	Vec2f(Vec2f &other);
 	float& operator [](int);
+	Vec2f operator + (const Vec2f &other);
 };
 
