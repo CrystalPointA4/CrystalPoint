@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "vector.h"
 
+void configureOpenGL(void);
+
 CrystalJohan* app;
 
 bool justMoved = false;
@@ -12,12 +14,8 @@ int main(int argc, char* argv[])
 {
 	app = new CrystalJohan();
 	glutInit(&argc, argv);
-	//Init window and glut display mode
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(800, 600);
-	glutCreateWindow("Crystal Point");
-	glutFullScreen();
-	//glutPositionWindow((glutGet(GLUT_SCREEN_WIDTH) / 2) - (glutGet(GLUT_WINDOW_WIDTH) / 2), (glutGet(GLUT_SCREEN_HEIGHT) / 2) - (glutGet(GLUT_WINDOW_HEIGHT) / 2));
+
+	configureOpenGL();
 
 	app->init();
 
@@ -28,9 +26,8 @@ int main(int argc, char* argv[])
 	//Keyboard
 	glutKeyboardFunc([](unsigned char c, int, int) { app->keyboardState.keys[c] = true; });
 	glutKeyboardUpFunc([](unsigned char c, int, int) { app->keyboardState.keys[c] = false; });
-
+	
 	//Mouse
-//	glutMouseFunc(mouse);
 	glutPassiveMotionFunc([](int x, int y)
 	{
 		if (justMoved)
@@ -49,7 +46,43 @@ int main(int argc, char* argv[])
 	});
 
 	glutMainLoop();
-
-
 	return 0;
+}
+
+void configureOpenGL()
+{
+	//Init window and glut display mode
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitWindowSize(800, 600);
+	glutCreateWindow("Crystal Point");
+	glutFullScreen();
+
+	//Depth testing
+	glEnable(GL_DEPTH_TEST);
+
+	//Alpha blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	//Alpha testing
+	glEnable(GL_ALPHA_TEST);
+	glAlphaFunc(GL_GREATER, 0.01f);
+
+	//Lighting
+	GLfloat mat_specular[] = { 0.2, 0.2, 0.2, 0 };
+	//GLfloat mat_shininess[] = { 5.0 };
+	GLfloat light_position[] = { 0.0, 2.0, 1.0, 0 };
+	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 0 };
+	GLfloat light_ambient[] = { 0.3, 0.3, 0.3, 0 };
+	glClearColor(0.7, 0.7, 1.0, 1.0);
+
+	//glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	//glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+
+	//glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHT0);
+
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
 }

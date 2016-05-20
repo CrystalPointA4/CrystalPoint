@@ -15,6 +15,8 @@ public:
 	Vec3f(Vec3f &other);
 	Vec3f(float x, float y, float z);
 	float& operator [](int);
+	Vec3f operator + (const Vec3f &other);
+	Vec3f operator / (float value);
 };
 
 class Vec2f

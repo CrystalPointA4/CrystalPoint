@@ -8,6 +8,8 @@
 Entity::Entity()
 {
 	model = NULL;
+	scale = 1;
+	canCollide = true;
 }
 
 
@@ -32,5 +34,16 @@ void Entity::draw()
 		glPopMatrix();
 	}
 
+}
+
+bool Entity::inObject(const Vec3f & point)
+{
+	if (!model)
+		return false;
+	Vec3f center = position + model->center;
+	float distance = sqrt((point.x - center.x) * (point.x - center.x) + (point.z - center.z)*(point.z - center.z));
+	if (distance < model->radius*scale)
+		return true;
+	return false;
 }
 

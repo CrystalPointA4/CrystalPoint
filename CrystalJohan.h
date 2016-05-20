@@ -28,6 +28,8 @@ public:
 
 	Vec2f mouseOffset;
 
+	Vec2f mousePosition;
+
 	float lastFrameTime;
 
 };

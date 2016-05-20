@@ -16,5 +16,8 @@ public:
 	Vec3f position;
 	Vec3f rotation;
 	float scale;
+
+	bool canCollide;
+	bool inObject(const Vec3f &position);
 };
 

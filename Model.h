@@ -71,7 +71,13 @@ public:
 
 	static std::map<std::string, std::pair<Model*, int> > cache;
 	static Model* load(const std::string &fileName);
-	static void unload(const std::string &fileName);
+	static void unload(Model* model);
 
 	void draw();
+
+	Vec3f minVertex;
+	Vec3f maxVertex;
+
+	Vec3f center;
+	float radius;
 };

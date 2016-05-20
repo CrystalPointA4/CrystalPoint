@@ -12,10 +12,14 @@ public:
 	Player();
 
 	void setCamera();
+	void setPosition(float angle, float fac, bool height);
 
 	Vec3f position;
 	Vec2f rotation;
 
 	Model* leftWeapon;
 	Model* rightWeapon;
+
+
+	float speed;
 };

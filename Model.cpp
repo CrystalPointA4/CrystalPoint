@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <cmath>
 
 //Prototypes
 std::vector<std::string> split(std::string str, std::string sep);
@@ -170,8 +171,25 @@ void Model::draw()
 			}
 		}
 		glEnd();
-
 	}
+
+	minVertex = vertices[0];
+	maxVertex = vertices[0];
+	for (auto v : vertices)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			minVertex[i] = fmin(minVertex[i], v[i]);
+			maxVertex[i] = fmax(maxVertex[i], v[i]);
+		}
+	}
+	center = (minVertex + maxVertex) / 2.0f;
+	radius = 0;
+	for (auto v : vertices)
+		radius = fmax(radius, (center.x - v.x) * (center.x - v.x) + (center.z - v.z) * (center.z - v.z));
+	radius = sqrt(radius);
+
+
 }
 
 void Model::loadMaterialFile(std::string fileName, std::string dirName)
@@ -327,13 +345,19 @@ Model* Model::load(const std::string &fileName)
 	return cache[fileName].first;
 }
 
-void Model::unload(const std::string & fileName)
+void Model::unload(Model* model)
 {
-	assert(cache.find(fileName) != cache.end());
-	cache[fileName].second--;
-	if (cache[fileName].second == 0)
+	for (auto m : cache)
 	{
-		delete cache[fileName].first;
-		cache.erase(cache.find(fileName));
+		if (m.second.first == model)
+		{
+			m.second.second--;
+			if (m.second.second == 0)
+			{
+				delete m.second.first;
+				cache.erase(cache.find(m.first));
+			}
+
+		}
 	}
 }
