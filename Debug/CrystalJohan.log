@@ -1,3 +1,0 @@
-﻿  World.cpp
-d:\code\c++\crystaljohan\world.cpp(7): warning C4305: '=': truncation from 'double' to 'float'
-  CrystalJohan.vcxproj -> D:\Code\C++\CrystalJohan\Debug\CrystalJohan.exe
