@@ -37,7 +37,6 @@ namespace json
 		Value();
 		Value(Type type);
 		Value(int value);
-		Value(__int64 value);
 		Value(float value);
 		Value(bool value);
 		Value(const std::string &value);
@@ -50,24 +49,24 @@ namespace json
 
 
 
-		inline operator int() const { return asInt(); }
-		inline operator float()	const { return asFloat(); }
-		inline operator bool() const { return asBool(); }
-		inline operator const std::string&() const { return asString(); }
+		inline operator int() const						{ return asInt(); }
+		inline operator float()	const					{ return asFloat(); }
+		inline operator bool() const					{ return asBool(); }
+		inline operator const std::string&() const		{ return asString(); }
 
 
-		inline int asInt() const { assert(type == Type::intValue); return value.intValue; }
-		inline float asFloat() const { assert(type == Type::floatValue || type == Type::intValue); return type == Type::floatValue ? value.floatValue : value.intValue; }
-		inline bool asBool() const { assert(type == Type::boolValue); return value.boolValue; }
-		inline const std::string& asString() const { assert(type == Type::stringValue); return *value.stringValue; }
-		inline bool isNull() const { return type == Type::nullValue; }
-		inline bool isString() const { return type == Type::stringValue; }
-		inline bool isInt() const { return type == Type::intValue; }
-		inline bool isBool() const { return type == Type::boolValue; }
-		inline bool isFloat() const { return type == Type::floatValue; }
-		inline bool isObject() const { return type == Type::objectValue; }
-		inline bool isArray() const { return type == Type::arrayValue; }
-		inline bool isMember(const std::string &name) const { if (type != Type::objectValue) return false; return value.objectValue->find(name) != value.objectValue->end(); }
+		inline int asInt() const					{ assert(type == Type::intValue); return value.intValue; }
+		inline float asFloat() const				{ assert(type == Type::floatValue || type == Type::intValue); return type == Type::floatValue ? value.floatValue : value.intValue; }
+		inline bool asBool() const					{ assert(type == Type::boolValue); return value.boolValue; }
+		inline const std::string& asString() const	{ assert(type == Type::stringValue); return *value.stringValue; }
+		inline bool isNull() const					{ return type == Type::nullValue; }
+		inline bool isString() const				{ return type == Type::stringValue; }
+		inline bool isInt() const					{ return type == Type::intValue; }
+		inline bool isBool() const					{ return type == Type::boolValue; }
+		inline bool isFloat() const					{ return type == Type::floatValue; }
+		inline bool isObject() const				{ return type == Type::objectValue; }
+		inline bool isArray() const					{ return type == Type::arrayValue;  }
+		inline bool isMember(const std::string &name) const				{ assert(type == Type::objectValue); return value.objectValue->find(name) != value.objectValue->end(); }
 		//array/object
 		virtual size_t size() const;
 		//array
@@ -83,8 +82,6 @@ namespace json
 		virtual Value& operator [] (const std::string &key) const;
 		virtual Value& operator [] (const char* key) const;
 
-		virtual const Value& get(const char* key, const Value& default) const;
-
 		virtual bool operator == (const std::string &other) { return asString() == other; }
 		virtual bool operator == (const int other) { return asInt() == other; }
 		virtual bool operator == (const float other) { return asFloat() == other; }
@@ -93,9 +90,6 @@ namespace json
 		std::ostream& prettyPrint(std::ostream& stream, json::Value& printConfig = null, int level = 0) const;
 
 		class Iterator;
-	private:
-
-	public:
 		Iterator begin() const;
 		Iterator end() const;
 	};
@@ -125,8 +119,6 @@ namespace json
 	Value readJson(const std::string &data);
 	Value readJson(std::istream &stream);
 	std::ostream &operator << (std::ostream &stream, const Value& value);	//serializes json data
-	std::string &operator << (std::string &stream, const Value& value);	//serializes json data
-
 
 
 }

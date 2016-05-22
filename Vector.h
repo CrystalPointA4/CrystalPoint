@@ -12,7 +12,7 @@ public:
 		float v[3];
 	};
 	Vec3f();
-	Vec3f(Vec3f &other);
+	Vec3f(const Vec3f &other);
 	Vec3f(float x, float y, float z);
 	float& operator [](int);
 	Vec3f operator + (const Vec3f &other);
@@ -32,7 +32,7 @@ public:
 	};
 	Vec2f();
 	Vec2f(float x, float y);
-	Vec2f(Vec2f &other);
+	Vec2f(const Vec2f &other);
 	float& operator [](int);
 	Vec2f operator + (const Vec2f &other);
 };

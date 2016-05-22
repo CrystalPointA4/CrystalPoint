@@ -4,7 +4,7 @@
 #include <list>
 #include <vector>
 #include <map>
-#include "vector.h"
+#include "Vector.h"
 
 class Model
 {

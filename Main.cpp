@@ -2,7 +2,7 @@
 
 #include "CrystalJohan.h"
 #include <stdio.h>
-#include "vector.h"
+#include "Vector.h"
 
 void configureOpenGL(void);
 

@@ -1,6 +1,8 @@
 
 #include "CrystalJohan.h"
 #include <GL/freeglut.h>
+#include <tgmath.h>
+#include <cstring>
 #include "World.h"
 
 void CrystalJohan::init()
