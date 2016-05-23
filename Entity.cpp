@@ -1,8 +1,6 @@
 #include "Entity.h"
-
+#include "cmath"
 #include <GL/freeglut.h>
-#include <tgmath.h>
-
 #include "Model.h"
 
 
