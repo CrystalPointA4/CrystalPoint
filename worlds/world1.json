@@ -4,12 +4,12 @@
   },
   "objects": [
     {
-      "file": "models/boom/boom.obj",
+      "file": "models/boom/Boom.obj",
       "pos": [ 0, 0, -4 ],
       "rot": [ 0, 20, 0 ]
     },
     {
-      "file": "models/boom/boom.obj",
+      "file": "models/boom/Boom.obj",
       "pos": [ 4, 0, -4 ]
     }
   ]
