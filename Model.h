@@ -1,6 +1,9 @@
 #pragma once
-#include "Header.h"
-#include "ModelLoader.h"
+
+#include <GL/freeglut.h>
+#include <list>
+#include <vector>
+#include <map>
 #include "Vector.h"
 
 class Model
@@ -17,7 +20,7 @@ private:
 	class Face
 	{
 	public:
-		list<Vertex> vertices;
+		std::list<Vertex> vertices;
 	};
 
 	class Texture
@@ -50,7 +53,7 @@ private:
 	public:
 		std::string name;
 		int materialIndex;
-		list<Face> faces;
+		std::list<Face> faces;
 	};
 
 	std::vector<Vec3f>	vertices;
@@ -60,9 +63,21 @@ private:
 	std::vector<MaterialInfo*> materials;
 
 	void loadMaterialFile(std::string fileName, std::string dirName);
-public:
+
 	Model(std::string filename);
 	~Model(void);
 
+public:
+
+	static std::map<std::string, std::pair<Model*, int> > cache;
+	static Model* load(const std::string &fileName);
+	static void unload(Model* model);
+
 	void draw();
+
+	Vec3f minVertex;
+	Vec3f maxVertex;
+
+	Vec3f center;
+	float radius;
 };

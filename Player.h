@@ -1,28 +1,25 @@
 #pragma once
-#include "Header.h"
-#include "Weapon.h"
 
-class Player
+#include "Singleton.h"
+
+#include "Vector.h"
+
+class Model;
+
+class Player : public Singleton<Player>
 {
 public:
 	Player();
-	~Player();
 
-	struct Eyes
-	{
-		float posX = 0;
-		float posY = 0;
-		float posZ = 0;
-		float rotX = 0;
-		float rotY = 0;
-	} eyes;	
+	void setCamera();
+	void setPosition(float angle, float fac, bool height);
 
-	void Draw_Player(void);
-private:
-	int level;
-	int xp;
-	Weapon* right = nullptr;
-	Weapon* left = nullptr;
-	vector<Weapon> weapons;
+	Vec3f position;
+	Vec2f rotation;
+
+	Model* leftWeapon;
+	Model* rightWeapon;
+
+
+	float speed;
 };
-

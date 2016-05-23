@@ -1,0 +1,16 @@
+{
+  "player": {
+    "startposition": [ 0, 1.7, 0 ]
+  },
+  "objects": [
+    {
+      "file": "models/boom/Boom.obj",
+      "pos": [ 0, 0, -4 ],
+      "rot": [ 0, 20, 0 ]
+    },
+    {
+      "file": "models/boom/Boom.obj",
+      "pos": [ 4, 0, -4 ]
+    }
+  ]
+}

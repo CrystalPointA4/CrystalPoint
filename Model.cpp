@@ -3,7 +3,18 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Model::Model(string fileName)
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <cmath>
+
+//Prototypes
+std::vector<std::string> split(std::string str, std::string sep);
+std::string replace(std::string str, std::string toReplace, std::string replacement);
+std::string toLower(std::string data);
+
+Model::Model(std::string fileName)
 {
 	std::string dirName = fileName;
 	if (dirName.rfind("/") != std::string::npos)
@@ -117,9 +128,6 @@ Model::~Model(void)
 {
 }
 
-
-
-
 void Model::draw()
 {
 	for (auto &g : groups)
@@ -164,6 +172,24 @@ void Model::draw()
 		}
 		glEnd();
 	}
+
+	minVertex = vertices[0];
+	maxVertex = vertices[0];
+	for (auto v : vertices)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			minVertex[i] = fmin(minVertex[i], v[i]);
+			maxVertex[i] = fmax(maxVertex[i], v[i]);
+		}
+	}
+	center = (minVertex + maxVertex) / 2.0f;
+	radius = 0;
+	for (auto v : vertices)
+		radius = fmax(radius, (center.x - v.x) * (center.x - v.x) + (center.z - v.z) * (center.z - v.z));
+	radius = sqrt(radius);
+
+
 }
 
 void Model::loadMaterialFile(std::string fileName, std::string dirName)
@@ -240,7 +266,6 @@ void Model::loadMaterialFile(std::string fileName, std::string dirName)
 
 Model::MaterialInfo::MaterialInfo()
 {
-	Texture *texture;
 	hasTexture = false;
 }
 
@@ -270,4 +295,69 @@ Model::Texture::Texture(const std::string & fileName)
 void Model::Texture::bind()
 {
 	glBindTexture(GL_TEXTURE_2D, index);
+}
+
+std::string replace(std::string str, std::string toReplace, std::string replacement)
+{
+	size_t index = 0;
+	while (true)
+	{
+		index = str.find(toReplace, index);
+		if (index == std::string::npos)
+			break;
+		str.replace(index, toReplace.length(), replacement);
+		++index;
+	}
+	return str;
+}
+
+std::vector<std::string> split(std::string str, std::string sep)
+{
+	std::vector<std::string> ret;
+	size_t index;
+	while (true)
+	{
+		index = str.find(sep);
+		if (index == std::string::npos)
+			break;
+		ret.push_back(str.substr(0, index));
+		str = str.substr(index + 1);
+	}
+	ret.push_back(str);
+	return ret;
+}
+
+inline std::string toLower(std::string data)
+{
+	std::transform(data.begin(), data.end(), data.begin(), ::tolower);
+	return data;
+}
+
+
+
+std::map<std::string, std::pair<Model*, int>> Model::cache;
+
+Model* Model::load(const std::string &fileName)
+{
+	if (cache.find(fileName) == cache.end())
+		cache[fileName] = std::pair<Model*, int>(new Model(fileName), 0);
+	cache[fileName].second++;
+	return cache[fileName].first;
+}
+
+void Model::unload(Model* model)
+{
+	for (auto m : cache)
+	{
+		if (m.second.first == model)
+		{
+			m.second.second--;
+			if (m.second.second == 0)
+			{
+				delete m.second.first;
+				cache.erase(cache.find(m.first));
+			}
+
+		}
+	}
 }

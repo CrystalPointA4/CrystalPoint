@@ -1,41 +1,28 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "Player.h"
-
-
+#include <GL/freeglut.h>
 
 Player::Player()
 {
-	right = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj");
-	left = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj");
+	speed = 10;
 }
 
-
-Player::~Player()
+void Player::setCamera()
 {
-	delete right;
-	delete left;
+	glRotatef(rotation.x, 1, 0, 0);
+	glRotatef(rotation.y, 0, 1, 0);
+	glTranslatef(-position.x, -position.y, -position.z);
+
 }
 
-void Player::Draw_Player(void)
+void Player::setPosition(float angle, float fac, bool height)
 {
-	if (right != nullptr)
-	{	
-		glPushMatrix();
-		glTranslatef(2.5f,0,-4.5f);
-		right->draw_weapon();		
-		glPopMatrix();
-	}
-		
-	if (left != nullptr)
+	if (height)
+		position.y += angle*fac;
+	else
 	{
-		glPushMatrix();
-		glTranslatef(-0.5f,0,-4.5f);
-		left->draw_weapon();
-		glPopMatrix();
-
+		position.x -= (float)cos((rotation.y + angle) / 180 * M_PI) * fac*speed;
+		position.z -= (float)sin((rotation.y + angle) / 180 * M_PI) * fac*speed;
 	}
-
-	glRotatef(eyes.rotX, 1, 0, 0);
-	glRotatef(eyes.rotY, 0, 1, 0);
-	glTranslatef(eyes.posX, eyes.posY, eyes.posZ);
 }
-
