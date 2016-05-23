@@ -2,7 +2,7 @@
 
 #include "Singleton.h"
 
-#include "vector.h"
+#include "Vector.h"
 
 class Model;
 

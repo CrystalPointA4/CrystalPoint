@@ -1,7 +1,7 @@
 #pragma once
 
 class World;
-#include "vector.h"
+#include "Vector.h"
 
 class KeyboardState
 {

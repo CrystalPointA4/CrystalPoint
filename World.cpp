@@ -4,20 +4,21 @@
 #include "LevelObject.h"
 #include "json.h"
 #include <fstream>
-#include <string>
 #include <iostream>
 
 World::World() : player(Player::getInstance())
 {
-	json::Value v = json::readJson(std::ifstream("worlds/world1.json"));
 
-	if (!v["player"]["startposition"].isNull())
-	{
-		player.position.x = v["player"]["startposition"][0];
-		player.position.y = v["player"]["startposition"][1];
-		player.position.z = v["player"]["startposition"][2];
-	}
-	
+	std::ifstream file("worlds/world1.json");
+	if(!file.is_open())
+		std::cout<<"Uhoh, can't open file\n";
+	json::Value v = json::readJson(file);
+	std::cout<<v;
+	file.close();
+	player.position.x = v["player"]["startposition"][0];
+	player.position.y = v["player"]["startposition"][1];
+	player.position.z = v["player"]["startposition"][2];
+
 
 	for (auto object : v["objects"])
 	{
