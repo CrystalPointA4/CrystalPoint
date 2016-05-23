@@ -48,7 +48,7 @@ World::World() : player(Player::getInstance())
 
 		std::string fileName = "";
 		if (!enemy_model["file"].isNull())
-			fileName = enemy_model["file"];
+			fileName = enemy_model["file"].asString();
 
 		enemy_models.push_back(std::pair<int, std::string>(id,fileName));
 	}

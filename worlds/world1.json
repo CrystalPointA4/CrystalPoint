@@ -4,11 +4,11 @@
   },
   "objects": [
     {
-      "file": "models/boom/boom.obj",
+      "file": "models/boom/Boom.obj",
       "pos": [ 4, 0, -4 ]
     },
     {
-      "file": "models/teleporter/teleporter.obj",
+      "file": "models/Teleporter/Teleporter.obj",
       "pos": [ 0, 0, -4 ],
       "rot": [ 0, 0, 0 ]
     }
@@ -16,7 +16,7 @@
   "enemy_models": [
     {
       "id": 0,
-      "file": "models/squid/blooper.obj"
+      "file": "models/squid/Blooper.obj"
     }
   ],
   "enemy_data": [
