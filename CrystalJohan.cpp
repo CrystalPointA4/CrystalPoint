@@ -1,7 +1,7 @@
 
 #include "CrystalJohan.h"
 #include <GL/freeglut.h>
-#include <tgmath.h>
+#include <cmath>
 #include <cstring>
 #include "World.h"
 
