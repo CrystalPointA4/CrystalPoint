@@ -4,14 +4,20 @@
 #include "LevelObject.h"
 #include "json.h"
 #include <fstream>
+#include <string>
+#include <iostream>
 
 World::World() : player(Player::getInstance())
 {
 	json::Value v = json::readJson(std::ifstream("worlds/world1.json"));
 
-	player.position.x = v["player"]["startposition"][0];
-	player.position.y = v["player"]["startposition"][1];
-	player.position.z = v["player"]["startposition"][2];
+	if (!v["player"]["startposition"].isNull())
+	{
+		player.position.x = v["player"]["startposition"][0];
+		player.position.y = v["player"]["startposition"][1];
+		player.position.z = v["player"]["startposition"][2];
+	}
+	
 
 	for (auto object : v["objects"])
 	{
@@ -29,6 +35,49 @@ World::World() : player(Player::getInstance())
 		
 		Vec3f position(object["pos"][0], object["pos"][1], object["pos"][2]);
 		entities.push_back(new LevelObject(object["file"], position, rotation, scale, hasCollision));
+	}
+
+	//look up table for the enemies	
+	std::vector<std::pair<int, std::string>>enemy_models;
+	for (auto enemy_model : v["enemy_models"])
+	{		
+		int id = -1;
+		if (!enemy_model["id"].isNull())
+			id = enemy_model["id"].asInt();
+
+		std::string fileName = "";
+		if (!enemy_model["file"].isNull())
+			fileName = enemy_model["file"];
+
+		enemy_models.push_back(std::pair<int, std::string>(id,fileName));
+	}
+
+	for (auto enemy : v["enemy_data"])
+	{
+		int id = -1;
+		if (!enemy["id"].isNull())
+			id = enemy["id"];
+		for (auto enemy_model : enemy_models)
+		{
+			if (id == enemy_model.first)
+			{				
+				Vec3f position(0, 0, 0);
+				if (!enemy["pos"].isNull())
+					position = Vec3f(enemy["pos"][0], enemy["pos"][1], enemy["pos"][2]);
+
+				Vec3f rotation(0, 0, 0);
+				if (!enemy["rot"].isNull())
+					rotation = Vec3f(enemy["rot"][0], enemy["rot"][1], enemy["rot"][2]);
+
+				float scale = 1.0f;
+				if (!enemy["scale"].isNull())
+					scale = enemy["scale"].asFloat();
+				
+				enemies.push_back(new Enemy(enemy_model.second,position,rotation,scale,true));
+			}
+
+		}
+		
 	}
 }
 
@@ -55,15 +104,34 @@ void World::draw()
 	glVertex3f(50, 0, -50);
 	glEnd();
 
-	for (auto e : entities)
-		e->draw();
+	for (auto &enemy : enemies)
+		enemy->draw();
+
+	for (auto &entity : entities)
+		entity->draw();
+
+	
 
 }
 
 void World::update(float elapsedTime)
 {
-	for (auto e : entities)
-		e->update(elapsedTime);
+	for (auto &entity : entities)
+		entity->update(elapsedTime);
+
+	for (auto &enemy : enemies)
+	{
+		if (enemy->position.Distance(player.position) <= enemy->radius)
+		{
+			enemy->hasTarget = true;
+			enemy->target.x = player.position.x;
+			enemy->target.z = player.position.z;
+		}
+		else
+			enemy->hasTarget = false;
+
+		enemy->update(elapsedTime);
+	}
 }
 
 bool World::isPlayerPositionValid()

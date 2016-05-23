@@ -1,0 +1,19 @@
+newmtl CylinderSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ^D70CEF585F0EAF59BA1D4FC14B4011137E15ED44D07FA7B93F^pimgpsh_fullsize_distr.png
+Ni 1.00
+newmtl Oil_TankSG
+illum 4
+Kd 0.00 0.00 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Oil_TankSG1
+illum 4
+Kd 0.43 0.63 0.80
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00

@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "Vector.h"
 
 Vec3f::Vec3f(float x, float y, float z)
@@ -6,6 +8,17 @@ Vec3f::Vec3f(float x, float y, float z)
 	this->y = y;
 	this->z = z;
 }
+/*The length of the vector*/
+float Vec3f::Length()
+{
+	return (float)sqrt(x*x+y*y+z*z);
+}
+
+float Vec3f::Distance(const Vec3f &other)
+{
+	return (float)sqrt(pow(other.x - x, 2)+pow(other.y - y, 2)+pow(other.z - z, 2));
+}
+
 Vec3f::Vec3f()
 {
 	this->x = 0;
@@ -32,6 +45,22 @@ Vec3f Vec3f::operator+(const Vec3f & other)
 Vec3f Vec3f::operator/(float value)
 {
 	return Vec3f(x / value, y / value, z / value);
+}
+
+bool  Vec3f::operator==(const Vec3f & other)
+{
+	/*bool xb, yb,zb;
+	xb = x == other.x;
+	yb = y == other.y;
+	zb = z == other.z;
+	if (xb & yb & zb)
+		return true;*/
+	return x == other.x & y == other.y & z == other.z;
+}
+
+bool Vec3f::operator!=(const Vec3f & other)
+{
+	return x != other.x & y != other.y & z != other.z;
 }
 
 
@@ -61,3 +90,9 @@ Vec2f Vec2f::operator+(const Vec2f & other)
 {
 	return Vec2f(x + other.x, y+other.y);
 }
+
+float Vec2f::length()
+{
+	return (float)sqrt(x*x + y*y);
+}
+

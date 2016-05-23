@@ -5,12 +5,30 @@
   "objects": [
     {
       "file": "models/boom/boom.obj",
-      "pos": [ 0, 0, -4 ],
-      "rot": [ 0, 20, 0 ]
+      "pos": [ 4, 0, -4 ]
     },
     {
-      "file": "models/boom/boom.obj",
-      "pos": [ 4, 0, -4 ]
+      "file": "models/teleporter/teleporter.obj",
+      "pos": [ 0, 0, -4 ],
+      "rot": [ 0, 0, 0 ]
+    }
+  ],
+  "enemy_models": [
+    {
+      "id": 0,
+      "file": "models/squid/blooper.obj"
+    }
+  ],
+  "enemy_data": [
+    {
+      "id": 0,
+      "pos": [ 1, 2, -10 ],
+      "scale": 0.01
+    },
+    {
+      "id": 0,
+      "pos": [ 4, 2, -15 ],
+      "scale": 0.01
     }
   ]
 }

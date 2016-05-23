@@ -18,11 +18,12 @@ void Player::setCamera()
 
 void Player::setPosition(float angle, float fac, bool height)
 {
+	fac *= speed;
 	if (height)
 		position.y += angle*fac;
 	else
 	{
-		position.x -= (float)cos((rotation.y + angle) / 180 * M_PI) * fac*speed;
-		position.z -= (float)sin((rotation.y + angle) / 180 * M_PI) * fac*speed;
+		position.x -= (float)cos((rotation.y + angle) / 180 * M_PI) * fac;
+		position.z -= (float)sin((rotation.y + angle) / 180 * M_PI) * fac;
 	}
 }

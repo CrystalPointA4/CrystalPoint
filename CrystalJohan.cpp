@@ -40,7 +40,7 @@ void CrystalJohan::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	glDisable(GL_LIGHTING);
+	/*glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
 	glColor4f(1, cos(glutGet(GLUT_ELAPSED_TIME) / 1000.0f), sin(glutGet(GLUT_ELAPSED_TIME) / 1000.0f), 1);
 	glBegin(GL_TRIANGLES);
@@ -48,7 +48,7 @@ void CrystalJohan::draw()
 	glVertex2f(mousePosition.x+15, mousePosition.y+15);
 	glVertex2f(mousePosition.x+5, mousePosition.y+20);
 
-	glEnd();
+	glEnd();*/
 
 
 
@@ -87,6 +87,7 @@ void CrystalJohan::update()
 	if (!world->isPlayerPositionValid())
 		world->player.position = oldPosition;
 
+	world->update(deltaTime);
 
 	mousePosition = mousePosition + mouseOffset;
 

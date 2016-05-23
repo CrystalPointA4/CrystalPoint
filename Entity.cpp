@@ -30,7 +30,13 @@ void Entity::draw()
 		glRotatef(rotation.z, 0, 0, 1);
 		glScalef(scale, scale, scale);
 
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 		model->draw();
+		glCullFace(GL_FRONT);
+		model->draw();
+		glDisable(GL_CULL_FACE);
+
 		glPopMatrix();
 	}
 
