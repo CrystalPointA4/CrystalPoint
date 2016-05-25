@@ -123,7 +123,7 @@ void World::update(float elapsedTime)
 	for (auto &enemy : enemies)
 	{
 		if (enemy->position.Distance(player.position) <= enemy->radius)
-		{
+		{			
 			enemy->hasTarget = true;
 			enemy->target.x = player.position.x;
 			enemy->target.z = player.position.z;
@@ -131,7 +131,19 @@ void World::update(float elapsedTime)
 		else
 			enemy->hasTarget = false;
 
+		Vec3f oldpos = enemy->position;
 		enemy->update(elapsedTime);
+		if (enemy->hasTarget)
+		{
+			for (auto e : entities)
+			{
+				if (e->canCollide && e->inObject(enemy->position))
+				{
+					enemy->position = oldpos;
+					break;
+				}
+			}
+		}		
 	}
 }
 

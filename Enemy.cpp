@@ -60,16 +60,17 @@ void Enemy::update(float delta)
 		dz = target.z - position.z;
 
 		length = sqrt(dx*dx + dz*dz);
-		dx /= length;
-		dz /= length;
+		if (length > 0.03)
+		{
+			dx /= length;
+			dz /= length;
 
-		dx *= speed*delta;
-		dz *= speed*delta;
+			dx *= speed*delta;
+			dz *= speed*delta;
 
-		position.x += dx;
-		position.z += dz;	
-
-		rotation.y = atan2f(target.x - position.x, target.z - position.z) * 180 / M_PI;
+			position.x += dx;
+			position.z += dz;
+		}
+		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}	
-
 }
