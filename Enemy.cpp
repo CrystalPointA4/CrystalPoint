@@ -67,13 +67,9 @@ void Enemy::update(float delta)
 		dz *= speed*delta;
 
 		position.x += dx;
-		position.z += dz;		
-	}	
+		position.z += dz;	
 
-	/*rotation.y += 10.0f;
-	if (rotation.y >= 360.0f)
-		rotation.y = 0.0f;*/
-	//std::cout << atan2f(target.z - position.z, target.x - position.x) * 180 / M_PI << std::endl;
-	//rotation.y = atan2f(target.z - position.z, target.x - position.x) * 180 / M_PI ;
+		rotation.y = atan2f(target.x - position.x, target.z - position.z) * 180 / M_PI;
+	}	
 
 }

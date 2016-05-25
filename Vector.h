@@ -15,9 +15,11 @@ public:
 	Vec3f(const Vec3f &other);
 	Vec3f(float x, float y, float z);
 	float Length();
+	void Normalize();
 	float Distance(const Vec3f &);
 	float& operator [](int);
 	Vec3f operator + (const Vec3f &other);
+	Vec3f operator -(const Vec3f &other);
 	Vec3f operator / (float value);
 	bool operator ==(const Vec3f &other);
 	bool operator !=(const Vec3f &other);

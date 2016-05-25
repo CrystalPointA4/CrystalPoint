@@ -14,6 +14,18 @@ float Vec3f::Length()
 	return (float)sqrt(x*x+y*y+z*z);
 }
 
+void Vec3f::Normalize()
+{	
+	float length = this->Length();
+
+	if (length != 0)
+	{
+		x = x / length;
+		y = y / length;
+		z = z / length;
+	}
+}
+
 float Vec3f::Distance(const Vec3f &other)
 {
 	return (float)sqrt(pow(other.x - x, 2)+pow(other.y - y, 2)+pow(other.z - z, 2));
@@ -40,6 +52,11 @@ float& Vec3f::operator [](int index)
 Vec3f Vec3f::operator+(const Vec3f & other)
 {
 	return Vec3f(x + other.x, y + other.y, z + other.z);
+}
+
+Vec3f Vec3f::operator-(const Vec3f & other)
+{
+	return Vec3f(x - other.x, y - other.y, z - other.z);
 }
 
 Vec3f Vec3f::operator/(float value)
