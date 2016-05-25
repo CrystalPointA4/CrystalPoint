@@ -19,6 +19,19 @@ public:
 	void GetHeigth(float x, float z);
 	void SetTexture(const std::string &file);
 
+	struct Vertex {
+		float x;
+		float y;
+		float z;
+
+		float normalX;
+		float normalY;
+		float normalZ;
+
+		float texX;
+		float texY;
+	};
+
 	std::vector<Vertex> vertices;
 };
 
