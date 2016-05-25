@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "HeightMap.h"
 #include "Player.h"
 
 class Entity;
@@ -14,6 +15,7 @@ public:
 
 	Player& player;
 	std::vector<Entity*> entities;
+	HeightMap* heightmap;
 
 	void draw();
 	void update(float elapsedTime);
