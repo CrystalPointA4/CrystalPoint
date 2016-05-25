@@ -163,6 +163,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="vector.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
