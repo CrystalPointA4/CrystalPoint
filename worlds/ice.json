@@ -13,21 +13,14 @@
     },
     {
       "file": "models/Teleporter/Teleporter.obj",
-      "pos": [ 0, 0, -4 ],
-      "rot": [ 0, 0, 0 ]
+      "pos": [ 0, 0, -4 ]
     }
   ],
-  "enemy_models": [
+  "enemies": [
     {
-      "id": 0,
-      "file": "models/squid/Blooper.obj"
-    }
-  ],
-  "enemy_data": [
-    {
-      "id": 0,
+      "file": "models/squid/Blooper.obj",
       "pos": [ 1, 2, -10 ],
       "scale": 0.01
-    }   
+    }
   ]
 }

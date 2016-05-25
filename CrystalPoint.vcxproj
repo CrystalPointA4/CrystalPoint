@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{98776A7C-CD7A-4C62-946A-2263C27E9690}</ProjectGuid>
+    <ProjectGuid>{F82158C7-7345-4CB0-9F90-3AB49A071904}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CrystalJohan</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>CrystalPoint</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -150,10 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CrystalJohan.cpp" />
+    <ClCompile Include="CrystalPoint.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="HeightMap.cpp" />
@@ -165,9 +163,10 @@
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="WorldHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CrystalJohan.h" />
+    <ClInclude Include="CrystalPoint.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="HeightMap.h" />
@@ -176,14 +175,16 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Singleton.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="WorldHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="worlds\world1.json" />
+    <None Include="worlds\fire.json" />
+    <None Include="worlds\ice.json" />
+    <None Include="worlds\worlds.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

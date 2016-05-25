@@ -158,10 +158,6 @@ void Model::Optimise(ObjGroup *t)
 	}
 }
 
-Model::~Model(void)
-{
-}
-
 void Model::draw()
 {
 	for (auto &g : groups)
@@ -379,5 +375,13 @@ void Model::unload(Model* model)
 			}
 
 		}
+	}
+}
+
+Model::~Model(void)
+{
+	for (auto m : cache)
+	{
+		delete m.second.first;
 	}
 }

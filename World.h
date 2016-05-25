@@ -10,15 +10,13 @@ class Entity;
 class World
 {
 public:
-	World();
+	World(const std::string &fileName);
 	~World();
 
-
-	Player& player;
 	std::vector<Entity*> entities;
-
 	std::vector<Enemy*> enemies;
 
+	Player* player;
 	HeightMap* heightmap;
 
 	void draw();

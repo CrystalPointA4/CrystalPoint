@@ -1,0 +1,6 @@
+{
+	"worlds": [
+			"worlds/fire.json",
+			"worlds/ice.json"
+	]
+}

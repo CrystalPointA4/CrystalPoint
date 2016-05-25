@@ -14,6 +14,8 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	if(model)
+		Model::unload(model);
 }
 
 
