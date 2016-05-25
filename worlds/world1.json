@@ -9,11 +9,25 @@
   "objects": [
     {
       "file": "models/boom/Boom.obj",
-      "pos": [ 0, 0, -4 ]
+      "pos": [ 4, 0, -4 ]
     },
     {
-      "file": "models/boom/Boom.obj",
-      "pos": [ 4, 0, -4 ]
+      "file": "models/Teleporter/Teleporter.obj",
+      "pos": [ 0, 0, -4 ],
+      "rot": [ 0, 0, 0 ]
     }
+  ],
+  "enemy_models": [
+    {
+      "id": 0,
+      "file": "models/squid/Blooper.obj"
+    }
+  ],
+  "enemy_data": [
+    {
+      "id": 0,
+      "pos": [ 1, 2, -10 ],
+      "scale": 0.01
+    }   
   ]
 }
