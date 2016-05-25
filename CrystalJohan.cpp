@@ -29,7 +29,7 @@ void CrystalJohan::draw()
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(70, width / (float)height, 0.1f, 100);
+	gluPerspective(70, width / (float)height, 0.1f, 15000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -52,11 +52,7 @@ void CrystalJohan::draw()
 
 	glEnd();
 
-
-
 	glutSwapBuffers();
-
-
 }
 
 
@@ -78,14 +74,15 @@ void CrystalJohan::update()
 	if (world->player.rotation.x < -90)
 		world->player.rotation.x = -90;
 
+	float speed = 20;
 
 	Vec3f oldPosition = world->player.position;
-	if (keyboardState.keys['a']) world->player.setPosition(0, deltaTime, false);
-	if (keyboardState.keys['d']) world->player.setPosition(180, deltaTime, false);
-	if (keyboardState.keys['w']) world->player.setPosition(90, deltaTime, false);
-	if (keyboardState.keys['s']) world->player.setPosition(270, deltaTime, false);
-	if (keyboardState.keys['q']) world->player.setPosition(1, deltaTime, true);
-	if (keyboardState.keys['e']) world->player.setPosition(-1, deltaTime, true);
+	if (keyboardState.keys['a']) world->player.setPosition(0, deltaTime*speed, false);
+	if (keyboardState.keys['d']) world->player.setPosition(180, deltaTime*speed, false);
+	if (keyboardState.keys['w']) world->player.setPosition(90, deltaTime*speed, false);
+	if (keyboardState.keys['s']) world->player.setPosition(270, deltaTime*speed, false);
+	if (keyboardState.keys['q']) world->player.setPosition(1, deltaTime*speed, true);
+	if (keyboardState.keys['e']) world->player.setPosition(-1, deltaTime*speed, true);
 	if (!world->isPlayerPositionValid())
 		world->player.position = oldPosition;
 
