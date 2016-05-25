@@ -156,18 +156,21 @@
     <ClCompile Include="CrystalJohan.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="LevelObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrystalJohan.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="HeightMap.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="LevelObject.h" />
     <ClInclude Include="Main.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="vector.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

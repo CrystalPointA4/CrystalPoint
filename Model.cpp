@@ -76,7 +76,7 @@ Model::Model(std::string fileName)
 
 				for (size_t i = ii - 3; i < ii; i++)	//magische forlus om van quads triangles te maken ;)
 				{
-					Vertex vertex;
+					VertexIndex vertex;
 					std::vector<std::string> indices = split(params[i == (ii - 3) ? 1 : i], "/");
 					if (indices.size() >= 1)	//er is een positie
 						vertex.position = atoi(indices[0].c_str()) - 1;
@@ -121,8 +121,42 @@ Model::Model(std::string fileName)
 		}
 	}
 	groups.push_back(currentGroup);
+
+	minVertex = vertices[0];
+	maxVertex = vertices[0];
+	for (auto v : vertices)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			minVertex[i] = fmin(minVertex[i], v[i]);
+			maxVertex[i] = fmax(maxVertex[i], v[i]);
+		}
+	}
+	center = (minVertex + maxVertex) / 2.0f;
+	radius = 0;
+	for (auto v : vertices)
+		radius = fmax(radius, (center.x - v.x) * (center.x - v.x) + (center.z - v.z) * (center.z - v.z));
+	radius = sqrt(radius);
+
+	for each(ObjGroup *group in groups)
+	{
+		Optimise(group);
+	}
 }
 
+void Model::Optimise(ObjGroup *t)
+{
+	for (Face &face : t->faces)
+	{
+		for each(auto &vertex in face.vertices)
+		{
+			t->VertexArray.push_back(Vertex(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z,
+				normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z,
+				texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
+
+		}
+	}
+}
 
 Model::~Model(void)
 {
@@ -160,36 +194,19 @@ void Model::draw()
 			}
 		}
 
-		glBegin(GL_TRIANGLES);
-		for (auto &f : g->faces)
-		{
-			for (auto &v : f.vertices)
-			{
-				glNormal3f(normals[v.normal].x, normals[v.normal].y, normals[v.normal].z);
-				glTexCoord2f(texcoords[v.texcoord].x, texcoords[v.texcoord].y);
-				glVertex3f(vertices[v.position].x, vertices[v.position].y, vertices[v.position].z);
-			}
-		}
-		glEnd();
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)g->VertexArray.data()) + 0);
+		glNormalPointer(GL_FLOAT, sizeof(Vertex), ((float*)g->VertexArray.data()) + 3);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)g->VertexArray.data()) + 6);
+		glDrawArrays(GL_TRIANGLES, 0, g->VertexArray.size());
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
-
-	minVertex = vertices[0];
-	maxVertex = vertices[0];
-	for (auto v : vertices)
-	{
-		for (int i = 0; i < 3; i++)
-		{
-			minVertex[i] = fmin(minVertex[i], v[i]);
-			maxVertex[i] = fmax(maxVertex[i], v[i]);
-		}
-	}
-	center = (minVertex + maxVertex) / 2.0f;
-	radius = 0;
-	for (auto v : vertices)
-		radius = fmax(radius, (center.x - v.x) * (center.x - v.x) + (center.z - v.z) * (center.z - v.z));
-	radius = sqrt(radius);
-
-
 }
 
 void Model::loadMaterialFile(std::string fileName, std::string dirName)

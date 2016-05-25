@@ -12,9 +12,13 @@ World::World() : player(Player::getInstance())
 	std::ifstream file("worlds/world1.json");
 	if(!file.is_open())
 		std::cout<<"Uhoh, can't open file\n";
+
 	json::Value v = json::readJson(file);
-	std::cout<<v;
 	file.close();
+
+	heightmap = new HeightMap(v["world"]["heightmap"].asString());
+	heightmap->SetTexture(v["world"]["texture"].asString());
+
 	player.position.x = v["player"]["startposition"][0];
 	player.position.y = v["player"]["startposition"][1];
 	player.position.z = v["player"]["startposition"][2];
@@ -96,14 +100,8 @@ void World::draw()
 	float lightAmbient[4] = { 0.5, 0.5, 0.5, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
-	glColor3f(0.5f, 0.9f, 0.5f);
-	glNormal3f(0, 1, 0);
-	glBegin(GL_QUADS);
-	glVertex3f(-50, 0, -50);
-	glVertex3f(-50, 0, 50);
-	glVertex3f(50, 0, 50);
-	glVertex3f(50, 0, -50);
-	glEnd();
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	heightmap->Draw();
 
 	for (auto &enemy : enemies)
 		enemy->draw();

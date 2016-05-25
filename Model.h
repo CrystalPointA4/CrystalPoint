@@ -5,11 +5,13 @@
 #include <vector>
 #include <map>
 #include "Vector.h"
+#include "Vertex.h"
 
 class Model
 {
 private:
-	class Vertex
+	
+	class VertexIndex
 	{
 	public:
 		int position;
@@ -20,7 +22,7 @@ private:
 	class Face
 	{
 	public:
-		std::list<Vertex> vertices;
+		std::list<VertexIndex> vertices;
 	};
 
 	class Texture
@@ -54,6 +56,7 @@ private:
 		std::string name;
 		int materialIndex;
 		std::list<Face> faces;
+		std::vector<Vertex> VertexArray;
 	};
 
 	std::vector<Vec3f>	vertices;
@@ -74,6 +77,7 @@ public:
 	static void unload(Model* model);
 
 	void draw();
+	void Optimise(ObjGroup *t);
 
 	Vec3f minVertex;
 	Vec3f maxVertex;
