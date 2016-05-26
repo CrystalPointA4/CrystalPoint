@@ -90,7 +90,7 @@ void HeightMap::Draw()
 	glDisableClientState(GL_NORMAL_ARRAY);
 }
 
-void HeightMap::GetHeigth(float x, float y)
+float HeightMap::GetHeigth(float x, float y)
 {
 	x /= scale;
 	y /= scale;
@@ -102,8 +102,18 @@ void HeightMap::GetHeigth(float x, float y)
 	Vertex& a = vertices[index];
 	Vertex& b = vertices[index+1];
 	Vertex& c = vertices[index+3];
-	//http://stackoverflow.com/questions/36090269/finding-height-of-point-on-height-map-triangles
 
+	float lowervalue = ((b.y - c.y)*(a.x - c.x) + (c.x - b.x)*(a.y - c.y));
+
+	float labda1 = ((b.y - c.y)*(x - c.x) + (c.x - b.x)*(y - c.y))/ lowervalue;
+
+	float labda2 = ((c.y - a.y)*(x - c.x) + (a.x - c.x)*(y - c.y)) / lowervalue;
+
+	float labda3 = 1 - labda1 - labda2;
+
+	Vec3f z = Vec3f(a.x, a.y, a.z) * labda1 + Vec3f(b.x, b.y, b.z) * labda2 + Vec3f(c.x, c.y, c.z) * labda3;
+	
+	return z.y;
 }
 
 void HeightMap::SetTexture(const std::string &file)

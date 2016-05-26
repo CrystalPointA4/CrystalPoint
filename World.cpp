@@ -133,7 +133,7 @@ void World::update(float elapsedTime)
 				{
 					Vec3f difference = e->position - enemy->position; //zou misschien omgedraait moeten worden
 					difference.Normalize();
-					//difference = difference * (e->model->radius + 0.01f);
+					difference = difference * (e->model->radius + 0.01f);
 					enemy->position = e->position + difference;
 					break;
 				}

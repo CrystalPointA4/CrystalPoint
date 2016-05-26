@@ -21,7 +21,6 @@ Entity::~Entity()
 
 void Entity::draw()
 {
-	rotation.y += 1;
 	if (model)
 	{
 		glPushMatrix();

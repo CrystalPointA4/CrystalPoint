@@ -23,6 +23,7 @@ public:
 	Vec3f operator / (float value);
 	bool operator ==(const Vec3f &other);
 	bool operator !=(const Vec3f &other);
+	Vec3f operator *(const float &other);
 
 	Vec3f cross(const Vec3f &other);
 

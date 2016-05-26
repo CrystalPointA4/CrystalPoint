@@ -18,7 +18,7 @@ public:
 	~HeightMap();
 
 	void Draw();
-	void GetHeigth(float x, float z);
+	float GetHeigth(float x, float y);
 	void SetTexture(const std::string &file);
 
 	std::vector<Vertex> vertices;
