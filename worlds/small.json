@@ -1,0 +1,11 @@
+{
+   "world": {
+    "heightmap": "worlds/small.png",
+    "scale": 1
+   },
+  "player": {
+    "startposition": [ 20, 5, 20 ]
+  },
+  "objects": [],
+  "enemies": []
+}

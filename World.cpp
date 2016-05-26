@@ -34,9 +34,9 @@ World::World(const std::string &fileName)
 	if(!v["world"]["texture"].isNull())
 		heightmap->SetTexture(v["world"]["texture"].asString());
 
-	player->position.x = v["player"]["startposition"][0].asFloat();
-	player->position.y = v["player"]["startposition"][1].asFloat();
-	player->position.z = v["player"]["startposition"][2].asFloat();
+	player->position.x = v["player"]["startposition"][0].asFloat()*scale;
+	player->position.y = v["player"]["startposition"][1].asFloat()*scale;
+	player->position.z = v["player"]["startposition"][2].asFloat()*scale;
 
 
 	for (auto object : v["objects"])

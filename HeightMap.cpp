@@ -73,9 +73,6 @@ void HeightMap::Draw()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, imageIndex);
 
-	//glDisable(GL_TEXTURE_2D);
-
-
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	//glEnableClientState(GL_COLOR_ARRAY);
@@ -105,15 +102,12 @@ float HeightMap::GetHeight(float x, float y)
 	Vertex& b = vertices[index+1];
 	Vertex& c = vertices[index+3];
 
-	float lowervalue = ((b.y - c.y)*(a.x - c.x) + (c.x - b.x)*(a.y - c.y));
-
-	float labda1 = ((b.y - c.y)*(x - c.x) + (c.x - b.x)*(y - c.y)) / lowervalue;
-
+	float lowervalue = ((b.z - c.z)*(a.x - c.x) + (c.x - b.x)*(a.z - c.z));
+	float labda1 = ((b.z - c.z)*(x - c.x) + (c.x - b.x)*(y - c.z)) / lowervalue;
 	float labda2 = ((c.y - a.y)*(x - c.x) + (a.x - c.x)*(y - c.y)) / lowervalue;
-
 	float labda3 = 1 - labda1 - labda2;
 
-	Vec3f z = Vec3f(a.x, a.y, a.z) * labda1 + Vec3f(b.x, b.y, b.z) * labda2 + Vec3f(c.x, c.y, c.z) * labda3;
+	Vertex z = a * labda1 + b * labda2 + c * labda3;
 
 	return z.y;
 }

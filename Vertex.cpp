@@ -17,3 +17,23 @@ Vertex::Vertex(float x, float y, float z, float nx, float ny, float nz, float tx
 Vertex::~Vertex()
 {
 }
+
+Vertex Vertex::operator/(float &other)
+{
+	return Vertex(x / other, y / other, z / other, normalX, normalY, normalZ, texX, texY);
+}
+
+Vertex Vertex::operator*(Vertex & other)
+{
+	return Vertex(x*other.x, y*other.y, z*other.z, normalX, normalY, normalZ, texX, texY);
+}
+
+Vertex Vertex::operator*(float & other)
+{
+	return Vertex(x*other, y*other, z*other, normalX, normalY, normalZ, texX, texY);
+}
+
+Vertex Vertex::operator+(Vertex & other)
+{
+	return Vertex(x+other.x, y+other.y, z+other.z, normalX, normalY, normalZ, texX, texY);
+}
