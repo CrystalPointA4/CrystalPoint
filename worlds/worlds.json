@@ -1,6 +1,6 @@
 {
 	"worlds": [
-			"worlds/fire.json",
-			"worlds/ice.json"
+			"worlds/ice.json",
+			"worlds/fire.json"
 	]
 }

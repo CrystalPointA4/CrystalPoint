@@ -22,5 +22,6 @@ public:
 	void draw();
 	void update(float elapsedTime);
 	bool isPlayerPositionValid();
+	float getHeight(float x, float y);
 };
 

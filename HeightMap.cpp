@@ -7,8 +7,10 @@
 #include <string>
 
 
-HeightMap::HeightMap(const std::string &file)
+HeightMap::HeightMap(const std::string &file, float scale)
 {
+	this->scale = scale;
+
 	int bpp;
 	unsigned char* imgData = stbi_load(file.c_str(), &width, &height, &bpp, 4);
 
@@ -90,7 +92,7 @@ void HeightMap::Draw()
 	glDisableClientState(GL_NORMAL_ARRAY);
 }
 
-float HeightMap::GetHeigth(float x, float y)
+float HeightMap::GetHeight(float x, float y)
 {
 	x /= scale;
 	y /= scale;
@@ -105,14 +107,14 @@ float HeightMap::GetHeigth(float x, float y)
 
 	float lowervalue = ((b.y - c.y)*(a.x - c.x) + (c.x - b.x)*(a.y - c.y));
 
-	float labda1 = ((b.y - c.y)*(x - c.x) + (c.x - b.x)*(y - c.y))/ lowervalue;
+	float labda1 = ((b.y - c.y)*(x - c.x) + (c.x - b.x)*(y - c.y)) / lowervalue;
 
 	float labda2 = ((c.y - a.y)*(x - c.x) + (a.x - c.x)*(y - c.y)) / lowervalue;
 
 	float labda3 = 1 - labda1 - labda2;
 
 	Vec3f z = Vec3f(a.x, a.y, a.z) * labda1 + Vec3f(b.x, b.y, b.z) * labda2 + Vec3f(c.x, c.y, c.z) * labda3;
-	
+
 	return z.y;
 }
 

@@ -1,10 +1,11 @@
 {
    "world": {
-      "heightmap": "worlds/hmcs.png",
-	  "texture": "worlds/hmcstexture.png"
+    "heightmap": "worlds/hmcs.png",
+    "texture": "worlds/hmcstexture.png",
+    "scale": 2
    },
   "player": {
-    "startposition": [ -100, 1.7, -100 ]
+    "startposition": [ 100, 20, 100 ]
   },
   "objects": [
     {

@@ -25,7 +25,11 @@ World::World(const std::string &fileName)
 	if (v["objects"].isNull())
 		std::cout << "Invalid world file: objects - " << fileName << "\n";
 
-	heightmap = new HeightMap(v["world"]["heightmap"].asString());
+	float scale = 1.0f;
+	if (!v["world"]["scale"].isNull())
+		scale = v["world"]["scale"].asFloat();
+
+	heightmap = new HeightMap(v["world"]["heightmap"].asString(), scale);
 
 	if(!v["world"]["texture"].isNull())
 		heightmap->SetTexture(v["world"]["texture"].asString());
@@ -84,6 +88,11 @@ World::World(const std::string &fileName)
 World::~World()
 {
 	delete heightmap;
+}
+
+float World::getHeight(float x, float y)
+{
+	return heightmap->GetHeight(x, y);
 }
 
 void World::draw()

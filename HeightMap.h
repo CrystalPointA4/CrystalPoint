@@ -12,13 +12,13 @@ private:
 	int width;
 
 	GLuint imageIndex;
-	int scale = 1;
+	int scale;
 public:
-	HeightMap(const std::string &file);
+	HeightMap(const std::string &file, float scale);
 	~HeightMap();
 
 	void Draw();
-	float GetHeigth(float x, float y);
+	float GetHeight(float x, float y);
 	void SetTexture(const std::string &file);
 
 	std::vector<Vertex> vertices;

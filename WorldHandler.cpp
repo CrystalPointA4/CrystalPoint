@@ -99,6 +99,14 @@ bool WorldHandler::isPlayerPositionValid(void)
 		return world->isPlayerPositionValid();
 }
 
+float WorldHandler::getHeight(float x, float y)
+{
+	if (!loadingWorld)
+		return world->getHeight(x, y);
+	else
+		return 0.0f;
+}
+
 
 void WorldHandler::Navigate(const std::string &fileName)
 {

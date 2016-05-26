@@ -25,6 +25,7 @@ public:
 	void update(float deltaTime);
 
 	bool isPlayerPositionValid(void);
+	float getHeight(float x, float y);
 
 	void Navigate(const std::string &fileName);
 	void NextWorld();
