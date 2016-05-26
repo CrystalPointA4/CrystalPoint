@@ -160,6 +160,9 @@ void Model::Optimise(ObjGroup *t)
 
 void Model::draw()
 {
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	for (auto &g : groups)
 	{
 		if (materials[g->materialIndex]->hasTexture)
@@ -190,19 +193,14 @@ void Model::draw()
 			}
 		}
 
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_NORMAL_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
 		glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)g->VertexArray.data()) + 0);
 		glNormalPointer(GL_FLOAT, sizeof(Vertex), ((float*)g->VertexArray.data()) + 3);
 		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)g->VertexArray.data()) + 6);
 		glDrawArrays(GL_TRIANGLES, 0, g->VertexArray.size());
-
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_NORMAL_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 void Model::loadMaterialFile(std::string fileName, std::string dirName)

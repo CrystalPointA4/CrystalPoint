@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "LevelObject.h"
 #include "json.h"
+#include "Model.h"
 #include <fstream>
 #include <iostream>
 
@@ -82,6 +83,7 @@ World::World(const std::string &fileName)
 
 World::~World()
 {
+	delete heightmap;
 }
 
 void World::draw()
@@ -129,7 +131,10 @@ void World::update(float elapsedTime)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
 				{
-					enemy->position = oldpos;
+					Vec3f difference = e->position - enemy->position; //zou misschien omgedraait moeten worden
+					difference.Normalize();
+					//difference = difference * (e->model->radius + 0.01f);
+					enemy->position = e->position + difference;
 					break;
 				}
 			}

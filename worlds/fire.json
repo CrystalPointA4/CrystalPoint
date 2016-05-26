@@ -1,7 +1,17 @@
 {
    "world": {
       "heightmap": "worlds/hell.png",
-	  "texture": "worlds/helltexture.png"
+	  "texture": "worlds/helltexture.png",
+	  "object-templates": [
+			{
+				"color": 25,
+				"file": "models/boom/Boom.obj"
+			},
+			{
+				"color": 23,
+				"file": "models/boom/Boom.obj"
+			}
+	  ]
    },
   "player": {
     "startposition": [ 100, 1.7, 100 ]

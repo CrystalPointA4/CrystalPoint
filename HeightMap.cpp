@@ -1,5 +1,6 @@
 #include "HeightMap.h"
 #include "stb_image.h"
+#include "vector.h"
 
 #include <GL/freeglut.h>
 #include <iostream>
@@ -11,19 +12,28 @@ HeightMap::HeightMap(const std::string &file)
 	int bpp;
 	unsigned char* imgData = stbi_load(file.c_str(), &width, &height, &bpp, 4);
 
-	for (int h = 0; h < height; h++)
+	auto heightAt = [&](int x, int y)
 	{
-		for (int w = 0; w < width; w++)
+		return (imgData[(x + y * width) * 4] / 256.0f) * 100.0f;
+	};
+
+	for (int y = 0; y < height-1; y++)
+	{
+		for (int x = 0; x < width-1; x++)
 		{
 			int offsets[4][2] = { { 0, 0 },{ 1, 0 },{ 1, 1 },{ 0, 1 } };
+			Vec3f ca(0, heightAt(x, y + 1) - heightAt(x, y), 1);
+			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
+
+			Vec3f normal = ca.cross(ba);
+			normal.Normalize();
+
 			for (int i = 0; i < 4; i++)
 			{
-				float y = ((float)imgData[((h + offsets[i][0]) + (w + offsets[i][1]) * width) * 4]);
-				y = (y / 256.0f) * 100.0f;
-
-				vertices.push_back(Vertex{ (float)(h + offsets[i][0])*scale, y*scale, (float)(w + offsets[i][1])*scale,
-									0, 1, 0,
-									(h + offsets[i][0]) / (float)height, (w + offsets[i][1]) / (float)width } );
+				float h = heightAt(x + offsets[i][0], y + offsets[i][1]);
+				vertices.push_back(Vertex{ (float)(x + offsets[i][0])*scale, h*scale, (float)(y + offsets[i][1])*scale,
+									normal.x, normal.y, normal.z,
+									(x + offsets[i][0]) / (float)height, (y + offsets[i][1]) / (float)width } );
 			}
 		}
 	}
@@ -48,31 +58,51 @@ HeightMap::HeightMap(const std::string &file)
 
 HeightMap::~HeightMap()
 {
+	glDeleteTextures(1, &imageIndex);
 }
 
 void HeightMap::Draw()
 {
+	glEnable(GL_LIGHTING);
+	float color[] = { 0.7f, 0.7f, 0.7f, 1 };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, color);
+
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, imageIndex);
+
+	//glDisable(GL_TEXTURE_2D);
+
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	//glEnableClientState(GL_COLOR_ARRAY);
-	//glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
 
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), ((float*)vertices.data()) + 0);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), ((float*)vertices.data()) + 6);
-	//glNormalPointer(GL_FLOAT, sizeof(Vertex), ((float*)cubeVertices.data()) + 3);
+	glNormalPointer(GL_FLOAT, sizeof(Vertex), ((float*)vertices.data()) + 3);
 	glDrawArrays(GL_QUADS, 0, vertices.size());
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	//glDisableClientState(GL_COLOR_ARRAY);
-	//glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
 }
 
-void HeightMap::GetHeigth(float x, float z)
+void HeightMap::GetHeigth(float x, float y)
 {
+	x /= scale;
+	y /= scale;
+	int ix = x;
+	int iy = y;
+
+	int index = (ix + (width - 1) * iy) * 4;
+
+	Vertex& a = vertices[index];
+	Vertex& b = vertices[index+1];
+	Vertex& c = vertices[index+3];
+	//http://stackoverflow.com/questions/36090269/finding-height-of-point-on-height-map-triangles
 
 }
 
