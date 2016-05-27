@@ -1,7 +1,6 @@
 #include "World.h"
 #include <GL/freeglut.h>
 #include "Entity.h"
-#include "LevelObject.h"
 #include "json.h"
 #include "Model.h"
 #include <fstream>
@@ -18,18 +17,27 @@ World::World(const std::string &fileName)
 	json::Value v = json::readJson(file);
 	file.close();
 
+	//Check file
 	if(v["world"].isNull() || v["world"]["heightmap"].isNull())
 		std::cout << "Invalid world file: world - " << fileName << "\n";
 	if (v["player"].isNull() || v["player"]["startposition"].isNull())
 		std::cout << "Invalid world file: player - " << fileName << "\n";
 	if (v["objects"].isNull())
 		std::cout << "Invalid world file: objects - " << fileName << "\n";
+	if (v["world"]["object-templates"].isNull())
+		std::cout << "Invalid world file: object templates - " << fileName << "\n";
 
 	float scale = 1.0f;
 	if (!v["world"]["scale"].isNull())
 		scale = v["world"]["scale"].asFloat();
 
-	heightmap = new HeightMap(v["world"]["heightmap"].asString(), scale);
+	//Load object templates
+	for (auto objt : v["world"]["object-templates"])
+	{
+		objecttemplates.push_back(std::pair<int, std::string>(objt["color"], objt["file"]));
+	}
+
+	heightmap = new HeightMap(v["world"]["heightmap"].asString(), scale, this);
 
 	if(!v["world"]["texture"].isNull())
 		heightmap->SetTexture(v["world"]["texture"].asString());
@@ -88,6 +96,17 @@ World::World(const std::string &fileName)
 World::~World()
 {
 	delete heightmap;
+}
+
+std::string World::getObjectFromValue(int val)
+{
+	for (auto i : objecttemplates)
+	{
+		if (i.first == val)
+			return i.second;
+	}
+
+	return objecttemplates[0].second;
 }
 
 float World::getHeight(float x, float y)
@@ -150,6 +169,11 @@ void World::update(float elapsedTime)
 		}		
 		//tot hier
 	}
+}
+
+void World::addLevelObject(LevelObject* obj)
+{
+	entities.push_back(obj);
 }
 
 bool World::isPlayerPositionValid()

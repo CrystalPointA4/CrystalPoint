@@ -184,6 +184,7 @@
   <ItemGroup>
     <None Include="worlds\fire.json" />
     <None Include="worlds\ice.json" />
+    <None Include="worlds\small.json" />
     <None Include="worlds\worlds.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
