@@ -2,6 +2,7 @@
 	"worlds": [
 			"worlds/small.json",
 			"worlds/ice.json",
-			"worlds/fire.json"
+      "worlds/fire.json",
+      "worlds/maze.json"
 	]
 }

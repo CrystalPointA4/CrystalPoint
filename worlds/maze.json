@@ -1,0 +1,37 @@
+{
+   "world": {
+    "heightmap": "worlds/maze.png",
+    "texture": "worlds/mazeTexture.png",
+    "scale": 1,
+	    "object-templates": [
+			  {
+				  "color": 25,
+				  "file": "models/boom/Boom.obj"
+			  },
+			  {
+				  "color": 23,
+				  "file": "models/boom/Boom.obj"
+			  }
+	    ]
+   },
+  "player": {
+    "startposition": [ 200, 40, 200 ]
+  },
+  "objects": [
+    {
+      "file": "models/boom/Boom.obj",
+      "pos": [ 4, 0, -4 ]
+    },
+	{
+      "file": "models/boom/Boom.obj",
+      "pos": [ -4, 0, -4 ]
+    }
+  ],
+  "enemies": [
+    {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 1, 2, -10 ],
+      "scale": 0.01
+    }
+  ]
+}

@@ -118,5 +118,11 @@
     <None Include="worlds\ice.json">
       <Filter>Source Files\json</Filter>
     </None>
+    <None Include="worlds\small.json">
+      <Filter>Source Files\json</Filter>
+    </None>
+    <None Include="worlds\maze.json">
+      <Filter>Source Files\json</Filter>
+    </None>
   </ItemGroup>
 </Project>
