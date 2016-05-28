@@ -39,7 +39,7 @@ HeightMap::HeightMap(const std::string &file, World* world)
 
 			if (valueAt(x, y, GREEN) > 0)
 			{
-				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x, heightAt(x, y), y), Vec3f(0, rand()%360, 0), 1, true));
+				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)).first, Vec3f(x, heightAt(x, y), y), Vec3f(0, rand()%360, 0), 1, world->getObjectFromValue(valueAt(x, y, GREEN)).second));
 			}
 
 			Vec3f normal = ca.cross(ba);
