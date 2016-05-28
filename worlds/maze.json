@@ -1,11 +1,23 @@
 {
-   "world": {
+  "world": {
     "heightmap": "worlds/maze.png",
-    "texture": "worlds/mazeTexture.png",
+    //"texture": "worlds/mazeTexture.png",
     "scale": 1,
-  "player": {
-    "startposition": [ 200, 40, 200 ]
+    "object-templates": [
+      {
+        "color": 100,
+        "file": "models/boom/Boom.obj"
+      },
+      {
+        "color": 200,
+        "file": "models/Teleporter/Teleporter.obj"
+      }
+    ]
   },
-  "objects": [],
-  "enemies": []
+    "player": {
+      "startposition": [ 200, 40, 200 ]
+    },
+    "objects": [ ],
+    "enemies": [ ]
 }
+
