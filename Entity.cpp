@@ -31,7 +31,7 @@ void Entity::draw()
 		glRotatef(rotation.y, 0, 1, 0);
 		glRotatef(rotation.z, 0, 0, 1);
 		glScalef(scale, scale, scale);
-		glTranslatef(-model->center.x, 0, -model->center.z);
+//collision gaat hierdoor kapot		glTranslatef(-model->center.x, 0, -model->center.z);
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);

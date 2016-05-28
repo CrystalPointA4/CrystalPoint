@@ -14,9 +14,8 @@ private:
 	int width;
 
 	GLuint imageIndex;
-	int scale;
 public:
-	HeightMap(const std::string &file, float scale, World* world);
+	HeightMap(const std::string &file, World* world);
 	~HeightMap();
 
 	void Draw();

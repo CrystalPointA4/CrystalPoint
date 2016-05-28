@@ -1,7 +1,6 @@
 {
    "world": {
     "heightmap": "worlds/small.png",
-    "scale": 1,
 	"object-templates": [
 		{
 			"color":100,

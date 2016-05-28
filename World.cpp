@@ -27,24 +27,20 @@ World::World(const std::string &fileName)
 	if (v["world"]["object-templates"].isNull())
 		std::cout << "Invalid world file: object templates - " << fileName << "\n";
 
-	float scale = 1.0f;
-	if (!v["world"]["scale"].isNull())
-		scale = v["world"]["scale"].asFloat();
-
 	//Load object templates
 	for (auto objt : v["world"]["object-templates"])
 	{
 		objecttemplates.push_back(std::pair<int, std::string>(objt["color"], objt["file"]));
 	}
 
-	heightmap = new HeightMap(v["world"]["heightmap"].asString(), scale, this);
+	heightmap = new HeightMap(v["world"]["heightmap"].asString(), this);
 
 	if(!v["world"]["texture"].isNull())
 		heightmap->SetTexture(v["world"]["texture"].asString());
 
-	player->position.x = v["player"]["startposition"][0].asFloat()*scale;
-	player->position.y = v["player"]["startposition"][1].asFloat()*scale;
-	player->position.z = v["player"]["startposition"][2].asFloat()*scale;
+	player->position.x = v["player"]["startposition"][0].asFloat();
+	player->position.y = v["player"]["startposition"][1].asFloat();
+	player->position.z = v["player"]["startposition"][2].asFloat();
 
 
 	for (auto object : v["objects"])

@@ -14,16 +14,14 @@
 #define BLUE 2
 #define ALPHA 3
 
-HeightMap::HeightMap(const std::string &file, float scale, World* world)
+HeightMap::HeightMap(const std::string &file, World* world)
 {
-	this->scale = scale;
-
 	int bpp;
 	unsigned char* imgData = stbi_load(file.c_str(), &width, &height, &bpp, 4);
 
 	auto heightAt = [&](int x, int y)
 	{
-		return (imgData[(x + y * width) * 4 ] / 256.0f) * 100.0f;
+		return (imgData[(x + y * width) * 4 ] / 256.0f) * 50.0f;
 	};
 
 	auto valueAt = [&](int x, int y, int offset = 0)
@@ -41,7 +39,7 @@ HeightMap::HeightMap(const std::string &file, float scale, World* world)
 
 			if (valueAt(x, y, GREEN) > 0)
 			{
-				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, rand()%360, 0), 1, true));
+				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x, heightAt(x, y), y), Vec3f(0, rand()%360, 0), 1, true));
 			}
 
 			Vec3f normal = ca.cross(ba);
@@ -50,7 +48,7 @@ HeightMap::HeightMap(const std::string &file, float scale, World* world)
 			for (int i = 0; i < 4; i++)
 			{
 				float h = heightAt(x + offsets[i][0], y + offsets[i][1]);
-				vertices.push_back(Vertex{ (float)(x + offsets[i][0])*scale, h*scale, (float)(y + offsets[i][1])*scale,
+				vertices.push_back(Vertex{ (float)(x + offsets[i][0]), h, (float)(y + offsets[i][1]),
 									normal.x, normal.y, normal.z,
 									(x + offsets[i][0]) / (float)height, (y + offsets[i][1]) / (float)width } );
 			}
@@ -108,12 +106,16 @@ void HeightMap::Draw()
 
 float HeightMap::GetHeight(float x, float y)
 {
-	x /= scale;
-	y /= scale;
 	int ix = x;
 	int iy = y;
 
 	int index = (ix + (width - 1) * iy) * 4;
+
+	if (index + 3 >= vertices.size())
+		index = vertices.size() - 4;
+
+	if (index < 0)
+		index = 0;
 
 	Vertex& a = vertices[index];
 	Vertex& b = vertices[index+1];

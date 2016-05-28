@@ -78,7 +78,7 @@ void CrystalPoint::update()
 	if (player->rotation.x < -90)
 		player->rotation.x = -90;
 
-	float speed = 2;
+	float speed = 1;
 
 	Vec3f oldPosition = player->position;
 	if (keyboardState.keys['a']) player->setPosition(0, deltaTime*speed, false);
@@ -91,7 +91,7 @@ void CrystalPoint::update()
 	if (!worldhandler->isPlayerPositionValid())
 		player->position = oldPosition;
 
-	player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+	player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 0.7f;
 
 	worldhandler->update(deltaTime);
 
