@@ -1,7 +1,7 @@
 {
   "world": {
     "heightmap": "worlds/maze.png",
-    //"texture": "worlds/mazeTexture.png",
+    "texture": "worlds/mazeTexture2.png",
     "scale": 1,
     "object-templates": [
       {
