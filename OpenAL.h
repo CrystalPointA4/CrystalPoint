@@ -2,9 +2,8 @@
 class OpenAL
 {
 public:
-	int endWithError(char* msg, int error = 0);
 	OpenAL();
+	bool EndWithError(char* msg);
+	bool Test();
 	~OpenAL();
-	boolean Test();
-
 };

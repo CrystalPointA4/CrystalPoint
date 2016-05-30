@@ -2,33 +2,29 @@
 #include <cstdlib>
 #include <iostream>
 #include <windows.h>
-#include <al.h>
-#include <alc.h>
+#include "al.h"
+#include "alc.h"
 
-int OpenAL::endWithError(char* msg, int error = 0)
+OpenAL::OpenAL()
+{
+	Test();
+}
+
+bool OpenAL::EndWithError(char* msg)
 {
 	//Display error message in console
+	bool error = false;
 	std::cout << msg << "\n";
 	system("PAUSE");
 	return error;
 }
 
-OpenAL::OpenAL()
-{
-	Test();
-
-}
-
-OpenAL::~OpenAL()
-{
-}
-
-boolean OpenAL::Test()
+bool OpenAL::Test()
 {
 	//Loading of the WAVE file
 	FILE *fp = NULL;                                                            //Create FILE pointer for the WAVE file
 	fp = fopen("WAVE/Sound.wav", "rb");                                            //Open the WAVE file
-	if (!fp) return endWithError("Failed to open file");                        //Could not open file
+	if (!fp) return EndWithError("Failed to open file");                        //Could not open file
 
 																				//Variables to store info about the WAVE file (all of them is not needed for OpenAL)
 	char type[4];
@@ -41,16 +37,16 @@ boolean OpenAL::Test()
 	//Check that the WAVE file is OK
 	fread(type, sizeof(char), 4, fp);                                              //Reads the first bytes in the file
 	if (type[0] != 'R' || type[1] != 'I' || type[2] != 'F' || type[3] != 'F')            //Should be "RIFF"
-		return endWithError("No RIFF");                                            //Not RIFF
+		return EndWithError("No RIFF");                                            //Not RIFF
 
 	fread(&size, sizeof(DWORD), 1, fp);                                           //Continue to read the file
 	fread(type, sizeof(char), 4, fp);                                             //Continue to read the file
 	if (type[0] != 'W' || type[1] != 'A' || type[2] != 'V' || type[3] != 'E')           //This part should be "WAVE"
-		return endWithError("not WAVE");                                            //Not WAVE
+		return EndWithError("not WAVE");                                            //Not WAVE
 
 	fread(type, sizeof(char), 4, fp);                                              //Continue to read the file
 	if (type[0] != 'f' || type[1] != 'm' || type[2] != 't' || type[3] != ' ')           //This part should be "fmt "
-		return endWithError("not fmt ");                                            //Not fmt 
+		return EndWithError("not fmt ");                                            //Not fmt 
 
 																					//Now we know that the file is a acceptable WAVE file
 																					//Info about the WAVE data is now read and stored
@@ -64,7 +60,7 @@ boolean OpenAL::Test()
 
 	fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'd' || type[1] != 'a' || type[2] != 't' || type[3] != 'a')           //This part should be "data"
-		return endWithError("Missing DATA");                                        //not data
+		return EndWithError("Missing DATA");                                        //not data
 
 	fread(&dataSize, sizeof(DWORD), 1, fp);                                        //The size of the sound data is read
 
@@ -80,18 +76,18 @@ boolean OpenAL::Test()
 
 	unsigned char* buf = new unsigned char[dataSize];                            //Allocate memory for the sound data
 	std::cout << fread(buf, sizeof(BYTE), dataSize, fp) << " bytes loaded\n";           //Read the sound data and display the 
-																				   //number of bytes loaded.
-																				   //Should be the same as the Data Size if OK
+																						//number of bytes loaded.
+																						//Should be the same as the Data Size if OK
 
 
-																				   //Now OpenAL needs to be initialized 
+																						//Now OpenAL needs to be initialized 
 	ALCdevice *device;                                                          //Create an OpenAL Device
 	ALCcontext *context;                                                        //And an OpenAL Context
 	device = alcOpenDevice(NULL);                                               //Open the device
-	if (!device) return endWithError("no sound device");                         //Error during device oening
+	if (!device) return EndWithError("no sound device");                         //Error during device oening
 	context = alcCreateContext(device, NULL);                                   //Give the device a context
 	alcMakeContextCurrent(context);                                             //Make the context the current
-	if (!context) return endWithError("no sound context");                       //Error during context handeling
+	if (!context) return EndWithError("no sound context");                       //Error during context handeling
 
 	ALuint source;                                                              //Is the name of source (where the sound come from)
 	ALuint buffer;                                                           //Stores the sound data
@@ -100,7 +96,7 @@ boolean OpenAL::Test()
 
 	alGenBuffers(1, &buffer);                                                    //Generate one OpenAL Buffer and link to "buffer"
 	alGenSources(1, &source);                                                   //Generate one OpenAL Source and link to "source"
-	if (alGetError() != AL_NO_ERROR) return endWithError("Error GenSource");     //Error during buffer/source generation
+	if (alGetError() != AL_NO_ERROR) return EndWithError("Error GenSource");     //Error during buffer/source generation
 
 																				 //Figure out the format of the WAVE file
 	if (bitsPerSample == 8)
@@ -117,11 +113,11 @@ boolean OpenAL::Test()
 		else if (channels == 2)
 			format = AL_FORMAT_STEREO16;
 	}
-	if (!format) return endWithError("Wrong BitPerSample");                      //Not valid format
+	if (!format) return EndWithError("Wrong BitPerSample");                      //Not valid format
 
 	alBufferData(buffer, format, buf, dataSize, frequency);                    //Store the sound data in the OpenAL Buffer
 	if (alGetError() != AL_NO_ERROR)
-		return endWithError("Error loading ALBuffer");                              //Error during buffer loading
+		return EndWithError("Error loading ALBuffer");                              //Error during buffer loading
 
 																					//Sound setting variables
 	ALfloat SourcePos[] = { 0.0, 0.0, 0.0 };                                    //Position of the source sound
@@ -145,7 +141,7 @@ boolean OpenAL::Test()
 
 																			 //PLAY 
 	alSourcePlay(source);                                                       //Play the sound buffer linked to the source
-	if (alGetError() != AL_NO_ERROR) return endWithError("Error playing sound"); //Error when playing sound
+	if (alGetError() != AL_NO_ERROR) return EndWithError("Error playing sound"); //Error when playing sound
 	system("PAUSE");                                                            //Pause to let the sound play
 
 																				//Clean-up
@@ -158,4 +154,9 @@ boolean OpenAL::Test()
 	alcCloseDevice(device);                                                     //Close the OpenAL Device
 
 	return EXIT_SUCCESS;
+}
+
+
+OpenAL::~OpenAL()
+{
 }
