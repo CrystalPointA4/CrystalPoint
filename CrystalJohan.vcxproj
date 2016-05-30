@@ -189,6 +189,9 @@
   <ItemGroup>
     <None Include="worlds\world1.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="WAVE\Sound.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
