@@ -2,6 +2,13 @@
    "world": {
     "heightmap": "worlds/hmcs.png",
     "texture": "worlds/hmcstexture.png",
+    "object-templates": [
+		{
+			"color":100,
+			"file": "models/boom/Boom.obj",
+			"collision": false
+		}
+	]
    },
   "player": {
     "startposition": [ 100, 20, 100 ]
