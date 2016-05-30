@@ -2,24 +2,25 @@
 #include <cstdlib>
 #include <iostream>
 #include <windows.h>
-#include "al.h"
-#include "alc.h"
+#include <al.h>
+#include <alc.h>
 
 OpenAL::OpenAL()
 {
-	Test();
+	Init();
+
 }
 
-bool OpenAL::EndWithError(char* msg)
+int OpenAL::EndWithError(char* msg)
 {
 	//Display error message in console
-	bool error = false;
+	int error = 0;
 	std::cout << msg << "\n";
 	system("PAUSE");
 	return error;
 }
 
-bool OpenAL::Test()
+int OpenAL::Init()
 {
 	//Loading of the WAVE file
 	FILE *fp = NULL;                                                            //Create FILE pointer for the WAVE file
@@ -76,11 +77,11 @@ bool OpenAL::Test()
 
 	unsigned char* buf = new unsigned char[dataSize];                            //Allocate memory for the sound data
 	std::cout << fread(buf, sizeof(BYTE), dataSize, fp) << " bytes loaded\n";           //Read the sound data and display the 
-																						//number of bytes loaded.
-																						//Should be the same as the Data Size if OK
+																				   //number of bytes loaded.
+																				   //Should be the same as the Data Size if OK
 
 
-																						//Now OpenAL needs to be initialized 
+																				   //Now OpenAL needs to be initialized 
 	ALCdevice *device;                                                          //Create an OpenAL Device
 	ALCcontext *context;                                                        //And an OpenAL Context
 	device = alcOpenDevice(NULL);                                               //Open the device
@@ -142,7 +143,7 @@ bool OpenAL::Test()
 																			 //PLAY 
 	alSourcePlay(source);                                                       //Play the sound buffer linked to the source
 	if (alGetError() != AL_NO_ERROR) return EndWithError("Error playing sound"); //Error when playing sound
-	system("PAUSE");                                                            //Pause to let the sound play
+	//system("PAUSE");                                                            //Pause to let the sound play
 
 																				//Clean-up
 	fclose(fp);                                                                 //Close the WAVE file

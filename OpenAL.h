@@ -3,7 +3,7 @@ class OpenAL
 {
 public:
 	OpenAL();
-	bool EndWithError(char* msg);
-	bool Test();
+	int EndWithError(char* msg);
+	int Init();
 	~OpenAL();
 };

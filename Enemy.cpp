@@ -1,6 +1,6 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
-
+#include "OpenAL.h"
 #include "Enemy.h"
 #include "Model.h"
 #include <iostream>
@@ -53,6 +53,7 @@ void Enemy::update(float delta)
 {
 	if (hasTarget)
 	{
+		OpenAL();
 		//just 2d walking
 		float dx, dz, length;
 
