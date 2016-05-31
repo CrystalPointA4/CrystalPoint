@@ -18,7 +18,7 @@ Enemy::Enemy(const std::string &fileName,
 	this->canCollide = true;
 	target = position;
 	speed = 1;
-	radius = 10;
+	radius = 20;
 	hasTarget = false;
 }
 

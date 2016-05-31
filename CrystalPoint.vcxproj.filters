@@ -121,7 +121,7 @@
     <None Include="worlds\small.json">
       <Filter>Source Files\json</Filter>
     </None>
-    <None Include="worlds\maze.json">
+    <None Include="worlds\rock.json">
       <Filter>Source Files\json</Filter>
     </None>
   </ItemGroup>

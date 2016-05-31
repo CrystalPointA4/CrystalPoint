@@ -1,0 +1,61 @@
+newmtl Engine_Thomas:Eyes
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Eye_01.png
+Ni 1.00
+Ks 0.37 0.37 0.37
+Ns 96.08
+newmtl Engine_Thomas:Page_01
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd engine_thomas_page1.png
+Ni 1.00
+Ks 0.37 0.37 0.37
+Ns 96.08
+newmtl Engine_Thomas:Page_02
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd engine_thomas_page2.png
+Ni 1.00
+Ks 0.37 0.37 0.37
+Ns 96.08
+newmtl Engine_Thomas:Page_05
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.00 0.00 0.00
+map_Kd Engine_Thomas_Page3.png
+Ni 1.00
+Ks 0.37 0.37 0.37
+Ns 96.08
+newmtl Engine_Thomas:Shadow
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.00 0.00 0.00
+map_Kd Thomas_Shadow.png
+Ni 1.00
+Ks 0.37 0.37 0.37
+Ns 96.08
+newmtl initialShadingGroup
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd tex_wendy.jpg
+Ni 1.00
+newmtl wooper:wooper
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd wooper.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
