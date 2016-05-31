@@ -5,19 +5,35 @@
     "scale": 1,
     "object-templates": [
       {
-        "color": 100,
-        "file": "models/boom/Boom.obj"
+        "color": 190,
+        "file": "models/Rocks/Cave1.obj"
       },
       {
         "color": 200,
-        "file": "models/Teleporter/Teleporter.obj"
+        "file": "models/Rocks/SpikeRock2.obj"
+      },
+      {
+        "color": 210,
+        "file": "models/Rocks/SpikeRock1.obj"
+      },
+      {
+        "color": 220,
+        "file": "models/Rocks/SpikeRock3.obj"
+      },
+      {
+        "color": 230,
+        "file": "models/Rocks/SpikeRock4.obj"
+      },
+      {
+        "color": 240,
+        "file": "models/Rocks/SpikeRock5.obj"
       }
+
     ]
   },
     "player": {
-      "startposition": [ 200, 40, 200 ]
+      "startposition": [ 300, 40, 450 ]
     },
     "objects": [ ],
     "enemies": [ ]
 }
-
