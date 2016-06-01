@@ -39,11 +39,16 @@ HeightMap::HeightMap(const std::string &file, float scale, World* world)
 			Vec3f ca(0, heightAt(x, y + 1) - heightAt(x, y), 1);
 			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
 
-			if ((valueAt(x, y, GREEN) >= 200) && (valueAt(x, y, GREEN) <= 240))
+
+			//if (valueAt(x, y, GREEN) == 190)
+			//{
+			//	world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, false));
+			//}
+			if (valueAt(x, y, GREEN) == 180 || valueAt(x, y, GREEN) == 190 || valueAt(x, y, GREEN) == 170)
 			{
-				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, false));
+				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, true));
 			}
-			if (valueAt(x, y, GREEN) == 190)
+			if ((valueAt(x, y, GREEN) >= 200) && (valueAt(x, y, GREEN) <= 240))
 			{
 				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, false));
 			}

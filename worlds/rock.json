@@ -5,6 +5,14 @@
     "scale": 1,
     "object-templates": [
       {
+        "color": 170,
+        "file": "models/Rocks/DraakHoofd.obj"
+      },
+      {
+        "color": 180,
+        "file": "models/Rocks/DragonWall1.obj"
+      },
+      {
         "color": 190,
         "file": "models/Rocks/Cave1.obj"
       },
@@ -36,41 +44,7 @@
     },
     "objects": [ ],
   "enemies": [
-    {
-      "file": "models/squid/Blooper.obj",
-      "pos": [ 300, 2, 500 ],
-      "scale": 0.01
-    },
-    {
-      "file": "models/Enemies/Bob.obj",
-      "pos": [ 300, 0, 490 ],
-      "scale": 0.5
-    },
-    {
-      "file": "models/Enemies/Skateboard.obj",
-      "pos": [ 300, 4, 510 ],
-      "scale": 1
-    },
-    {
-      "file": "models/Enemies/Monkey.obj",
-      "pos": [ 60, 0, 675 ],
-      "scale": 2
-    },
-    {
-      "file": "models/Enemies/Vincent.obj",
-      "pos": [ 300, 0, 520 ],
-      "scale": 0.2
-    },
-    {
-      "file": "models/Enemies/Vincent.obj",
-      "pos": [ 300, 0, 521 ],
-      "scale": 0.2
-    },
-    {
-      "file": "models/Enemies/Vincent.obj",
-      "pos": [ 300, 0, 522 ],
-      "scale": 0.2
-    }
+
 
 
   ]
