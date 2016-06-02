@@ -40,11 +40,11 @@ HeightMap::HeightMap(const std::string &file, float scale, World* world)
 			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
 
 
-			//if (valueAt(x, y, GREEN) == 190)
-			//{
-			//	world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, false));
-			//}
-			if (valueAt(x, y, GREEN) == 180 || valueAt(x, y, GREEN) == 190 || valueAt(x, y, GREEN) == 170)
+			if ((valueAt(x, y, GREEN) >= 10) && (valueAt(x,y,GREEN) <= 100))
+			{
+				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, rand() % 360, 0), 1, true));
+			}
+			if (valueAt(x, y, GREEN) == 180 || valueAt(x, y, GREEN) == 190 || valueAt(x, y, GREEN) == 170 || valueAt(x, y, GREEN) == 250)
 			{
 				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, true));
 			}

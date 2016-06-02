@@ -5,6 +5,46 @@
     "scale": 1,
     "object-templates": [
       {
+        "color": 10,
+        "file": "models/Rocks/Rock1.obj"
+      },
+      {
+        "color": 20,
+        "file": "models/Rocks/Rock2.obj"
+      },
+      {
+        "color": 30,
+        "file": "models/Rocks/Rock3.obj"
+      },
+      {
+        "color": 40,
+        "file": "models/Rocks/Rock4.obj"
+      },
+      {
+        "color": 50,
+        "file": "models/Rocks/Rock5.obj"
+      },
+      {
+        "color": 60,
+        "file": "models/Rocks/Rock6.obj"
+      },
+      {
+        "color": 70,
+        "file": "models/Rocks/Rock7.obj"
+      },
+      {
+        "color": 80,
+        "file": "models/Rocks/Rock8.obj"
+      },
+      {
+        "color": 90,
+        "file": "models/Rocks/Rock9.obj"
+      },
+            {
+        "color": 100,
+        "file": "models/Rocks/Rock10.obj"
+      },
+      {
         "color": 170,
         "file": "models/Rocks/DraakHoofd.obj"
       },
@@ -35,6 +75,10 @@
       {
         "color": 240,
         "file": "models/Rocks/SpikeRock5.obj"
+      },
+      {
+        "color": 250,
+        "file": "models/Crystal/Crystal.obj"
       }
 
     ]
