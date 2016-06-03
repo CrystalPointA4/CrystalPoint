@@ -40,7 +40,7 @@
         "color": 90,
         "file": "models/Rocks/Rock9.obj"
       },
-            {
+      {
         "color": 100,
         "file": "models/Rocks/Rock10.obj"
       },
@@ -78,7 +78,7 @@
       },
       {
         "color": 250,
-        "file": "models/Crystal/Crystal.obj"
+        "file": "models/Teleporter/Teleporter.obj"
       }
 
     ]

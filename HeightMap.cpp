@@ -52,6 +52,10 @@ HeightMap::HeightMap(const std::string &file, float scale, World* world)
 			{
 				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, false));
 			}
+			if (valueAt(x, y, GREEN) == 160)
+			{
+				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)), Vec3f(x*scale, heightAt(x, y), y*scale), Vec3f(0, 0, 0), 1, false));
+			}
 
 			Vec3f normal = ca.cross(ba);
 			normal.Normalize();
