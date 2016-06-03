@@ -6,10 +6,14 @@
 #include "WorldHandler.h"
 #include "Player.h"
 
+int CrystalPoint::width = 0;
+int CrystalPoint::height = 0;
+
 void CrystalPoint::init()
 {
 	player = Player::getInstance();
 	worldhandler = WorldHandler::getInstance();
+	//cursor = Cursor::getInstance();
 
 	lastFrameTime = 0;
 
@@ -34,23 +38,8 @@ void CrystalPoint::draw()
 	glLoadIdentity();
 
 	worldhandler->draw();
-	
-	//Draw Cursor
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0,width, height,0,-10,10);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
-	glDisable(GL_LIGHTING);
-	glDisable(GL_DEPTH_TEST);
-	glColor4f(1, cos(glutGet(GLUT_ELAPSED_TIME) / 1000.0f), sin(glutGet(GLUT_ELAPSED_TIME) / 1000.0f), 1);
-
-	glBegin(GL_TRIANGLES);
-	glVertex2f(mousePosition.x, mousePosition.y);
-	glVertex2f(mousePosition.x+15, mousePosition.y+15);
-	glVertex2f(mousePosition.x+5, mousePosition.y+20);
-	glEnd();
+	//cursor->draw();
 
 	glutSwapBuffers();
 }
@@ -96,6 +85,7 @@ void CrystalPoint::update()
 	worldhandler->update(deltaTime);
 
 	mousePosition = mousePosition + mouseOffset;
+	//cursor->update(mousePosition);
 
 	mouseOffset = Vec2f(0, 0);
 	prevKeyboardState = keyboardState;
