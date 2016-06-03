@@ -45,6 +45,10 @@
         "file": "models/Rocks/Rock10.obj"
       },
       {
+        "color": 160,
+        "file": "models/Rocks/InvisBall.obj"
+      },
+      {
         "color": 170,
         "file": "models/Rocks/DraakHoofd.obj"
       },
