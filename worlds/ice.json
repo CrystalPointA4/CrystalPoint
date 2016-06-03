@@ -1,0 +1,26 @@
+{
+   "world": {
+    "heightmap": "worlds/hmcs.png",
+    "texture": "worlds/hmcstexture.png",
+   },
+  "player": {
+    "startposition": [ 100, 20, 100 ]
+  },
+  "objects": [
+    {
+      "file": "models/boom/Boom.obj",
+      "pos": [ 4, 0, -4 ]
+    },
+    {
+      "file": "models/Teleporter/Teleporter.obj",
+      "pos": [ 0, 0, -4 ]
+    }
+  ],
+  "enemies": [
+    {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 1, 2, -10 ],
+      "scale": 0.01
+    }
+  ]
+}

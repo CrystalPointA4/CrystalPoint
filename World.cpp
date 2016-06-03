@@ -1,27 +1,46 @@
 #include "World.h"
 #include <GL/freeglut.h>
 #include "Entity.h"
-#include "LevelObject.h"
 #include "json.h"
+#include "Model.h"
 #include <fstream>
 #include <iostream>
 
-World::World() : player(Player::getInstance())
+World::World(const std::string &fileName)
 {
+	player = Player::getInstance();
 
-	std::ifstream file("worlds/world1.json");
+	std::ifstream file(fileName);
 	if(!file.is_open())
-		std::cout<<"Uhoh, can't open file\n";
+		std::cout<<"Error, can't open world file - " << fileName << "\n";
 
 	json::Value v = json::readJson(file);
 	file.close();
 
-	heightmap = new HeightMap(v["world"]["heightmap"].asString());
-	heightmap->SetTexture(v["world"]["texture"].asString());
+	//Check file
+	if(v["world"].isNull() || v["world"]["heightmap"].isNull())
+		std::cout << "Invalid world file: world - " << fileName << "\n";
+	if (v["player"].isNull() || v["player"]["startposition"].isNull())
+		std::cout << "Invalid world file: player - " << fileName << "\n";
+	if (v["objects"].isNull())
+		std::cout << "Invalid world file: objects - " << fileName << "\n";
+	if (v["world"]["object-templates"].isNull())
+		std::cout << "Invalid world file: object templates - " << fileName << "\n";
 
-	player.position.x = v["player"]["startposition"][0];
-	player.position.y = v["player"]["startposition"][1];
-	player.position.z = v["player"]["startposition"][2];
+	//Load object templates
+	for (auto objt : v["world"]["object-templates"])
+	{
+		objecttemplates.push_back(std::pair<int, std::string>(objt["color"], objt["file"]));
+	}
+
+	heightmap = new HeightMap(v["world"]["heightmap"].asString(), this);
+
+	if(!v["world"]["texture"].isNull())
+		heightmap->SetTexture(v["world"]["texture"].asString());
+
+	player->position.x = v["player"]["startposition"][0].asFloat();
+	player->position.y = v["player"]["startposition"][1].asFloat();
+	player->position.z = v["player"]["startposition"][2].asFloat();
 
 
 	for (auto object : v["objects"])
@@ -32,68 +51,68 @@ World::World() : player(Player::getInstance())
 
 		Vec3f rotation(0, 0, 0);
 		if(!object["rot"].isNull())
-			rotation = Vec3f(object["rot"][0], object["rot"][1], object["rot"][2]);
+			rotation = Vec3f(object["rot"][0].asFloat(), object["rot"][1].asFloat(), object["rot"][2].asFloat());
 
 		float scale = 1;
 		if (!object["scale"].isNull())
 			scale = object["scale"].asFloat();
 		
-		Vec3f position(object["pos"][0], object["pos"][1], object["pos"][2]);
+		if (object["pos"].isNull())
+			std::cout << "Invalid world file: objects pos - " << fileName << "\n";
+
+		Vec3f position(object["pos"][0].asFloat(), object["pos"][1].asFloat(), object["pos"][2].asFloat());
 		entities.push_back(new LevelObject(object["file"], position, rotation, scale, hasCollision));
 	}
 
-	//look up table for the enemies	
-	std::vector<std::pair<int, std::string>>enemy_models;
-	for (auto enemy_model : v["enemy_models"])
+	//Enemies
+	for (auto e : v["enemies"])
 	{		
-		int id = -1;
-		if (!enemy_model["id"].isNull())
-			id = enemy_model["id"].asInt();
-
 		std::string fileName = "";
-		if (!enemy_model["file"].isNull())
-			fileName = enemy_model["file"].asString();
+		if (!e["file"].isNull())
+			fileName = e["file"].asString();
 
-		enemy_models.push_back(std::pair<int, std::string>(id,fileName));
-	}
+		Vec3f position(0, 0, 0);
+		if (!e["pos"].isNull())
+			position = Vec3f(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
 
-	for (auto enemy : v["enemy_data"])
-	{
-		int id = -1;
-		if (!enemy["id"].isNull())
-			id = enemy["id"];
-		for (auto enemy_model : enemy_models)
-		{
-			if (id == enemy_model.first)
-			{				
-				Vec3f position(0, 0, 0);
-				if (!enemy["pos"].isNull())
-					position = Vec3f(enemy["pos"][0], enemy["pos"][1], enemy["pos"][2]);
+		Vec3f rotation(0, 0, 0);
+		if (!e["rot"].isNull())
+			rotation = Vec3f(e["rot"][0].asFloat(), e["rot"][1].asFloat(), e["rot"][2].asFloat());
 
-				Vec3f rotation(0, 0, 0);
-				if (!enemy["rot"].isNull())
-					rotation = Vec3f(enemy["rot"][0], enemy["rot"][1], enemy["rot"][2]);
+		float scale = 1.0f;
+		if (!e["scale"].isNull())
+			scale = e["scale"].asFloat();
 
-				float scale = 1.0f;
-				if (!enemy["scale"].isNull())
-					scale = enemy["scale"].asFloat();
-				
-				enemies.push_back(new Enemy(enemy_model.second,position,rotation,scale,true));
-			}
+		enemies.push_back(new Enemy(fileName, position, rotation, scale));
 
-		}
-		
 	}
 }
 
 
 World::~World()
 {
+	delete heightmap;
+}
+
+std::string World::getObjectFromValue(int val)
+{
+	for (auto i : objecttemplates)
+	{
+		if (i.first == val)
+			return i.second;
+	}
+
+	return objecttemplates[0].second;
+}
+
+float World::getHeight(float x, float y)
+{
+	return heightmap->GetHeight(x, y);
 }
 
 void World::draw()
 {
-	player.setCamera();
+	player->setCamera();
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -108,9 +127,6 @@ void World::draw()
 
 	for (auto &entity : entities)
 		entity->draw();
-
-	
-
 }
 
 void World::update(float elapsedTime)
@@ -120,11 +136,13 @@ void World::update(float elapsedTime)
 
 	for (auto &enemy : enemies)
 	{
-		if (enemy->position.Distance(player.position) <= enemy->radius)
+
+		//Al deze code zou in enemy moeten staan
+		if (enemy->position.Distance(player->position) <= enemy->radius)
 		{			
 			enemy->hasTarget = true;
-			enemy->target.x = player.position.x;
-			enemy->target.z = player.position.z;
+			enemy->target.x = player->position.x;
+			enemy->target.z = player->position.z;
 		}
 		else
 			enemy->hasTarget = false;
@@ -137,19 +155,28 @@ void World::update(float elapsedTime)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
 				{
-					enemy->position = oldpos;
+					Vec3f difference = e->position - enemy->position; //zou misschien omgedraait moeten worden
+					difference.Normalize();
+					difference = difference * (e->model->radius + 0.01f);
+					enemy->position = e->position + difference;
 					break;
 				}
 			}
 		}		
+		//tot hier
 	}
+}
+
+void World::addLevelObject(LevelObject* obj)
+{
+	entities.push_back(obj);
 }
 
 bool World::isPlayerPositionValid()
 {
 	for (auto e : entities)
 	{
-		if (e->canCollide && e->inObject(player.position))
+		if (e->canCollide && e->inObject(player->position))
 			return false;
 	}
 	return true;

@@ -1,0 +1,16 @@
+{
+   "world": {
+    "heightmap": "worlds/small.png",
+	"object-templates": [
+		{
+			"color":100,
+			"file": "models/boom/Boom.obj"
+		}
+	]
+   },
+  "player": {
+    "startposition": [ 20, 5, 20 ]
+  },
+  "objects": [],
+  "enemies": []
+}

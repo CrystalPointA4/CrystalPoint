@@ -3,9 +3,33 @@
 #include "Player.h"
 #include <GL/freeglut.h>
 
+Player* Player::instance = NULL;
+
 Player::Player()
 {
 	speed = 10;
+}
+
+Player* Player::getInstance()
+{
+	if (instance == nullptr)
+		instance = new Player();
+
+	return instance;
+}
+
+void Player::init()
+{
+	instance = new Player();
+}
+
+Player::~Player()
+{
+	if (leftWeapon)
+		delete leftWeapon;
+
+	if (rightWeapon)
+		delete rightWeapon;
 }
 
 void Player::setCamera()

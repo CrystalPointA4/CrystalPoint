@@ -80,6 +80,20 @@ bool Vec3f::operator!=(const Vec3f & other)
 	return x != other.x & y != other.y & z != other.z;
 }
 
+Vec3f Vec3f::operator*(const float & other)
+{
+	return Vec3f(x*other, y*other, z*other);
+}
+
+Vec3f Vec3f::cross(const Vec3f & other)
+{
+	return Vec3f(
+		y*other.z - other.y*z,
+		z*other.x - other.z*x,
+		x*other.y - other.x*y
+		);
+}
+
 
 
 Vec2f::Vec2f(float x, float y)
