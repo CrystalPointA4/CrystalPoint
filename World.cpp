@@ -118,7 +118,7 @@ World::World(const std::string &fileName)
 
 World::~World()
 {
-	delete heightmap;
+	//delete heightmap;
 }
 
 std::pair<std::string, bool> World::getObjectFromValue(int val)
@@ -166,16 +166,9 @@ void World::update(float elapsedTime)
 	{
 
 		//Al deze code zou in enemy moeten staan
-		if (enemy->position.Distance(player->position) <= enemy->radius)
-		{			
-			enemy->hasTarget = true;
-			enemy->target.x = player->position.x;
-			enemy->target.z = player->position.z;
-		}
-		else
-			enemy->hasTarget = false;
+		enemy->inEyeSight(player->position);
 
-		Vec3f oldpos = enemy->position;
+		
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{

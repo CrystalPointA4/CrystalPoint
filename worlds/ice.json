@@ -11,12 +11,12 @@
 	]
    },
   "player": {
-    "startposition": [ 100, 20, 100 ]
+    "startposition": [ 0, 1.7, 0]
   },
   "objects": [
     {
       "file": "models/boom/Boom.obj",
-      "pos": [ 4, 0, -4 ]
+      "pos": [ 10, 0, -4 ]
     },
     {
       "file": "models/Teleporter/Teleporter.obj",
@@ -26,7 +26,7 @@
   "enemies": [
     {
       "file": "models/squid/Blooper.obj",
-      "pos": [ 1, 2, -10 ],
+      "pos": [ 10, 2, -10 ],
       "scale": 0.01
     }
   ]
