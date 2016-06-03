@@ -2,7 +2,6 @@
    "world": {
     "heightmap": "worlds/hell.png",
     "texture": "worlds/helltexture.png",
-    "scale": 1,
 	    "object-templates": [
 			  {
 				  "color": 25,

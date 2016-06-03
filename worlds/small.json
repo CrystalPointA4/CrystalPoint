@@ -1,11 +1,11 @@
 {
    "world": {
     "heightmap": "worlds/small.png",
-    "scale": 1,
 	"object-templates": [
 		{
 			"color":100,
-			"file": "models/boom/Boom.obj"
+			"file": "models/boom/Boom.obj",
+			"collision": false
 		}
 	]
    },
