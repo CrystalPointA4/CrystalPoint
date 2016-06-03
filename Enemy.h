@@ -16,5 +16,8 @@ public:
 
 	void update(float);
 	void draw();
+
+	void inEyeSight(Vec3f &);
+	bool hasCollison(Vec3f &);
 };
 

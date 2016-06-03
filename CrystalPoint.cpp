@@ -13,7 +13,7 @@ void CrystalPoint::init()
 
 	lastFrameTime = 0;
 
-	glClearColor(0.7, 0.7, 1.0, 1.0);
+	glClearColor(0.7f, 0.7f, 1.0f, 1.0f);
 
 	mousePosition = Vec2f(width / 2, height / 2);
 }
@@ -85,13 +85,13 @@ void CrystalPoint::update()
 	if (keyboardState.keys['d']) player->setPosition(180, deltaTime*speed, false);
 	if (keyboardState.keys['w']) player->setPosition(90, deltaTime*speed, false);
 	if (keyboardState.keys['s']) player->setPosition(270, deltaTime*speed, false);
-	//if (keyboardState.keys['q']) player->setPosition(1, deltaTime*speed, true);
-	//if (keyboardState.keys['e']) player->setPosition(-1, deltaTime*speed, true);
+	if (keyboardState.keys['q']) player->setPosition(1, deltaTime*speed, true);
+	if (keyboardState.keys['e']) player->setPosition(-1, deltaTime*speed, true);
 
 	if (!worldhandler->isPlayerPositionValid())
 		player->position = oldPosition;
 
-	player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+	//player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
 
 	worldhandler->update(deltaTime);
 

@@ -7,7 +7,7 @@ Player* Player::instance = NULL;
 
 Player::Player()
 {
-	speed = 10;
+	
 }
 
 Player* Player::getInstance()
@@ -41,8 +41,7 @@ void Player::setCamera()
 }
 
 void Player::setPosition(float angle, float fac, bool height)
-{
-	fac *= speed;
+{	
 	if (height)
 		position.y += angle*fac;
 	else

@@ -15,17 +15,19 @@
 	    ]
    },
   "player": {
-    "startposition": [ 200, 40, 200 ]
+    "startposition": [ 0, 1.7, 0]
   },
   "objects": [
     {
       "file": "models/boom/Boom.obj",
-      "pos": [ 4, 0, -4 ]
+      "pos": [ 4, 0, -4 ],
+      "collide": "true"
     },
-	{
+    {
       "file": "models/boom/Boom.obj",
-      "pos": [ -4, 0, -4 ]
-    }
+      "pos": [ -4, 0, -4 ],
+      "collide": "true"
+     }
   ],
   "enemies": [
     {

@@ -17,7 +17,7 @@ public:
 	std::vector<Enemy*> enemies;
 
 	Player* player;
-	HeightMap* heightmap;
+	//HeightMap* heightmap;
 
 	void draw();
 	void update(float elapsedTime);

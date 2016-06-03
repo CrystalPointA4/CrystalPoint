@@ -22,7 +22,4 @@ public:
 
 	Model* leftWeapon;
 	Model* rightWeapon;
-
-
-	float speed;
 };

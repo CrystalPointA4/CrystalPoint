@@ -48,6 +48,22 @@ void Enemy::draw()
 	glPopMatrix();
 }
 
+void Enemy::inEyeSight(Vec3f & TargetPosition)
+{
+	if (position.Distance(TargetPosition) <= radius)
+	{
+		hasTarget = true;
+		target = TargetPosition;
+	}
+	else
+		hasTarget = false;
+}
+
+bool Enemy::hasCollison(Vec3f &)
+{
+	
+}
+
 void Enemy::update(float delta)
 {
 	if (hasTarget)

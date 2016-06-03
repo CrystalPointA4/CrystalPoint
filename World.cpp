@@ -29,10 +29,10 @@ World::World(const std::string &fileName)
 	if (!v["world"]["scale"].isNull())
 		scale = v["world"]["scale"].asFloat();
 
-	heightmap = new HeightMap(v["world"]["heightmap"].asString(), scale);
+	//heightmap = new HeightMap(v["world"]["heightmap"].asString(), scale);
 
-	if(!v["world"]["texture"].isNull())
-		heightmap->SetTexture(v["world"]["texture"].asString());
+	/*if(!v["world"]["texture"].isNull())
+		heightmap->SetTexture(v["world"]["texture"].asString());*/
 
 	player->position.x = v["player"]["startposition"][0].asFloat()*scale;
 	player->position.y = v["player"]["startposition"][1].asFloat()*scale;
@@ -87,12 +87,12 @@ World::World(const std::string &fileName)
 
 World::~World()
 {
-	delete heightmap;
+	//delete heightmap;
 }
 
 float World::getHeight(float x, float y)
 {
-	return heightmap->GetHeight(x, y);
+	//return heightmap->GetHeight(x, y);
 }
 
 void World::draw()
@@ -104,8 +104,9 @@ void World::draw()
 	float lightAmbient[4] = { 0.5, 0.5, 0.5, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	heightmap->Draw();
+	glColor4f(1.0f,1.0f, 1.0f, 1.0f);
+	//heightmap->Draw();
+
 
 	for (auto &enemy : enemies)
 		enemy->draw();
@@ -123,16 +124,9 @@ void World::update(float elapsedTime)
 	{
 
 		//Al deze code zou in enemy moeten staan
-		if (enemy->position.Distance(player->position) <= enemy->radius)
-		{			
-			enemy->hasTarget = true;
-			enemy->target.x = player->position.x;
-			enemy->target.z = player->position.z;
-		}
-		else
-			enemy->hasTarget = false;
+		enemy->inEyeSight(player->position);
 
-		Vec3f oldpos = enemy->position;
+		
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{

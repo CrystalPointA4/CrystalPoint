@@ -21,17 +21,17 @@ Entity::~Entity()
 
 void Entity::draw()
 {
+	//rotation.y += 0.05f;
 	if (model)
 	{
 		glPushMatrix();
-
 
 		glTranslatef(position.x, position.y, position.z);
 		glRotatef(rotation.x, 1, 0, 0);
 		glRotatef(rotation.y, 0, 1, 0);
 		glRotatef(rotation.z, 0, 0, 1);
 		glScalef(scale, scale, scale);
-		glTranslatef(-model->center.x, 0, -model->center.z);
+		//glTranslatef(-model->center.x, 0, -model->center.z);
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
