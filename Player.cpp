@@ -7,7 +7,10 @@ Player* Player::instance = NULL;
 
 Player::Player()
 {
-	
+	speed = 10;
+	health = 50;
+	xp = 75;
+	level = 10;
 }
 
 Player* Player::getInstance()

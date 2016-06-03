@@ -2,21 +2,31 @@
 #include "stb_image.h"
 #include "vector.h"
 
+#include "LevelObject.h"
+
 #include <GL/freeglut.h>
 #include <iostream>
 #include <string>
+#include "World.h"
 
+#define RED 0
+#define GREEN 1
+#define BLUE 2
+#define ALPHA 3
 
-HeightMap::HeightMap(const std::string &file, float scale)
+HeightMap::HeightMap(const std::string &file, World* world)
 {
-	this->scale = scale;
-
 	int bpp;
 	unsigned char* imgData = stbi_load(file.c_str(), &width, &height, &bpp, 4);
 
 	auto heightAt = [&](int x, int y)
 	{
-		return (imgData[(x + y * width) * 4] / 256.0f) * 100.0f;
+		return (imgData[(x + y * width) * 4 ] / 256.0f) * 50.0f;
+	};
+
+	auto valueAt = [&](int x, int y, int offset = 0)
+	{
+		return imgData[(x + y * width) * 4 + offset];
 	};
 
 	for (int y = 0; y < height-1; y++)
@@ -27,13 +37,18 @@ HeightMap::HeightMap(const std::string &file, float scale)
 			Vec3f ca(0, heightAt(x, y + 1) - heightAt(x, y), 1);
 			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
 
+			if (valueAt(x, y, GREEN) > 0)
+			{
+				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)).first, Vec3f(x, heightAt(x, y), y), Vec3f(0, 0, 0), 1, world->getObjectFromValue(valueAt(x, y, GREEN)).second));
+			}
+
 			Vec3f normal = ca.cross(ba);
 			normal.Normalize();
 
 			for (int i = 0; i < 4; i++)
 			{
 				float h = heightAt(x + offsets[i][0], y + offsets[i][1]);
-				vertices.push_back(Vertex{ (float)(x + offsets[i][0])*scale, h*scale, (float)(y + offsets[i][1])*scale,
+				vertices.push_back(Vertex{ (float)(x + offsets[i][0]), h, (float)(y + offsets[i][1]),
 									normal.x, normal.y, normal.z,
 									(x + offsets[i][0]) / (float)height, (y + offsets[i][1]) / (float)width } );
 			}
@@ -91,12 +106,16 @@ void HeightMap::Draw()
 
 float HeightMap::GetHeight(float x, float y)
 {
-	x /= scale;
-	y /= scale;
 	int ix = x;
 	int iy = y;
 
 	int index = (ix + (width - 1) * iy) * 4;
+
+	if (index + 3 >= vertices.size())
+		index = vertices.size() - 4;
+
+	if (index < 0)
+		index = 0;
 
 	Vertex& a = vertices[index];
 	Vertex& b = vertices[index+1];

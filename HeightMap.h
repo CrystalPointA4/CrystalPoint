@@ -5,6 +5,8 @@
 #include <vector>
 #include <GL/freeglut.h>
 
+class World;
+
 class HeightMap
 {
 private:
@@ -12,9 +14,8 @@ private:
 	int width;
 
 	GLuint imageIndex;
-	int scale;
 public:
-	HeightMap(const std::string &file, float scale);
+	HeightMap(const std::string &file, World* world);
 	~HeightMap();
 
 	void Draw();

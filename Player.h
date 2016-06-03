@@ -22,4 +22,10 @@ public:
 
 	Model* leftWeapon;
 	Model* rightWeapon;
+
+	float health;
+	float xp;
+	int level;
+
+	float speed;
 };

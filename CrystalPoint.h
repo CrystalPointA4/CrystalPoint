@@ -24,12 +24,11 @@ public:
 	WorldHandler* worldhandler;
 	Player* player;
 
-	int width, height;
+	static int width, height;
 	KeyboardState keyboardState;
 	KeyboardState prevKeyboardState;
 
 	Vec2f mouseOffset;
-
 	Vec2f mousePosition;
 
 	float lastFrameTime;
