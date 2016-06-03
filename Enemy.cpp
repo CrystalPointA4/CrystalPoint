@@ -59,9 +59,14 @@ void Enemy::inEyeSight(Vec3f & TargetPosition)
 		hasTarget = false;
 }
 
-bool Enemy::hasCollison(Vec3f &)
+void Enemy::collide(const Entity * entity)
 {
-	
+	Vec3f difference = position - entity->position; //zou misschien omgedraait moeten worden
+	difference.y = 0;
+	difference.Normalize();
+	difference = difference * (entity->model->radius + 0.01f);
+	position.x = difference.x + entity->position.x;
+	position.z = difference.z + entity->position.z;
 }
 
 void Enemy::update(float delta)
