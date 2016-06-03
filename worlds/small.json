@@ -5,7 +5,7 @@
 		{
 			"color":100,
 			"file": "models/boom/Boom.obj",
-			"collision": false
+			"collision": true
 		}
 	]
    },
@@ -13,5 +13,11 @@
     "startposition": [ 20, 5, 20 ]
   },
   "objects": [],
-  "enemies": []
+  "enemies": [
+    {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 20, 5, 10 ],
+      "scale": 0.01
+    }
+  ]
 }

@@ -80,7 +80,7 @@ void Enemy::update(float delta)
 		dz = target.z - position.z;
 
 		length = sqrt(dx*dx + dz*dz);
-		if (length > 0.03)
+		if (length > 1)
 		{
 			dx /= length;
 			dz /= length;

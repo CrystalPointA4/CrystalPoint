@@ -6,6 +6,7 @@
 #include "CrystalPoint.h"
 #include <fstream>
 #include <iostream>
+#include "WorldHandler.h"
 
 World::World(const std::string &fileName)
 {
@@ -181,6 +182,8 @@ void World::update(float elapsedTime)
 				}
 			}
 		}
+		WorldHandler* worldhandler = WorldHandler::getInstance();
+		enemy->position.y = worldhandler->getHeight(enemy->position.x, enemy->position.z) + 2.0f;
 		//tot hier
 	}
 }
