@@ -1,8 +1,8 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include "OpenAL.h"
 #include "Enemy.h"
 #include "Model.h"
+#include "CrystalPoint.h"
 #include <iostream>
 
 Enemy::Enemy(const std::string &fileName,
@@ -19,7 +19,7 @@ Enemy::Enemy(const std::string &fileName,
 	speed = 1;
 	radius = 10;
 	hasTarget = false;
-//	openal = new OpenAL();
+	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/Sound.wav", false);
 }
 
 
@@ -61,14 +61,11 @@ void Enemy::inEyeSight(Vec3f & TargetPosition)
 
 bool Enemy::hasCollison(Vec3f &)
 {
-	
+	return false;
 }
 
 void Enemy::update(float delta)
 {
-//	if (!openal->isMusicPlaying()) {
-//		openal->playMusic();
-//	}
 	if (hasTarget)
 	{
 
@@ -91,5 +88,12 @@ void Enemy::update(float delta)
 			position.z += dz;
 		}
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
-	}	
+	}
+
+	if (false)
+	{
+		Sound* sound = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
+		sound->SetPos(position, Vec3f());
+		sound->Play();
+	}
 }

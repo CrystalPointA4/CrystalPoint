@@ -54,6 +54,8 @@ int main(int argc, char* argv[])
 	CrystalPoint::width = GLUT_WINDOW_WIDTH;
 
 	glutMainLoop();
+
+	delete app;
 	return 0;
 }
 

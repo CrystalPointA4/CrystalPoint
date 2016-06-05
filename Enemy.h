@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include <string>
 #include "Vector.h"
-#include "OpenAL.h"
 
 class Enemy : public Entity
 {
@@ -20,5 +19,8 @@ public:
 
 	void inEyeSight(Vec3f &);
 	bool hasCollison(Vec3f &);
+
+private:
+	int hit_sound_id;
 };
 

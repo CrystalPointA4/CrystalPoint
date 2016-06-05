@@ -1,8 +1,10 @@
 #pragma once
 
 class WorldHandler;
+class SoundSystem;
 class Player;
 #include "Vector.h"
+#include "SoundSystem.h"
 
 class KeyboardState
 {
@@ -33,4 +35,8 @@ public:
 
 	float lastFrameTime;
 
+	static SoundSystem& GetSoundSystem() { return sound_system; }
+
+private:
+	static SoundSystem sound_system;
 };
