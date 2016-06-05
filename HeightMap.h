@@ -5,6 +5,8 @@
 #include <vector>
 #include <GL/freeglut.h>
 
+class World;
+
 class HeightMap
 {
 private:
@@ -12,13 +14,12 @@ private:
 	int width;
 
 	GLuint imageIndex;
-	int scale = 1;
 public:
-	HeightMap(const std::string &file);
+	HeightMap(const std::string &file, World* world);
 	~HeightMap();
 
 	void Draw();
-	void GetHeigth(float x, float z);
+	float GetHeight(float x, float y);
 	void SetTexture(const std::string &file);
 
 	std::vector<Vertex> vertices;

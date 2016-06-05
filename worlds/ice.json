@@ -1,0 +1,33 @@
+{
+   "world": {
+    "heightmap": "worlds/hmcs.png",
+    "texture": "worlds/hmcstexture.png",
+    "object-templates": [
+		{
+			"color":100,
+			"file": "models/boom/Boom.obj",
+			"collision": false
+		}
+	]
+   },
+  "player": {
+    "startposition": [ 0, 1.7, 0]
+  },
+  "objects": [
+    {
+      "file": "models/boom/Boom.obj",
+      "pos": [ 10, 0, -4 ]
+    },
+    {
+      "file": "models/Teleporter/Teleporter.obj",
+      "pos": [ 0, 0, -4 ]
+    }
+  ],
+  "enemies": [
+    {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 10, 2, -10 ],
+      "scale": 0.01
+    }
+  ]
+}

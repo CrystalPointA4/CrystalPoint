@@ -7,6 +7,8 @@ LevelObject::LevelObject(const std::string &fileName, const Vec3f &position, con
 {
 	model = Model::load(fileName);
 	this->position = position;
+	this->position.x -= model->center.x;
+	this->position.z -= model->center.z;
 	this->rotation = rotation;
 	this->scale = scale;
 	this->canCollide = hasCollision;

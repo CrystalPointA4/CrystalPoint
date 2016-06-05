@@ -15,5 +15,10 @@ public:
 
 	float texX;
 	float texY;
+
+	Vertex operator/(float &other);
+	Vertex operator*(Vertex &other);
+	Vertex operator*(float &other);
+	Vertex operator+(Vertex &other);
 };
 

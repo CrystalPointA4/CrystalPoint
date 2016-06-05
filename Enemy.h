@@ -8,7 +8,7 @@
 class Enemy : public Entity
 {
 public:
-	Enemy(const std::string &fileName,const Vec3f &position,Vec3f &rotation,const float &scale,const bool &hasCollision);
+	Enemy(const std::string &fileName,const Vec3f &position,Vec3f &rotation,const float &scale);
 	~Enemy();
 
 	bool hasTarget;
@@ -17,7 +17,8 @@ public:
 
 	void update(float);
 	void draw();
-private:
-	OpenAL *openal;
+
+	void inEyeSight(Vec3f &);
+	bool hasCollison(Vec3f &);
 };
 

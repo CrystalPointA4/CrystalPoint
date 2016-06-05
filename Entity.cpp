@@ -14,6 +14,8 @@ Entity::Entity()
 
 Entity::~Entity()
 {
+	if(model)
+		Model::unload(model);
 }
 
 
@@ -46,8 +48,8 @@ bool Entity::inObject(const Vec3f & point)
 	if (!model)
 		return false;
 	Vec3f center = position + model->center;
-	float distance = sqrt((point.x - center.x) * (point.x - center.x) + (point.z - center.z)*(point.z - center.z));
-	if (distance < model->radius*scale)
+	float distance = ((point.x - center.x) * (point.x - center.x) + (point.z - center.z)*(point.z - center.z));
+	if (distance < model->radius*scale*model->radius*scale)
 		return true;
 	return false;
 }

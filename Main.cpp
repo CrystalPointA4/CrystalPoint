@@ -1,18 +1,18 @@
 #include <GL/freeglut.h>
 
-#include "CrystalJohan.h"
+#include "CrystalPoint.h"
 #include <stdio.h>
 #include "Vector.h"
 
 void configureOpenGL(void);
 
-CrystalJohan* app;
+CrystalPoint* app;
 
 bool justMoved = false;
 
 int main(int argc, char* argv[])
 {
-	app = new CrystalJohan();
+	app = new CrystalPoint();
 	glutInit(&argc, argv);
 
 	configureOpenGL();
@@ -21,14 +21,15 @@ int main(int argc, char* argv[])
 
 	glutDisplayFunc([]() { app->draw(); } );
 	glutIdleFunc([]() { app->update(); } );
-	glutReshapeFunc([](int w, int h) { app->width = w; app->height = h; glViewport(0, 0, w, h); });
+	glutReshapeFunc([](int w, int h) { CrystalPoint::width = w; CrystalPoint::height = h; glViewport(0, 0, w, h); });
 
 	//Keyboard
 	glutKeyboardFunc([](unsigned char c, int, int) { app->keyboardState.keys[c] = true; });
 	glutKeyboardUpFunc([](unsigned char c, int, int) { app->keyboardState.keys[c] = false; });
+	glutSpecialFunc([](int c, int, int) { app->keyboardState.special[c] = true; });
+	glutSpecialUpFunc([](int c, int, int) { app->keyboardState.special[c] = false; });
 	
-	//Mouse
-	glutPassiveMotionFunc([](int x, int y)
+	auto mousemotion = [](int x, int y)
 	{
 		if (justMoved)
 		{
@@ -39,11 +40,18 @@ int main(int argc, char* argv[])
 		int dy = y - app->height / 2;
 		if ((dx != 0 || dy != 0) && abs(dx) < 400 && abs(dy) < 400)
 		{
-			app->mouseOffset = app->mouseOffset + Vec2f(dx,dy);
+			app->mouseOffset = app->mouseOffset + Vec2f(dx, dy);
 			glutWarpPointer(app->width / 2, app->height / 2);
 			justMoved = true;
 		}
-	});
+	};
+
+	//Mouse
+	glutPassiveMotionFunc(mousemotion);
+	glutMotionFunc(mousemotion);
+
+	CrystalPoint::height = GLUT_WINDOW_HEIGHT;
+	CrystalPoint::width = GLUT_WINDOW_WIDTH;
 
 	glutMainLoop();
 	return 0;
@@ -81,8 +89,8 @@ void configureOpenGL()
 	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	//glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
-	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
+	glutSetCursor(GLUT_CURSOR_NONE);
 }

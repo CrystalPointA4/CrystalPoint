@@ -8,14 +8,13 @@
 Enemy::Enemy(const std::string &fileName,
 	const Vec3f &position,
 	Vec3f &rotation,
-	const float &scale,
-	const bool &hasCollision)
+	const float &scale)
 {
 	model = Model::load(fileName);
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;
-	this->canCollide = hasCollision;
+	this->canCollide = true;
 	target = position;
 	speed = 1;
 	radius = 10;
@@ -47,6 +46,22 @@ void Enemy::draw()
 	glEnd();
 
 	glPopMatrix();
+}
+
+void Enemy::inEyeSight(Vec3f & TargetPosition)
+{
+	if (position.Distance(TargetPosition) <= radius)
+	{
+		hasTarget = true;
+		target = TargetPosition;
+	}
+	else
+		hasTarget = false;
+}
+
+bool Enemy::hasCollison(Vec3f &)
+{
+	
 }
 
 void Enemy::update(float delta)

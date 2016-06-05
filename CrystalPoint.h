@@ -1,6 +1,7 @@
 #pragma once
 
-class World;
+class WorldHandler;
+class Player;
 #include "Vector.h"
 
 class KeyboardState
@@ -13,21 +14,21 @@ public:
 	KeyboardState();
 };
 
-class CrystalJohan
+class CrystalPoint
 {
 public:
 	void init();
 	void draw();
 	void update();
 
-	World* world;
+	WorldHandler* worldhandler;
+	Player* player;
 
-	int width, height;
+	static int width, height;
 	KeyboardState keyboardState;
 	KeyboardState prevKeyboardState;
 
 	Vec2f mouseOffset;
-
 	Vec2f mousePosition;
 
 	float lastFrameTime;
