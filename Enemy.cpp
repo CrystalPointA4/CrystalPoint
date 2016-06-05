@@ -5,7 +5,6 @@
 #include "Model.h"
 #include <iostream>
 
-
 Enemy::Enemy(const std::string &fileName,
 	const Vec3f &position,
 	Vec3f &rotation,
@@ -21,6 +20,7 @@ Enemy::Enemy(const std::string &fileName,
 	speed = 1;
 	radius = 10;
 	hasTarget = false;
+	openal = new OpenAL();
 }
 
 
@@ -51,9 +51,12 @@ void Enemy::draw()
 
 void Enemy::update(float delta)
 {
+	if (!openal->isMusicPlaying()) {
+		openal->playMusic();
+	}
 	if (hasTarget)
 	{
-		OpenAL();
+
 		//just 2d walking
 		float dx, dz, length;
 

@@ -4,6 +4,9 @@ class OpenAL
 public:
 	OpenAL();
 	int EndWithError(char* msg);
-	int Init();
+	int playMusic(void);
+	bool isMusicPlaying();
 	~OpenAL();
+private:
+	bool isPlaying;
 };

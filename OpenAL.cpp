@@ -7,7 +7,6 @@
 
 OpenAL::OpenAL()
 {
-	Init();
 
 }
 
@@ -20,8 +19,10 @@ int OpenAL::EndWithError(char* msg)
 	return error;
 }
 
-int OpenAL::Init()
-{
+int OpenAL::playMusic(void) {
+	//start nieuwe thread
+	//speel sound;
+	isPlaying = true;
 	//Loading of the WAVE file
 	FILE *fp = NULL;                                                            //Create FILE pointer for the WAVE file
 	fp = fopen("WAVE/Sound.wav", "rb");                                            //Open the WAVE file
@@ -77,11 +78,11 @@ int OpenAL::Init()
 
 	unsigned char* buf = new unsigned char[dataSize];                            //Allocate memory for the sound data
 	std::cout << fread(buf, sizeof(BYTE), dataSize, fp) << " bytes loaded\n";           //Read the sound data and display the 
-																				   //number of bytes loaded.
-																				   //Should be the same as the Data Size if OK
+																						//number of bytes loaded.
+																						//Should be the same as the Data Size if OK
 
 
-																				   //Now OpenAL needs to be initialized 
+																						//Now OpenAL needs to be initialized 
 	ALCdevice *device;                                                          //Create an OpenAL Device
 	ALCcontext *context;                                                        //And an OpenAL Context
 	device = alcOpenDevice(NULL);                                               //Open the device
@@ -143,7 +144,7 @@ int OpenAL::Init()
 																			 //PLAY 
 	alSourcePlay(source);                                                       //Play the sound buffer linked to the source
 	if (alGetError() != AL_NO_ERROR) return EndWithError("Error playing sound"); //Error when playing sound
-	//system("PAUSE");                                                            //Pause to let the sound play
+	system("PAUSE");                                                            //Pause to let the sound play
 
 																				//Clean-up
 	fclose(fp);                                                                 //Close the WAVE file
@@ -154,9 +155,14 @@ int OpenAL::Init()
 	alcDestroyContext(context);                                                 //Destroy the OpenAL Context
 	alcCloseDevice(device);                                                     //Close the OpenAL Device
 
+	isPlaying = false;
 	return EXIT_SUCCESS;
 }
 
+bool OpenAL::isMusicPlaying()
+{
+	return isPlaying;
+}
 
 OpenAL::~OpenAL()
 {

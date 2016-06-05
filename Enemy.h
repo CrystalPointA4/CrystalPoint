@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include <string>
 #include "Vector.h"
+#include "OpenAL.h"
 
 class Enemy : public Entity
 {
@@ -16,5 +17,7 @@ public:
 
 	void update(float);
 	void draw();
+private:
+	OpenAL *openal;
 };
 
