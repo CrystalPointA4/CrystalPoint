@@ -1,12 +1,29 @@
 #pragma once
-class OpenAL
+
+struct ALCdevice;
+struct ALCcontext;
+
+class SoundSystem
 {
 public:
-	OpenAL();
-	int EndWithError(char* msg);
-	int playMusic(void);
-	bool isMusicPlaying();
-	~OpenAL();
+	enum ESoundID
+	{
+		ES_Music1,
+		ES_Music2
+	};
+
+	SoundSystem();
+	~SoundSystem();
+
+	void Play(ESoundID inID);
+	void Pause(ESoundID inID);
+	void Stop(ESoundID inID);
+
+
 private:
-	bool isPlaying;
+	const char* GetWaveFile(ESoundID inID);
+	bool LoadWave(ESoundID inID);
+
+	ALCdevice* device;
+	ALCcontext* context;
 };

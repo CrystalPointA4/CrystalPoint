@@ -19,7 +19,7 @@ Enemy::Enemy(const std::string &fileName,
 	speed = 1;
 	radius = 10;
 	hasTarget = false;
-	openal = new OpenAL();
+//	openal = new OpenAL();
 }
 
 
@@ -66,9 +66,9 @@ bool Enemy::hasCollison(Vec3f &)
 
 void Enemy::update(float delta)
 {
-	if (!openal->isMusicPlaying()) {
-		openal->playMusic();
-	}
+//	if (!openal->isMusicPlaying()) {
+//		openal->playMusic();
+//	}
 	if (hasTarget)
 	{
 
