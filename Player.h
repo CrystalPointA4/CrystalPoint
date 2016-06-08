@@ -26,6 +26,7 @@ public:
 	float health;
 	float xp;
 	int level;
+	int crystals;
 
 	float speed;
 };

@@ -220,9 +220,10 @@ void World::update(float elapsedTime)
 	}
 
 	for(auto &crystal : crystals)
-		if (crystal->canCollide && crystal->inObject(player->position))
+		if (crystal->canCollide && crystal->inObject(player->position) && crystal->filled)
 		{
 			crystal->filled = false;
+			player->crystals++;
 			break;
 		}
 }

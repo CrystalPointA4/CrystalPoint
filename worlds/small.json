@@ -17,9 +17,11 @@
   "crystals": [
     {
       "file": "models/sphere/sphere.obj",
-      "pos": [ 33, 2, 31 ],
-      "collide": "true"
+      "pos": [ 33, 2, 31 ]
+    },
+    {
+      "file": "models/sphere/sphere.obj",
+      "pos": [ 45, 2, 31 ]      
     }
   ]
-
 }
