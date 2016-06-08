@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Crystal.cpp" />
     <ClCompile Include="CrystalPoint.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="WorldHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Crystal.h" />
     <ClInclude Include="CrystalPoint.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="Enemy.h" />

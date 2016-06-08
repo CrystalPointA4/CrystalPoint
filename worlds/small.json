@@ -1,17 +1,25 @@
 {
-   "world": {
+  "world": {
     "heightmap": "worlds/small.png",
-	"object-templates": [
-		{
-			"color":100,
-			"file": "models/boom/Boom.obj",
-			"collision": false
-		}
-	]
-   },
+    "object-templates": [
+      {
+        "color": 100,
+        "file": "models/boom/Boom.obj",
+        "collision": true
+      }
+    ]
+  },
   "player": {
     "startposition": [ 20, 5, 20 ]
   },
-  "objects": [],
-  "enemies": []
+  "objects": [ ],
+  "enemies": [ ],
+  "crystals": [
+    {
+      "file": "models/sphere/sphere.obj",
+      "pos": [ 33, 2, 31 ],
+      "collide": "true"
+    }
+  ]
+
 }
