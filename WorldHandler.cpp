@@ -97,6 +97,7 @@ bool WorldHandler::isPlayerPositionValid(void)
 {
 	if(!loadingWorld)
 		return world->isPlayerPositionValid();
+	return false;
 }
 
 float WorldHandler::getHeight(float x, float y)

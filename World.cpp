@@ -8,7 +8,8 @@
 #include <iostream>
 #include "WorldHandler.h"
 
-World::World(const std::string &fileName)
+World::World(const std::string &fileName):
+	music_id(-1)
 {
 	//Store player instance
 	player = Player::getInstance();
@@ -162,6 +163,15 @@ World::World(const std::string &fileName)
 			}
 		}
 	}
+
+	if (!v["world"]["music"].isNull())
+	{
+		music_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
+		Sound* music = CrystalPoint::GetSoundSystem().GetSound(music_id);
+		music->SetPos(Vec3f(), Vec3f());
+		music->Play();
+	}
+
 }
 
 

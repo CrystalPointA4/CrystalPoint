@@ -9,6 +9,8 @@
 int CrystalPoint::width = 0;
 int CrystalPoint::height = 0;
 
+SoundSystem CrystalPoint::sound_system;
+
 void CrystalPoint::init()
 {
 	player = Player::getInstance();
@@ -90,6 +92,8 @@ void CrystalPoint::update()
 	mouseOffset = Vec2f(0, 0);
 	prevKeyboardState = keyboardState;
 	glutPostRedisplay();
+
+	sound_system.SetListener(player->position, Vec3f(), Vec3f());
 }
 
 
