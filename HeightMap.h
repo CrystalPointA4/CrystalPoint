@@ -20,6 +20,7 @@ public:
 
 	void Draw();
 	float GetHeight(float x, float y);
+	int GetSize();
 	void SetTexture(const std::string &file);
 
 	std::vector<Vertex> vertices;

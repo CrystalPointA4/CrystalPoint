@@ -3,11 +3,12 @@
  
 class Skybox
 {
-public:
-	Skybox(const float &size);
-	~Skybox();
-
+private:
 	float size;
+	std::string folder;
+public:
+	Skybox(const float &size, const std::string &folder);
+	~Skybox();
 
 	void init();
 	void draw();

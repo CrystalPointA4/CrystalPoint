@@ -8,9 +8,10 @@
 enum{SKY_LEFT=0,SKY_BACK,SKY_RIGHT,SKY_FRONT,SKY_TOP,SKY_BOTTOM};
 GLuint skybox[6];
 
-Skybox::Skybox(const float &size)
+Skybox::Skybox(const float &size, const std::string &folder)
 {
 	this->size = size;
+	this->folder = folder;
 }
 
 Skybox::~Skybox()
@@ -20,12 +21,12 @@ Skybox::~Skybox()
 
 void Skybox::init() 
 {
-	skybox[SKY_LEFT] = loadTexture("skyboxes/water/left.png");
-	skybox[SKY_BACK] = loadTexture("skyboxes/water/back.png");
-	skybox[SKY_RIGHT] = loadTexture("skyboxes/water/right.png");
-	skybox[SKY_FRONT] = loadTexture("skyboxes/water/front.png");
-	skybox[SKY_TOP] = loadTexture("skyboxes/water/top.png");
-	skybox[SKY_BOTTOM] = loadTexture("skyboxes/water/bottom.png");
+	skybox[SKY_LEFT] = loadTexture(folder + "left.png");
+	skybox[SKY_BACK] = loadTexture(folder + "back.png");
+	skybox[SKY_RIGHT] = loadTexture(folder + "right.png");
+	skybox[SKY_FRONT] = loadTexture(folder + "front.png");
+	skybox[SKY_TOP] = loadTexture(folder + "top.png");
+	skybox[SKY_BOTTOM] = loadTexture(folder + "bottom.png");
 }
 
 void Skybox::draw()
@@ -117,6 +118,7 @@ GLuint Skybox::loadTexture(const std::string & fileName)  //load the filename na
 {
 	int width, height, bpp;
 
+	stbi_set_flip_vertically_on_load(true);
 	unsigned char* imgData = stbi_load(fileName.c_str(), &width, &height, &bpp, 4);
 	GLuint num;
 	glGenTextures(1, &num);
