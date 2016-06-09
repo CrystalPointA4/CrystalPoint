@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Crystal.cpp" />
     <ClCompile Include="CrystalPoint.cpp" />
     <ClCompile Include="Cursor.cpp" />
@@ -164,17 +165,22 @@
     <ClCompile Include="json.cpp" />
     <ClCompile Include="LevelObject.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuElement.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundSystem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Util.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Crystal.h" />
     <ClInclude Include="CrystalPoint.h" />
     <ClInclude Include="Cursor.h" />
@@ -185,12 +191,16 @@
     <ClInclude Include="json.h" />
     <ClInclude Include="LevelObject.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuElement.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="World.h" />

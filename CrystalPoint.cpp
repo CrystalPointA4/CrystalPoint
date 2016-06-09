@@ -5,6 +5,10 @@
 #include <cstring>
 #include "WorldHandler.h"
 #include "Player.h"
+#include "Cursor.h"
+#include "Menu.h"
+#include "Text.h"
+#include "Vector.h"
 
 int CrystalPoint::width = 0;
 int CrystalPoint::height = 0;
@@ -15,13 +19,14 @@ void CrystalPoint::init()
 {
 	player = Player::getInstance();
 	worldhandler = WorldHandler::getInstance();
-	//cursor = Cursor::getInstance();
+	cursor = Cursor::getInstance();
+
+	menu = new Menu();
+	menu->AddMenuElement(new Text("Hello", Vec2f(10, 10)));
 
 	lastFrameTime = 0;
 
 	glClearColor(0.7f, 0.7f, 1.0f, 1.0f);
-
-	mousePosition = Vec2f(width / 2, height / 2);
 }
 
 
@@ -40,8 +45,7 @@ void CrystalPoint::draw()
 	glLoadIdentity();
 
 	worldhandler->draw();
-
-	//cursor->draw();
+	menu->draw();
 
 	glutSwapBuffers();
 }
@@ -86,8 +90,8 @@ void CrystalPoint::update()
 
 	worldhandler->update(deltaTime);
 
-	mousePosition = mousePosition + mouseOffset;
-	//cursor->update(mousePosition);
+	cursor->update(cursor->mousePosition + mouseOffset);
+	menu->update();
 
 	mouseOffset = Vec2f(0, 0);
 	prevKeyboardState = keyboardState;

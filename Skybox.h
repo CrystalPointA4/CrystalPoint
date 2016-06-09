@@ -12,5 +12,4 @@ public:
 
 	void init();
 	void draw();
-	GLuint loadTexture(const std::string &fileName);
 };

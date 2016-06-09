@@ -8,9 +8,8 @@ private:
 
 	static Cursor* instance;
 	bool enabled;
-	Vec2f mousePosition;
 public:
-	
+	Vec2f mousePosition;
 	~Cursor();
 
 	static Cursor* getInstance(void);

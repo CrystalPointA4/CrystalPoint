@@ -1,6 +1,7 @@
 #include "cmath"
 #include <GL/freeglut.h>
 
+#include "Util.h"
 #include "stb_image.h"
 #include "Skybox.h"
 #include <string>
@@ -21,12 +22,12 @@ Skybox::~Skybox()
 
 void Skybox::init() 
 {
-	skybox[SKY_LEFT] = loadTexture(folder + "left.png");
-	skybox[SKY_BACK] = loadTexture(folder + "back.png");
-	skybox[SKY_RIGHT] = loadTexture(folder + "right.png");
-	skybox[SKY_FRONT] = loadTexture(folder + "front.png");
-	skybox[SKY_TOP] = loadTexture(folder + "top.png");
-	skybox[SKY_BOTTOM] = loadTexture(folder + "bottom.png");
+	skybox[SKY_LEFT] = Util::loadTexture(folder + "left.png");
+	skybox[SKY_BACK] = Util::loadTexture(folder + "back.png");
+	skybox[SKY_RIGHT] = Util::loadTexture(folder + "right.png");
+	skybox[SKY_FRONT] = Util::loadTexture(folder + "front.png");
+	skybox[SKY_TOP] = Util::loadTexture(folder + "top.png");
+	skybox[SKY_BOTTOM] = Util::loadTexture(folder + "bottom.png");
 }
 
 void Skybox::draw()
@@ -112,33 +113,5 @@ void Skybox::draw()
 	glEnable(GL_DEPTH_TEST);
 	if (!b1)
 		glDisable(GL_TEXTURE_2D);
-}
-
-GLuint Skybox::loadTexture(const std::string & fileName)  //load the filename named texture
-{
-	int width, height, bpp;
-
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char* imgData = stbi_load(fileName.c_str(), &width, &height, &bpp, 4);
-	GLuint num;
-	glGenTextures(1, &num);
-	glBindTexture(GL_TEXTURE_2D, num);
-
-	glTexImage2D(GL_TEXTURE_2D,
-		0,		//level
-		GL_RGBA,		//internal format
-		width,		//width
-		height,		//height
-		0,		//border
-		GL_RGBA,		//data format
-		GL_UNSIGNED_BYTE,	//data type
-		imgData);		//data
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-	stbi_image_free(imgData);
-	return num;
 }
 

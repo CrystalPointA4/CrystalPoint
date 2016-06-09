@@ -3,6 +3,8 @@
 class WorldHandler;
 class SoundSystem;
 class Player;
+class Cursor;
+class Menu;
 #include "Vector.h"
 #include "SoundSystem.h"
 
@@ -25,6 +27,9 @@ public:
 
 	WorldHandler* worldhandler;
 	Player* player;
+	Cursor* cursor;
+
+	Menu* menu;
 
 	static int width, height;
 	KeyboardState keyboardState;
