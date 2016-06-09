@@ -18,8 +18,7 @@ public:
 	void draw();
 
 	void inEyeSight(Vec3f &);
-	bool hasCollison(Vec3f &);
-
+	void collide(const Entity *entity);
 private:
 	int hit_sound_id;
 };

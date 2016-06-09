@@ -11,6 +11,7 @@ Player::Player()
 	health = 50;
 	xp = 75;
 	level = 10;
+	crystals = 0;
 }
 
 Player* Player::getInstance()

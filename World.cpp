@@ -6,6 +6,7 @@
 #include "CrystalPoint.h"
 #include <fstream>
 #include <iostream>
+#include "WorldHandler.h"
 
 World::World(const std::string &fileName):
 	music_id(-1)
@@ -84,7 +85,9 @@ World::World(const std::string &fileName):
 			std::cout << "Invalid world file: objects file - " << fileName << "\n";
 
 		//Create
-		Vec3f position(object["pos"][0].asFloat(), object["pos"][1].asFloat(), object["pos"][2].asFloat());
+		Vec3f position(object["pos"][0].asFloat(), object["pos"][1].asFloat(), object["pos"][2].asFloat());		
+		position.y = getHeight(position.x, position.z) + 2.0f;
+
 		entities.push_back(new LevelObject(object["file"].asString(), position, rotation, scale, hasCollision));
 	}
 
@@ -111,8 +114,36 @@ World::World(const std::string &fileName):
 
 		//Create
 		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
-		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
+		position.y = getHeight(position.x, position.z) + 2.0f;
 
+		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
+	}
+
+	for (auto e : v["crystals"])
+	{
+		//Rotation
+		Vec3f rotation(0, 0, 0);
+		if (!e["rot"].isNull())
+			rotation = Vec3f(e["rot"][0].asFloat(), e["rot"][1].asFloat(), e["rot"][2].asFloat());
+
+		//Scale
+		float scale = 1.0f;
+		if (!e["scale"].isNull())
+			scale = e["scale"].asFloat();
+
+		//Position
+		if (e["pos"].isNull())
+			std::cout << "Invalid world file: enemies pos - " << fileName << "\n";
+
+		//File
+		if (e["file"].isNull())
+			std::cout << "Invalid world file: enemies file - " << fileName << "\n";
+
+		//Create
+		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
+		position.y = getHeight(position.x, position.z) + 2.0f;
+
+		crystals.push_back(new Crystal(e["file"].asString(), position, rotation, scale));
 	}
 
 	if (!v["world"]["music"].isNull())
@@ -163,6 +194,8 @@ void World::draw()
 
 	for (auto &entity : entities)
 		entity->draw();
+	for (auto &crystal : crystals)
+		crystal->draw();
 
 	interface->draw();
 }
@@ -178,7 +211,7 @@ void World::update(float elapsedTime)
 		//Al deze code zou in enemy moeten staan
 		enemy->inEyeSight(player->position);
 
-		
+
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{
@@ -186,15 +219,25 @@ void World::update(float elapsedTime)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
 				{
-					Vec3f difference = e->position - enemy->position; //zou misschien omgedraait moeten worden
-					difference.Normalize();
-					difference = difference * (e->model->radius + 0.01f);
-					enemy->position = e->position + difference;
+					enemy->collide(e);
 					break;
 				}
 			}
-		}		
+		}
+
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
 		//tot hier
+
+	}
+
+	for(auto &crystal : crystals)
+	{
+		if (crystal->canCollide && crystal->inObject(player->position) && crystal->filled)
+		{
+			crystal->filled = false;
+			player->crystals++;
+			break;
+		}
 	}
 }
 

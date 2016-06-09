@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "LevelObject.h"
 #include "Interface.h"
+#include "Crystal.h"
 
 class Entity;
 
@@ -21,6 +22,7 @@ private:
 
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;
+	std::vector<Crystal*> crystals;
 public:
 	World(const std::string &fileName);
 	~World();
@@ -31,5 +33,6 @@ public:
 	float getHeight(float x, float y);
 	void addLevelObject(LevelObject* obj);
 	std::pair<std::string, bool> getObjectFromValue(int i);
+	
 };
 

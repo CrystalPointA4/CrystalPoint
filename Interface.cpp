@@ -77,6 +77,23 @@ void Interface::draw()
 	glColor4f(1.0f, 1.0f, 0.1f, 1.0);
 	glutBitmapString("Level: " + std::to_string(player->level), 490, 900);
 
+	
+
+	int cw, ch, offset;
+	cw = 20;
+	ch = 50;
+	offset = 5;
+	for (int i = 0; i < player->crystals; i++)
+	{
+		glBegin(GL_QUADS);
+		glColor4f(0, 1.0f, 1.0f, 1.0f);
+		glVertex2f(975 - cw / 2, offset*i + ch*i);
+		glVertex2f(975 - cw    , ch / 2 + offset*i + ch*i);
+		glColor4f(0, 0.8f, 0.8f, 1.0f);
+		glVertex2f(975 - cw / 2, ch + offset*i + ch*i);
+		glVertex2f(975         , ch / 2 + offset*i + ch*i);
+		glEnd();
+	}
 }
 
 void Interface::update(float deltaTime)

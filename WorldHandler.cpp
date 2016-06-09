@@ -24,7 +24,7 @@ void WorldHandler::ChangeWorld(int i)
 			delete world;
 
 		world = new World(worldfiles[i]);
-		worldIndex = i;
+		worldIndex = i;		
 		loadingWorld = false;
 	}
 }

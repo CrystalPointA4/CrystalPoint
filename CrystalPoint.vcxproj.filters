@@ -73,6 +73,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sound.cpp">
+    <ClCompile Include="Crystal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -129,6 +130,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sound.h">
+    <ClInclude Include="Crystal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
