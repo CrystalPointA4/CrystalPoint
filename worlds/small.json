@@ -21,14 +21,18 @@
       "pos": [ 20, 5, 10 ],
       "scale": 0.01
   }],
-  "crystals": [
-    {
-      "file": "models/sphere/sphere.obj",
-      "pos": [ 33, 2, 31 ]
-    },
-    {
-      "file": "models/sphere/sphere.obj",
-      "pos": [ 45, 2, 31 ]
-    }
-  ]
+  "crystal": {
+    "full texture": "models/crystal/Crystal.obj",
+    "empty texture": "models/crystal/PickedUpCrystal.obj",
+    "instances": [
+      {
+        "pos": [ 31, 5, 33 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 40, 5, 40 ],
+        "rot": [ 0, 0, 0 ]
+      }
+    ]
+  }
 }

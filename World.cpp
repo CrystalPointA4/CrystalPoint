@@ -127,31 +127,49 @@ World::World(const std::string &fileName):
 		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
 	}
 
-	for (auto e : v["crystals"])
+	if (!v["crystal"].isNull())
 	{
-		//Rotation
-		Vec3f rotation(0, 0, 0);
-		if (!e["rot"].isNull())
-			rotation = Vec3f(e["rot"][0].asFloat(), e["rot"][1].asFloat(), e["rot"][2].asFloat());
+		std::string filled = "unknown";
+		std::string empty = "unknown";
 
-		//Scale
-		float scale = 1.0f;
-		if (!e["scale"].isNull())
-			scale = e["scale"].asFloat();
+		if(!v["crystal"]["full texture"].isNull())
+			filled = v["crystal"]["full texture"].asString();
 
-		//Position
-		if (e["pos"].isNull())
-			std::cout << "Invalid world file: enemies pos - " << fileName << "\n";
+		if(!v["crystal"]["empty texture"].isNull())
+			empty = v["crystal"]["empty texture"].asString();
 
-		//File
-		if (e["file"].isNull())
-			std::cout << "Invalid world file: enemies file - " << fileName << "\n";
+		if (!v["crystal"]["instances"].isNull())
+		{
+			for (auto instance : v["crystal"]["instances"])
+			{
+				Vec3f position(0, 0, 0);
+				Vec3f rotation(0, 0, 0);
+				float scale = 1.0f;
 
-		//Create
-		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
-		position.y = getHeight(position.x, position.z) + 2.0f;
+				if (!instance["pos"].isNull())
+				{
+					position.x = instance["pos"][0];
+					position.y = instance["pos"][1];
+					position.z = instance["pos"][2];
+				}
+				
+				if (!instance["rot"].isNull())
+				{
+					rotation.x = instance["rot"][0];
+					rotation.y = instance["rot"][1];
+					rotation.z = instance["rot"][2];
+				}
 
-		crystals.push_back(new Crystal(e["file"].asString(), position, rotation, scale));
+				if (!instance["scale"].isNull())
+					scale = instance["scale"].asFloat();
+
+				position.y = getHeight(position.x, position.z);
+
+				Crystal *c = new Crystal(filled, empty, position, rotation, scale);
+								
+				entities.push_back(c);
+			}
+		}
 	}
 
 	if (!v["world"]["music"].isNull())
@@ -207,8 +225,6 @@ void World::draw()
 
 	for (auto &entity : entities)
 		entity->draw();
-	for (auto &crystal : crystals)
-		crystal->draw();
 
 	interface->draw();
 }
@@ -237,20 +253,7 @@ void World::update(float elapsedTime)
 				}
 			}
 		}
-
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
-		//tot hier
-
-	}
-
-	for(auto &crystal : crystals)
-	{
-		if (crystal->canCollide && crystal->inObject(player->position) && crystal->filled)
-		{
-			crystal->filled = false;
-			player->crystals++;
-			break;
-		}
 	}
 }
 
@@ -261,10 +264,13 @@ void World::addLevelObject(LevelObject* obj)
 
 bool World::isPlayerPositionValid()
 {
-	for (auto e : entities)
+	for (auto &e : entities)
 	{
 		if (e->canCollide && e->inObject(player->position))
+		{
+			e->collide();
 			return false;
+		}
 	}
 	return true;
 }

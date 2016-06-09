@@ -1,17 +1,20 @@
 #include "Crystal.h"
 #include "Model.h"
+#include "Player.h"
 
 
-Crystal::Crystal(const std::string &fileName, const Vec3f &position, Vec3f &rotation, const float &scale)
+Crystal::Crystal(const std::string & filled, const std::string & empty, const Vec3f & position, Vec3f & rotation, const float & scale)
 {
-	model = Model::load(fileName);
+	this->filled = filled;
+	this->empty = empty;
+
+	model = Model::load(this->filled);
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;
 	this->canCollide = true;
-	filled = true;
+	isFilled = true;
 }
-
 
 Crystal::~Crystal()
 {
@@ -20,7 +23,16 @@ Crystal::~Crystal()
 }
 
 void Crystal::draw()
+{	
+	Entity::draw();	
+}
+
+void Crystal::collide()
 {
-	if (filled)
-		Entity::draw();	
+	if (isFilled)
+	{
+		Player::getInstance()->crystals++;
+		isFilled = false;
+		model = Model::load(empty);
+	}	
 }

@@ -13,6 +13,8 @@ public:
 
 	virtual void draw();
 	virtual void update(float elapsedTime) {};
+	virtual void collide() {};
+
 	Vec3f position;
 	Vec3f rotation;
 	float scale;
