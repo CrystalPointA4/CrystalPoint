@@ -157,9 +157,8 @@ World::World(const std::string &fileName)
 				position.y = getHeight(position.x, position.z);
 
 				Crystal *c = new Crystal(filled, empty, position, rotation, scale);
-
-				crystals.push_back(c);
-				//entities.push_back(c);
+								
+				entities.push_back(c);
 			}
 		}
 	}
@@ -203,8 +202,6 @@ void World::draw()
 
 	for (auto &entity : entities)
 		entity->draw();
-	for (auto &crystal : crystals)
-		crystal->draw();
 
 	interface->draw();
 }
@@ -247,18 +244,8 @@ bool World::isPlayerPositionValid()
 	for (auto &e : entities)
 	{
 		if (e->canCollide && e->inObject(player->position))
-			return false;
-	}
-
-	for (auto & c : crystals)
-	{
-		if (c->canCollide && c->inObject(player->position)) 
 		{
-			if (c->isFilled)
-			{
-				c->pickUp();
-				player->crystals++;
-			}
+			e->collide();
 			return false;
 		}
 	}

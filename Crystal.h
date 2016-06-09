@@ -12,7 +12,7 @@ public:
 
 	bool isFilled;
 	void draw();
-	void pickUp();
+	void collide();
 private:
 	std::string filled, empty;
 };

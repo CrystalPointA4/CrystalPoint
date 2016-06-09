@@ -21,7 +21,7 @@ private:
 
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;
-	std::vector<Crystal*> crystals;
+	//std::vector<Crystal*> crystals;
 public:
 	World(const std::string &fileName);
 	~World();

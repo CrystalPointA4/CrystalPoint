@@ -90,12 +90,12 @@ void Interface::draw()
 	{
 		glBegin(GL_QUADS);
 		glColor4f(0, 1.0f, 1.0f, 1.0f);
-		glVertex2f(975 - crystalWidth / 2, crystalOffset*i + crystalHeight*i);
-		glVertex2f(975 - crystalWidth, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
+		glVertex2f(975 - crystalWidth / 2	, crystalOffset*i + crystalHeight*i);
+		glVertex2f(975 - crystalWidth		, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
 
 		glColor4f(0, 0.8f, 0.8f, 1.0f);
-		glVertex2f(975 - crystalWidth / 2, crystalHeight + crystalOffset*i + crystalHeight*i);
-		glVertex2f(975, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
+		glVertex2f(975 - crystalWidth / 2	, crystalHeight + crystalOffset*i + crystalHeight*i);
+		glVertex2f(975						, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
 		glEnd();
 	}
 }
