@@ -1,7 +1,7 @@
 {
   "world": {
     "heightmap": "worlds/small.png",
-    "skybox": "skyboxes/peaceful/",
+    "skybox": "skyboxes/water/",
     "object-templates": [
       {
         "color": 100,

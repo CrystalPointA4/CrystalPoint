@@ -186,6 +186,8 @@ void World::draw()
 	float lightAmbient[4] = { 0.2, 0.2, 0.2, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
+	glColor4f(1, 1, 1, 1);
+
 	skybox->draw();
 
 	heightmap->Draw();
