@@ -1,10 +1,9 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
-
 #include "Enemy.h"
 #include "Model.h"
+#include "CrystalPoint.h"
 #include <iostream>
-
 
 Enemy::Enemy(const std::string &fileName,
 	const Vec3f &position,
@@ -20,6 +19,7 @@ Enemy::Enemy(const std::string &fileName,
 	speed = 1;
 	radius = 10;
 	hasTarget = false;
+	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/Sound.wav", false);
 }
 
 
@@ -73,6 +73,7 @@ void Enemy::update(float delta)
 {
 	if (hasTarget)
 	{
+
 		//just 2d walking
 		float dx, dz, length;
 
@@ -92,5 +93,12 @@ void Enemy::update(float delta)
 			position.z += dz;
 		}
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
-	}	
+	}
+
+	if (false)
+	{
+		Sound* sound = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
+		sound->SetPos(position, Vec3f());
+		sound->Play();
+	}
 }

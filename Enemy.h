@@ -19,5 +19,7 @@ public:
 
 	void inEyeSight(Vec3f &);
 	void collide(const Entity *entity);
+private:
+	int hit_sound_id;
 };
 
