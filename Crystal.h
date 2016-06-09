@@ -6,10 +6,14 @@ class Crystal :
 	public Entity
 {
 public:
-	Crystal(const std::string &fileName, const Vec3f &position, Vec3f &rotation, const float &scale);
+	Crystal(const std::string &filled, const std::string &empty,
+		const Vec3f &position, Vec3f &rotation, const float &scale);
 	~Crystal();
 
-	bool filled;
+	bool isFilled;
 	void draw();
+	void pickUp();
+private:
+	std::string filled, empty;
 };
 
