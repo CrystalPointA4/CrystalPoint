@@ -91,6 +91,7 @@ void configureOpenGL()
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	//glEnable(GL_COLOR_MATERIAL);
 
 	glutSetCursor(GLUT_CURSOR_NONE);
 }

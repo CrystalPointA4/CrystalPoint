@@ -33,6 +33,16 @@ World::World(const std::string &fileName)
 		std::cout << "Invalid world file: objects - " << fileName << "\n";
 	if (v["world"]["object-templates"].isNull())
 		std::cout << "Invalid world file: object templates - " << fileName << "\n";
+	/*if(crystals)
+
+	if(skybox)
+
+	if(enemies)
+	*/
+
+	skybox = new Skybox(15000.0f);
+	skybox->init();
+
 
 	//Load object templates
 	for (auto objt : v["world"]["object-templates"])
@@ -149,7 +159,8 @@ World::World(const std::string &fileName)
 
 World::~World()
 {
-	//delete heightmap;
+	delete heightmap;
+	delete skybox;
 }
 
 std::pair<std::string, bool> World::getObjectFromValue(int val)
@@ -176,6 +187,8 @@ void World::draw()
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 	float lightAmbient[4] = { 0.2, 0.2, 0.2, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+
+	skybox->draw();
 
 	heightmap->Draw();
 
