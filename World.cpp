@@ -94,7 +94,7 @@ World::World(const std::string &fileName):
 
 		//Create
 		Vec3f position(object["pos"][0].asFloat(), object["pos"][1].asFloat(), object["pos"][2].asFloat());		
-		position.y = getHeight(position.x, position.z) + 2.0f;
+		position.y = getHeight(position.x, position.z);
 
 		entities.push_back(new LevelObject(object["file"].asString(), position, rotation, scale, hasCollision));
 	}
@@ -126,7 +126,7 @@ World::World(const std::string &fileName):
 
 		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
 	}
-
+	maxCrystals = 0;
 	if (!v["crystal"].isNull())
 	{
 		std::string filled = "unknown";
@@ -164,11 +164,12 @@ World::World(const std::string &fileName):
 					scale = instance["scale"].asFloat();
 
 				position.y = getHeight(position.x, position.z);
-
+				maxCrystals++;
 				Crystal *c = new Crystal(filled, empty, position, rotation, scale);
 								
 				entities.push_back(c);
 			}
+			interface->maxCrystals = maxCrystals;
 		}
 	}
 

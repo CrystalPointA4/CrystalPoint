@@ -21,7 +21,7 @@ private:
 	Interface* interface;
 	Skybox* skybox;
 	
-	int music_id;
+	int music_id,maxCrystals;
 
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;

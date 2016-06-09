@@ -5,10 +5,11 @@
 
 Crystal::Crystal(const std::string & filled, const std::string & empty, const Vec3f & position, Vec3f & rotation, const float & scale)
 {
-	this->filled = filled;
-	this->empty = empty;
+	this->filled = Model::load(filled);
+	this->empty = Model::load(empty);
+	model = this->filled;
+	
 
-	model = Model::load(this->filled);
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;
@@ -20,6 +21,15 @@ Crystal::~Crystal()
 {
 	if (model)
 		Model::unload(model);
+
+	//if isfilled, means model is model filled, so model empty has to been deleted.
+	//if is not filled, means model is model empty, so model filled has to been deleted.
+	if (isFilled)
+		if(empty)
+			Model::unload(empty);
+	else
+		if(filled)
+			Model::unload(filled);
 }
 
 void Crystal::draw()
@@ -33,6 +43,6 @@ void Crystal::collide()
 	{
 		Player::getInstance()->crystals++;
 		isFilled = false;
-		model = Model::load(empty);
+		model = empty;
 	}	
 }
