@@ -5,84 +5,84 @@
     "scale": 1,
     "object-templates": [
       {
-        "color": 10,
-        "file": "models/Rocks/Rock1.obj"
-      },
-      {
-        "color": 20,
-        "file": "models/Rocks/Rock2.obj"
-      },
-      {
-        "color": 30,
-        "file": "models/Rocks/Rock3.obj"
-      },
-      {
-        "color": 40,
-        "file": "models/Rocks/Rock4.obj"
-      },
-      {
         "color": 50,
-        "file": "models/Rocks/Rock5.obj"
+        "file": "models/Rocks/Rock5.obj",
+        "collision":  true
       },
       {
         "color": 60,
-        "file": "models/Rocks/Rock6.obj"
+        "file": "models/Rocks/Rock6.obj",
+        "collision":  true
       },
       {
         "color": 70,
-        "file": "models/Rocks/Rock7.obj"
+        "file": "models/Rocks/Rock7.obj",
+        "collision":  true
       },
       {
         "color": 80,
-        "file": "models/Rocks/Rock8.obj"
+        "file": "models/Rocks/Rock8.obj",
+        "collision":  true
       },
       {
         "color": 90,
-        "file": "models/Rocks/Rock9.obj"
+        "file": "models/Rocks/Rock9.obj",
+        "collision":  true
       },
       {
         "color": 100,
-        "file": "models/Rocks/Rock10.obj"
+        "file": "models/Rocks/Rock10.obj",
+        "collision":  true
       },
       {
         "color": 160,
-        "file": "models/Rocks/InvisBall.obj"
+        "file": "models/Rocks/InvisBall.obj",
+        "collision":  true
       },
       {
         "color": 170,
-        "file": "models/Rocks/DraakHoofd.obj"
+        "file": "models/Rocks/DraakHoofd.obj",
+        "collision":  true
       },
       {
         "color": 180,
-        "file": "models/Rocks/DragonWall1.obj"
+        "file": "models/Rocks/DragonWall1.obj",
+        "collision":  true
       },
       {
         "color": 190,
-        "file": "models/Rocks/Cave1.obj"
+        "file": "models/Rocks/Cave1.obj",
+        "collision":  false
       },
       {
         "color": 200,
-        "file": "models/Rocks/SpikeRock2.obj"
+        "file": "models/Rocks/SpikeRock2.obj",
+        "collision":  false
       },
       {
         "color": 210,
-        "file": "models/Rocks/SpikeRock1.obj"
+        "file": "models/Rocks/SpikeRock1.obj",
+        "collision":  false
       },
       {
         "color": 220,
-        "file": "models/Rocks/SpikeRock3.obj"
+        "file": "models/Rocks/SpikeRock3.obj",
+        "collision":  false
       },
       {
         "color": 230,
-        "file": "models/Rocks/SpikeRock4.obj"
+        "file": "models/Rocks/SpikeRock4.obj",
+        "collision":  false
       },
       {
         "color": 240,
-        "file": "models/Rocks/SpikeRock5.obj"
+        "file": "models/Rocks/SpikeRock5.obj",
+        "collision":  false
       },
       {
         "color": 250,
-        "file": "models/Teleporter/Teleporter.obj"
+        "file": "models/Teleporter/Teleporter.obj",
+        "collision":  false
       }
 
     ]
