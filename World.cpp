@@ -201,7 +201,7 @@ void World::update(float elapsedTime)
 		//Al deze code zou in enemy moeten staan
 		enemy->inEyeSight(player->position);
 
-		
+
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{
@@ -209,23 +209,26 @@ void World::update(float elapsedTime)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
 				{
-					Vec3f difference = e->position - enemy->position; //zou misschien omgedraait moeten worden
-					difference.Normalize();
-					difference = difference * (e->model->radius + 0.01f);
-					enemy->position = e->position + difference;
+					enemy->collide(e);
 					break;
 				}
 			}
 		}
+
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		//tot hier
+
 	}
 
 	for(auto &crystal : crystals)
+	{
 		if (crystal->canCollide && crystal->inObject(player->position) && crystal->filled)
 		{
 			crystal->filled = false;
 			player->crystals++;
 			break;
 		}
+	}
 }
 
 void World::addLevelObject(LevelObject* obj)

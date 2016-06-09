@@ -13,7 +13,12 @@
     "startposition": [ 20, 5, 20 ]
   },
   "objects": [ ],
-  "enemies": [ ],
+  "enemies": [
+  {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 20, 5, 10 ],
+      "scale": 0.01
+  }],
   "crystals": [
     {
       "file": "models/sphere/sphere.obj",
@@ -21,7 +26,7 @@
     },
     {
       "file": "models/sphere/sphere.obj",
-      "pos": [ 45, 2, 31 ]      
+      "pos": [ 45, 2, 31 ]
     }
   ]
 }
