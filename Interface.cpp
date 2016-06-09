@@ -77,8 +77,6 @@ void Interface::draw()
 	glColor4f(1.0f, 1.0f, 0.1f, 1.0);
 	glutBitmapString("Level: " + std::to_string(player->level), 490, 900);
 
-	
-
 	int cw, ch, offset;
 	cw = 20;
 	ch = 50;
@@ -94,6 +92,9 @@ void Interface::draw()
 		glVertex2f(975         , ch / 2 + offset*i + ch*i);
 		glEnd();
 	}
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Interface::update(float deltaTime)

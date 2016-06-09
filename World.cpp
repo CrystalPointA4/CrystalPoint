@@ -26,14 +26,18 @@ World::World(const std::string &fileName):
 	file.close();
 
 	//Check file
-	if(v["world"].isNull() || v["world"]["heightmap"].isNull())
+	if(v["world"].isNull() || v["world"]["heightmap"].isNull() || v["world"]["skybox"].isNull())
 		std::cout << "Invalid world file: world - " << fileName << "\n";
+	if (v["world"]["object-templates"].isNull())
+		std::cout << "Invalid world file: object templates - " << fileName << "\n";
 	if (v["player"].isNull() || v["player"]["startposition"].isNull())
 		std::cout << "Invalid world file: player - " << fileName << "\n";
 	if (v["objects"].isNull())
 		std::cout << "Invalid world file: objects - " << fileName << "\n";
-	if (v["world"]["object-templates"].isNull())
-		std::cout << "Invalid world file: object templates - " << fileName << "\n";
+	if (v["enemies"].isNull())
+		std::cout << "Invalid world file: enemies - " << fileName << "\n";
+	if (v["crystals"].isNull())
+		std::cout << "Invalid world file: crystals - " << fileName << "\n";
 
 	//Load object templates
 	for (auto objt : v["world"]["object-templates"])
@@ -48,6 +52,10 @@ World::World(const std::string &fileName):
 
 	//Generate heightmap for this world
 	heightmap = new HeightMap(v["world"]["heightmap"].asString(), this);
+
+	//Load skybox
+	skybox = new Skybox(15000.0f, v["world"]["skybox"].asString());
+	skybox->init();
 
 	//Map different texture to heightmap if available
 	if(!v["world"]["texture"].isNull())
@@ -159,7 +167,8 @@ World::World(const std::string &fileName):
 
 World::~World()
 {
-	//delete heightmap;
+	delete heightmap;
+	delete skybox;
 }
 
 std::pair<std::string, bool> World::getObjectFromValue(int val)
@@ -186,6 +195,10 @@ void World::draw()
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 	float lightAmbient[4] = { 0.2, 0.2, 0.2, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
+
+	glColor4f(1, 1, 1, 1);
+
+	skybox->draw();
 
 	heightmap->Draw();
 

@@ -131,6 +131,12 @@ float HeightMap::GetHeight(float x, float y)
 	return z.y;
 }
 
+
+int HeightMap::GetSize()
+{
+	return height >= width ? height : width;
+}
+
 void HeightMap::SetTexture(const std::string &file)
 {
 	int bpp, width2, height2;

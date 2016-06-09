@@ -7,6 +7,7 @@
 #include "LevelObject.h"
 #include "Interface.h"
 #include "Crystal.h"
+#include "Skybox.h"
 
 class Entity;
 
@@ -18,6 +19,8 @@ private:
 	Player* player;
 	HeightMap* heightmap;
 	Interface* interface;
+	Skybox* skybox;
+	
 	int music_id;
 
 	std::vector<Entity*> entities;
