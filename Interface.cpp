@@ -11,6 +11,9 @@ void glutBitmapString(std::string str, int x, int y);
 
 Interface::Interface()
 {
+	crystalWidth = 20;
+	crystalHeight = 50;
+	crystalOffset = 5;
 }
 
 
@@ -87,11 +90,12 @@ void Interface::draw()
 	{
 		glBegin(GL_QUADS);
 		glColor4f(0, 1.0f, 1.0f, 1.0f);
-		glVertex2f(975 - cw / 2, offset*i + ch*i);
-		glVertex2f(975 - cw    , ch / 2 + offset*i + ch*i);
+		glVertex2f(975 - crystalWidth / 2, crystalOffset*i + crystalHeight*i);
+		glVertex2f(975 - crystalWidth, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
+
 		glColor4f(0, 0.8f, 0.8f, 1.0f);
-		glVertex2f(975 - cw / 2, ch + offset*i + ch*i);
-		glVertex2f(975         , ch / 2 + offset*i + ch*i);
+		glVertex2f(975 - crystalWidth / 2, crystalHeight + crystalOffset*i + crystalHeight*i);
+		glVertex2f(975, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
 		glEnd();
 	}
 }

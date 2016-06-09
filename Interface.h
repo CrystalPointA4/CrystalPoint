@@ -7,5 +7,7 @@ public:
 
 	void draw(void);
 	void update(float deltaTime);
+
+	int crystalWidth, crystalHeight, crystalOffset;
 };
 
