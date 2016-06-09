@@ -18,6 +18,7 @@ private:
 	Player* player;
 	HeightMap* heightmap;
 	Interface* interface;
+	int music_id;
 
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;
