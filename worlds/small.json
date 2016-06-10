@@ -14,12 +14,11 @@
   "player": {
     "startposition": [ 20, 5, 20 ]
   },
-  "objects": [
-    {
-      "file": "models/Teleporter/Teleporter.obj",
-      "pos": [ 10, 5, 10 ]
-    }
-  ],
+  "objects": [ ],
+  "portal": {     
+    "file": "models/Teleporter/Teleporter.obj",
+    "pos": [ 10, 5, 10 ]    
+  },
   "enemies": [
   {
       "file": "models/squid/Blooper.obj",

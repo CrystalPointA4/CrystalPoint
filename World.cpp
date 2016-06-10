@@ -181,6 +181,30 @@ World::World(const std::string &fileName):
 		music->Play();
 	}
 
+	if (!v["portal"].isNull())
+	{
+		Vec3f pos(0, 0, 0);
+		if (!v["portal"]["pos"].isNull())
+			pos = Vec3f(v["portal"]["pos"][0].asFloat(),
+				v["portal"]["pos"][1].asFloat(),
+				v["portal"]["pos"][0].asFloat());
+
+		pos.y = getHeight(pos.x, pos.z);
+
+		Vec3f rot(0, 0, 0);
+		if (!v["portal"]["rot"].isNull())
+			pos = Vec3f(v["portal"]["rot"][0].asFloat(),
+				v["portal"]["rot"][1].asFloat(),
+				v["portal"]["rot"][0].asFloat());
+
+		float scale = 1.0f;
+		if (!v["portal"]["scale"].isNull())
+			scale = !v["portal"]["scale"].asFloat();
+
+		portal = new Portal(v["portal"]["file"], pos, rot, scale);
+		entities.push_back(portal);
+		portal->maxCrystals = maxCrystals;
+	}
 }
 
 
@@ -256,6 +280,9 @@ void World::update(float elapsedTime)
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
 	}
+
+	if (portal->mayEnter)
+		WorldHandler::getInstance()->NextWorld();
 }
 
 void World::addLevelObject(LevelObject* obj)

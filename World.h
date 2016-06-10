@@ -8,6 +8,7 @@
 #include "Interface.h"
 #include "Crystal.h"
 #include "Skybox.h"
+#include "Portal.h"
 
 class Entity;
 
@@ -20,6 +21,7 @@ private:
 	HeightMap* heightmap;
 	Interface* interface;
 	Skybox* skybox;
+	Portal* portal;
 	
 	int music_id,maxCrystals;
 
