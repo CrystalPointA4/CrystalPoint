@@ -6,6 +6,7 @@
 #include "CrystalPoint.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include "WorldHandler.h"
 
 World::World(const std::string &fileName):
@@ -99,6 +100,7 @@ World::World(const std::string &fileName):
 		entities.push_back(new LevelObject(object["file"].asString(), position, rotation, scale, hasCollision));
 	}
 
+	maxEnemies = 0;
 	//Load and place enemies into world
 	for (auto e : v["enemies"])
 	{		
@@ -124,6 +126,7 @@ World::World(const std::string &fileName):
 		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
 		position.y = getHeight(position.x, position.z) + 2.0f;
 
+		maxEnemies++;
 		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
 	}
 	maxCrystals = 0;
@@ -239,8 +242,6 @@ void World::draw()
 	float lightAmbient[4] = { 0.2, 0.2, 0.2, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
-	glColor4f(1, 1, 1, 1);
-
 	skybox->draw();
 
 	heightmap->Draw();
@@ -258,6 +259,9 @@ void World::update(float elapsedTime)
 {
 	for (auto &entity : entities)
 		entity->update(elapsedTime);
+
+	int count = 0;
+	int remove = false;
 
 	for (auto &enemy : enemies)
 	{
@@ -277,9 +281,23 @@ void World::update(float elapsedTime)
 					break;
 				}
 			}
+
+			if (enemy->attack)
+			{
+				remove = true;
+				continue;
+			}
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		
+		if(!remove)
+			count++;
 	}
+
+	if(remove)
+		enemies.erase(enemies.begin() + count);
+
+	skybox->update(elapsedTime, maxEnemies - enemies.size(), maxEnemies);
 
 	if (portal->mayEnter)
 		WorldHandler::getInstance()->NextWorld();

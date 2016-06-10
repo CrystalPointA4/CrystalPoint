@@ -13,6 +13,7 @@ public:
 	bool hasTarget;
 	Vec3f target;
 	float speed,radius;
+	bool attack;
 
 	void update(float);
 	void draw();

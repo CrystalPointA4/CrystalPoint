@@ -23,7 +23,7 @@ private:
 	Skybox* skybox;
 	Portal* portal;
 	
-	int music_id,maxCrystals;
+	int music_id,maxCrystals,maxEnemies;
 
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;
