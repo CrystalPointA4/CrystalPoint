@@ -124,9 +124,14 @@ void Skybox::update(float deltaTime, int curr, int max)
 {
 	targetBrightness = 80 + ((255 - 80) / max) * curr;
 
-	if (targetBrightness > brightness)
+	if (targetBrightness > brightness + 2)
 	{
 		brightness += 20 * deltaTime;
+	}
+
+	if (targetBrightness < brightness - 2)
+	{
+		brightness -= 20 * deltaTime;
 	}
 }
 
