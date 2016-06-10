@@ -66,7 +66,7 @@ void configureOpenGL()
 	glutInitWindowSize(800, 600);
 	//glutInitWindowPosition(glutGet(GLUT_WINDOW_WIDTH) / 2 - 800/2, glutGet(GLUT_WINDOW_HEIGHT) / 2 - 600/2);
 	glutCreateWindow("Crystal Point");	
-	glutFullScreen();
+	//glutFullScreen();
 
 	//Depth testing
 	glEnable(GL_DEPTH_TEST);

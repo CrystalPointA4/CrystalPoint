@@ -1,38 +1,43 @@
 {
-   "world": {
+  "world": {
     "heightmap": "worlds/hell.png",
-    "texture": "worlds/helltexture.png",
-	    "object-templates": [
-			  {
-				  "color": 25,
-				  "file": "models/boom/Boom.obj"
-			  },
-			  {
-				  "color": 23,
-				  "file": "models/boom/Boom.obj"
-			  }
-	    ]
-   },
-  "player": {
-    "startposition": [ 0, 1.7, 0]
+    "texture":  "worlds/helltexture.png",
+    "skybox": "skyboxes/peaceful/",
+    "object-templates": [
+      {
+        "color": 100,
+        "file": "models/boom/Boom.obj",
+        "collision": true
+      }
+    ],
+	"music": "WAVE/bond.wav"
   },
-  "objects": [
-    {
-      "file": "models/boom/Boom.obj",
-      "pos": [ 4, 0, -4 ],
-      "collide": "true"
-    },
-    {
-      "file": "models/boom/Boom.obj",
-      "pos": [ -4, 0, -4 ],
-      "collide": "true"
-     }
-  ],
+  "player": {
+    "startposition": [ 1, 5, 20 ]
+  },
+  "objects": [ ],
+  "portal": {     
+    "file": "models/Teleporter/Teleporter.obj",
+    "pos": [ 10, 5, 10 ]    
+  },
   "enemies": [
-    {
+  {
       "file": "models/squid/Blooper.obj",
-      "pos": [ 1, 2, -10 ],
+      "pos": [ 20, 5, 10 ],
       "scale": 0.01
-    }
-  ]
+  }],
+  "crystal": {
+    "full texture": "models/crystal/Crystal.obj",
+    "empty texture": "models/crystal/PickedUpCrystal.obj",
+    "instances": [
+      {
+        "pos": [ 31, 5, 33 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 40, 5, 40 ],
+        "rot": [ 0, 0, 0 ]
+      }
+    ]
+  }
 }
