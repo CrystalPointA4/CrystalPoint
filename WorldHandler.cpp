@@ -126,6 +126,7 @@ void WorldHandler::NextWorld()
 	if (!loadingWorld)
 	{
 		ChangeWorld(worldIndex + 1);
+		Player::getInstance()->crystals = 0;
 	}
 }
 
@@ -134,5 +135,6 @@ void WorldHandler::PreviousWorld()
 	if (!loadingWorld)
 	{
 		ChangeWorld(worldIndex - 1);
+		Player::getInstance()->crystals = 0;
 	}
 }
