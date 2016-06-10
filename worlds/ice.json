@@ -1,7 +1,7 @@
 {
   "world": {
     "heightmap": "worlds/hmcs.png",
-    "texture":  "hmcstexture.png",
+    "texture":  "worlds/hmcstexture.png",
     "skybox": "skyboxes/peaceful/",
     "object-templates": [
       {
