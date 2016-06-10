@@ -14,6 +14,7 @@ public:
 	void draw();
 	void collide();
 private:
-	std::string filled, empty;
+	Model* filled;
+	Model* empty;
 };
 

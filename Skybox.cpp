@@ -4,6 +4,7 @@
 #include "stb_image.h"
 #include "Skybox.h"
 #include <string>
+#include <iostream>
 
 enum{SKY_LEFT=0,SKY_BACK,SKY_RIGHT,SKY_FRONT,SKY_TOP,SKY_BOTTOM};
 GLuint skybox[6];
@@ -12,6 +13,9 @@ Skybox::Skybox(const float &size, const std::string &folder)
 {
 	this->size = size;
 	this->folder = folder;
+
+	brightness = 80;
+	targetBrightness = 80;
 }
 
 Skybox::~Skybox()
@@ -31,6 +35,8 @@ void Skybox::init()
 
 void Skybox::draw()
 {
+	glColor4f(brightness/255, brightness/255, brightness/255, 1);
+
 	bool b1 = glIsEnabled(GL_TEXTURE_2D);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_DEPTH_TEST);
@@ -112,6 +118,16 @@ void Skybox::draw()
 	glEnable(GL_DEPTH_TEST);
 	if (!b1)
 		glDisable(GL_TEXTURE_2D);
+}
+
+void Skybox::update(float deltaTime, int curr, int max)
+{
+	targetBrightness = 80 + ((255 - 80) / max) * curr;
+
+	if (targetBrightness > brightness)
+	{
+		brightness += 20 * deltaTime;
+	}
 }
 
 GLuint Skybox::loadTexture(const std::string & fileName)  //load the filename named texture

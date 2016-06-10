@@ -15,10 +15,19 @@
     "startposition": [ 20, 5, 20 ]
   },
   "objects": [ ],
+  "portal": {     
+    "file": "models/Teleporter/Teleporter.obj",
+    "pos": [ 10, 5, 10 ]    
+  },
   "enemies": [
-  {
+    {
       "file": "models/squid/Blooper.obj",
       "pos": [ 20, 5, 10 ],
+      "scale": 0.01
+    },
+    {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 30, 10, 10 ],
       "scale": 0.01
   }],
   "crystal": {

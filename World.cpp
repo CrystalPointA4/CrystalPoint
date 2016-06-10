@@ -6,6 +6,7 @@
 #include "CrystalPoint.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include "WorldHandler.h"
 
 World::World(const std::string &fileName):
@@ -94,11 +95,12 @@ World::World(const std::string &fileName):
 
 		//Create
 		Vec3f position(object["pos"][0].asFloat(), object["pos"][1].asFloat(), object["pos"][2].asFloat());		
-		position.y = getHeight(position.x, position.z) + 2.0f;
+		position.y = getHeight(position.x, position.z);
 
 		entities.push_back(new LevelObject(object["file"].asString(), position, rotation, scale, hasCollision));
 	}
 
+	maxEnemies = 0;
 	//Load and place enemies into world
 	for (auto e : v["enemies"])
 	{		
@@ -124,9 +126,10 @@ World::World(const std::string &fileName):
 		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
 		position.y = getHeight(position.x, position.z) + 2.0f;
 
+		maxEnemies++;
 		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
 	}
-
+	maxCrystals = 0;
 	if (!v["crystal"].isNull())
 	{
 		std::string filled = "unknown";
@@ -164,11 +167,12 @@ World::World(const std::string &fileName):
 					scale = instance["scale"].asFloat();
 
 				position.y = getHeight(position.x, position.z);
-
+				maxCrystals++;
 				Crystal *c = new Crystal(filled, empty, position, rotation, scale);
 								
 				entities.push_back(c);
 			}
+			interface->maxCrystals = maxCrystals;
 		}
 	}
 
@@ -180,6 +184,30 @@ World::World(const std::string &fileName):
 		music->Play();
 	}
 
+	if (!v["portal"].isNull())
+	{
+		Vec3f pos(0, 0, 0);
+		if (!v["portal"]["pos"].isNull())
+			pos = Vec3f(v["portal"]["pos"][0].asFloat(),
+				v["portal"]["pos"][1].asFloat(),
+				v["portal"]["pos"][0].asFloat());
+
+		pos.y = getHeight(pos.x, pos.z);
+
+		Vec3f rot(0, 0, 0);
+		if (!v["portal"]["rot"].isNull())
+			pos = Vec3f(v["portal"]["rot"][0].asFloat(),
+				v["portal"]["rot"][1].asFloat(),
+				v["portal"]["rot"][0].asFloat());
+
+		float scale = 1.0f;
+		if (!v["portal"]["scale"].isNull())
+			scale = !v["portal"]["scale"].asFloat();
+
+		portal = new Portal(v["portal"]["file"], pos, rot, scale);
+		entities.push_back(portal);
+		portal->maxCrystals = maxCrystals;
+	}
 }
 
 
@@ -214,8 +242,6 @@ void World::draw()
 	float lightAmbient[4] = { 0.2, 0.2, 0.2, 1 };
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
-	glColor4f(1, 1, 1, 1);
-
 	skybox->draw();
 
 	heightmap->Draw();
@@ -233,6 +259,9 @@ void World::update(float elapsedTime)
 {
 	for (auto &entity : entities)
 		entity->update(elapsedTime);
+
+	int count = 0;
+	int remove = false;
 
 	for (auto &enemy : enemies)
 	{
@@ -252,9 +281,26 @@ void World::update(float elapsedTime)
 					break;
 				}
 			}
+
+			if (enemy->attack)
+			{
+				remove = true;
+				continue;
+			}
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		
+		if(!remove)
+			count++;
 	}
+
+	if(remove)
+		enemies.erase(enemies.begin() + count);
+
+	skybox->update(elapsedTime, maxEnemies - enemies.size(), maxEnemies);
+
+	if (portal->mayEnter)
+		WorldHandler::getInstance()->NextWorld();
 }
 
 void World::addLevelObject(LevelObject* obj)
