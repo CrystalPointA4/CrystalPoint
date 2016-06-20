@@ -3,6 +3,7 @@
 
 Util::Util()
 {
+	
 }
 
 
@@ -46,3 +47,19 @@ void Util::glutBitmapString(std::string str, int x, int y)
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, str[i]);
 	}
 }
+
+int Util::glutTextWidth(const std::string str)
+{
+	int total = 0;
+	for (int i = 0; i < str.size(); i++)
+	{
+		total += glutBitmapWidth(GLUT_BITMAP_HELVETICA_18, str[i]);
+	}
+	return total;
+}
+
+//int Util::glutTextHeight()
+//{
+//	return glutBitmapHeight(GLUT_BITMAP_HELVETICA_18);
+//}
+

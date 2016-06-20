@@ -23,8 +23,8 @@ void CrystalPoint::init()
 	cursor = Cursor::getInstance();
 
 	menu = new Menu();
-	menu->AddMenuElement(new Text("Hello", Vec2f(10, 18)));
-	menu->AddMenuElement(new Button("Start", Vec2f(1920 / 2, 1080 / 2), 100, 50));
+	menu->AddMenuElement(new Text("Hello", Vec2f(10, 10)));
+	menu->AddMenuElement(new Button("Start", Vec2f(1920 / 2 - 50, 1080 / 2 - 25), 100, 50));
 
 	lastFrameTime = 0;
 
