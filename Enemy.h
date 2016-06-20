@@ -3,12 +3,15 @@
 #include "Entity.h"
 #include <string>
 #include "Vector.h"
+#include "CrystalPoint.h"
 
 class Enemy : public Entity
 {
 public:
 	Enemy(const std::string &fileName,const Vec3f &position,Vec3f &rotation,const float &scale);
 	~Enemy();
+
+	Sound* music;
 
 	bool hasTarget;
 	Vec3f target;

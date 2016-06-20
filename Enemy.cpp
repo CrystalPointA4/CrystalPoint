@@ -2,7 +2,6 @@
 #include <cmath>
 #include "Enemy.h"
 #include "Model.h"
-#include "CrystalPoint.h"
 #include <iostream>
 
 Enemy::Enemy(const std::string &fileName,
@@ -19,7 +18,8 @@ Enemy::Enemy(const std::string &fileName,
 	speed = 1;
 	radius = 10;
 	hasTarget = false;
-	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/Sound.wav", false);
+	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/enemy.wav", false);
+	music = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
 	attack = false;
 }
 
@@ -72,9 +72,14 @@ void Enemy::collide(const Entity * entity)
 
 void Enemy::update(float delta)
 {
+	music->SetPos(position, Vec3f());
+
 	if (hasTarget)
 	{
-
+		if (music->IsPlaying() == false)
+		{
+			music->Play();
+		}
 		//just 2d walking
 		float dx, dz, length;
 
@@ -98,15 +103,14 @@ void Enemy::update(float delta)
 		else
 		{	
 			attack = true;
+			if (music->IsPlaying() == true)
+			{
+//				music->Pause();
+				music->Stop();
+			}
 		}
 
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}
 
-	if (false)
-	{
-		Sound* sound = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
-		sound->SetPos(position, Vec3f());
-		sound->Play();
-	}
 }

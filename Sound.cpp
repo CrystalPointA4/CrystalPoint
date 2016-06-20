@@ -9,8 +9,6 @@ Sound::Sound(const char* inWavPath, bool inLooping):
 	source_id(0),
 	is_looping(inLooping)
 {
-	isPlaying = false;
-
 	const char* path = inWavPath;
 
 	FILE *fp = fopen(path, "rb");													// Open the WAVE file
@@ -122,7 +120,6 @@ void Sound::SetPos(const Vec3f& inPos, const Vec3f& inVel)
 
 void Sound::Play()
 {
-	isPlaying = true;
 	alSourcePlay(source_id);
 	int e = alGetError(); // != AL_NO_ERROR) return;
 }
@@ -136,12 +133,15 @@ void Sound::Pause()
 
 void Sound::Stop()
 {
-	isPlaying = false;
 	alSourceStop(source_id);
 }
 
 bool Sound::IsPlaying()
 {
-	return isPlaying;
+	ALenum state;
+
+	alGetSourcei(source_id, AL_SOURCE_STATE, &state);
+
+	return (state == AL_PLAYING);
 }
 
