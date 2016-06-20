@@ -25,7 +25,7 @@ void CrystalPoint::init()
 	menu = new Menu();
 	menu->AddMenuElement(new Text("Hello", Vec2f(10, 10)));
 	menu->AddMenuElement(new Button("Start", Vec2f(1920 / 2 - 50, 1080 / 2 - 25), 100, 50));
-
+	menu->AddMenuElement(new Button("Test", Vec2f(1920 / 2 - 50, 1080 / 2 - 100), 100, 50));
 	lastFrameTime = 0;
 
 	glClearColor(0.7f, 0.7f, 1.0f, 1.0f);
@@ -92,8 +92,8 @@ void CrystalPoint::update()
 
 	//worldhandler->update(deltaTime);
 
-	cursor->update(cursor->mousePosition + mouseOffset);
 	menu->update();
+	cursor->update(cursor->mousePosition + mouseOffset);
 
 	mouseOffset = Vec2f(0, 0);
 	prevKeyboardState = keyboardState;

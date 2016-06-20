@@ -9,6 +9,7 @@ Cursor::Cursor()
 {
 	enabled = false;
 	mousePosition = Vec2f(CrystalPoint::width / 2, CrystalPoint::height / 2);
+	clicked = false;
 }
 
 Cursor::~Cursor()
@@ -68,4 +69,11 @@ void Cursor::update(Vec2f newPosition)
 		newPosition.y = CrystalPoint::height;
 
 	mousePosition = newPosition;
+
+	if (clicked)
+		clicked = !clicked;
+	if (state != prev)
+		if(state == GLUT_UP)
+			clicked = true;
+	prev = state;
 }

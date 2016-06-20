@@ -8,6 +8,7 @@ private:
 
 	static Cursor* instance;
 	bool enabled;
+	
 public:
 	Vec2f mousePosition;
 	~Cursor();
@@ -16,6 +17,10 @@ public:
 	
 	void enable(bool enable);
 	bool isEnabled(void);
+
+	bool clicked;
+	int state, prev;
+
 
 	void draw(void);
 	void update(Vec2f newPosition);

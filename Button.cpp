@@ -2,6 +2,7 @@
 #include <string>
 #include "Util.h"
 #include "Vector.h"
+#include "Cursor.h"
 
 Button::Button(const std::string & text, Vec2f position, float width, float height) : Text(text,position)
 {
@@ -51,6 +52,9 @@ void Button::update(int x, int y)
 		alfa = 1.0f;
 	else
 		alfa = 0.5f;
+
+	if (cursorOnButton && Cursor::getInstance()->clicked)
+		this->setColor(Vec3f(0, 255, 0));
 }
 
 void Button::setForeground(Vec3f color)
