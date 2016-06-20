@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include "Vector.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
+#include "Cursor.h"
+
 void configureOpenGL(void);
 
 CrystalPoint* app;
@@ -50,6 +55,17 @@ int main(int argc, char* argv[])
 	glutPassiveMotionFunc(mousemotion);
 	glutMotionFunc(mousemotion);
 
+	auto mouseclick = [](int button, int state,
+		int x, int y)
+	{
+		if (button == GLUT_LEFT_BUTTON)
+			Cursor::getInstance()->state = state;
+
+			//std::cout << "Left button is down" << std::endl;
+	};
+
+	glutMouseFunc(mouseclick);
+
 	CrystalPoint::height = GLUT_WINDOW_HEIGHT;
 	CrystalPoint::width = GLUT_WINDOW_WIDTH;
 
@@ -66,7 +82,8 @@ void configureOpenGL()
 	glutInitWindowSize(800, 600);
 	//glutInitWindowPosition(glutGet(GLUT_WINDOW_WIDTH) / 2 - 800/2, glutGet(GLUT_WINDOW_HEIGHT) / 2 - 600/2);
 	glutCreateWindow("Crystal Point");	
-	//glutFullScreen();
+	glutFullScreen();
+
 
 	//Depth testing
 	glEnable(GL_DEPTH_TEST);

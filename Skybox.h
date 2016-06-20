@@ -14,6 +14,8 @@ public:
 
 	void init();
 	void draw();
+
 	void update(float deltaTime, int, int);
 	GLuint loadTexture(const std::string &fileName);
+
 };

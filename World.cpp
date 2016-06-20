@@ -214,6 +214,7 @@ World::~World()
 	music->Stop();
 	delete music;
 	delete skybox;
+	delete portal;
 }
 
 std::pair<std::string, bool> World::getObjectFromValue(int val)

@@ -8,10 +8,13 @@ Cursor* Cursor::instance = NULL;
 Cursor::Cursor()
 {
 	enabled = false;
+	mousePosition = Vec2f(CrystalPoint::width / 2, CrystalPoint::height / 2);
+	clicked = false;
 }
 
 Cursor::~Cursor()
 {
+	
 }
 
 Cursor* Cursor::getInstance(void)
@@ -54,5 +57,24 @@ void Cursor::draw(void)
 
 void Cursor::update(Vec2f newPosition)
 {
+	if (newPosition.x < 0)
+		newPosition.x = 0;
+
+	if (newPosition.y < 0)
+		newPosition.y = 0;
+
+	if (newPosition.x > CrystalPoint::width)
+		newPosition.x = CrystalPoint::width;
+
+	if (newPosition.y > CrystalPoint::height)
+		newPosition.y = CrystalPoint::height;
+
 	mousePosition = newPosition;
+
+	if (clicked)
+		clicked = !clicked;
+	if (state != prev)
+		if(state == GLUT_UP)
+			clicked = true;
+	prev = state;
 }
