@@ -16,9 +16,9 @@ public:
 	float texX;
 	float texY;
 
-	Vertex operator/(float &other);
-	Vertex operator*(Vertex &other);
-	Vertex operator*(float &other);
-	Vertex operator+(Vertex &other);
+	Vertex operator/(const float &other) const;
+	Vertex operator*(const Vertex &other) const;
+	Vertex operator*(const float &other) const;
+	Vertex operator+(const Vertex &other) const;
 };
 

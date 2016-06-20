@@ -1,5 +1,5 @@
 #include "Interface.h"
-#include <GL\freeglut.h>
+#include <GL/freeglut.h>
 #include "CrystalPoint.h"
 
 #include <string>
