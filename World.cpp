@@ -215,6 +215,7 @@ World::~World()
 {
 	delete heightmap;
 	delete skybox;
+	delete portal;
 }
 
 std::pair<std::string, bool> World::getObjectFromValue(int val)
