@@ -201,12 +201,14 @@
   <ItemGroup>
     <None Include="worlds\fire.json" />
     <None Include="worlds\ice.json" />
+    <None Include="worlds\rock.json" />
     <None Include="worlds\small.json" />
     <None Include="worlds\worlds.json" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="WAVE\bond.wav" />
-    <Media Include="WAVE\Sound.wav" />
+    <Media Include="WAVE\enemy.wav" />
+    <Media Include="WAVE\test1.wav" />
+    <Media Include="WAVE\test2.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

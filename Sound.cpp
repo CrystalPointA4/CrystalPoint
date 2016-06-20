@@ -17,7 +17,6 @@ Sound::Sound(const char* inWavPath, bool inLooping):
 	buffer_id(0),
 	source_id(0),
 	is_looping(inLooping)
-
 {
 	const char* path = inWavPath;
 
@@ -144,5 +143,14 @@ void Sound::Pause()
 void Sound::Stop()
 {
 	alSourceStop(source_id);
+}
+
+bool Sound::IsPlaying()
+{
+	ALenum state;
+
+	alGetSourcei(source_id, AL_SOURCE_STATE, &state);
+
+	return (state == AL_PLAYING);
 }
 

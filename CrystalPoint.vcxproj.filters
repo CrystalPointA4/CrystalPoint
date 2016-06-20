@@ -166,12 +166,18 @@
     <None Include="worlds\small.json">
       <Filter>Source Files\json</Filter>
     </None>
+    <None Include="worlds\rock.json">
+      <Filter>Source Files\json</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="WAVE\Sound.wav">
+    <Media Include="WAVE\test1.wav">
       <Filter>Resource Files</Filter>
     </Media>
-    <Media Include="WAVE\bond.wav">
+    <Media Include="WAVE\test2.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="WAVE\enemy.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
