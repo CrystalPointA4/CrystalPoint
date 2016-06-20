@@ -179,9 +179,6 @@ World::World(const std::string &fileName):
 	if (!v["world"]["music"].isNull())
 	{
 		music_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
-		Sound* music = CrystalPoint::GetSoundSystem().GetSound(music_id);
-		music->SetPos(Vec3f(), Vec3f());
-		music->Play();
 	}
 
 	if (!v["portal"].isNull())
@@ -257,6 +254,13 @@ void World::draw()
 
 void World::update(float elapsedTime)
 {
+	Sound* music = CrystalPoint::GetSoundSystem().GetSound(music_id);
+	music->SetPos(player->position, Vec3f());
+
+	if (music->IsPlaying() ==  false)
+	{
+		music->Play();
+	}
 	for (auto &entity : entities)
 		entity->update(elapsedTime);
 

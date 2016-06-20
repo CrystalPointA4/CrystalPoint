@@ -13,8 +13,10 @@ public:
 	void Play();
 	void Pause();
 	void Stop();
+	bool IsPlaying();
 
 private:
+	bool isPlaying;
 	unsigned int buffer_id;
 	unsigned int source_id;
 

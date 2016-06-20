@@ -9,7 +9,7 @@
         "collision": true
       }
     ],
-	"music": "WAVE/bond.wav"
+	"music": "WAVE/test2.wav"
   },
   "player": {
     "startposition": [ 20, 5, 20 ]
