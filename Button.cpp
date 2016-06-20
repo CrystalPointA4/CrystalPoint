@@ -54,7 +54,13 @@ void Button::update(int x, int y)
 		alfa = 0.5f;
 
 	if (cursorOnButton && Cursor::getInstance()->clicked)
-		this->setColor(Vec3f(0, 255, 0));
+		if(action != nullptr)
+			action(this);
+}
+
+void Button::addAction(action_function action)
+{
+	this->action = action;
 }
 
 void Button::setForeground(Vec3f color)
