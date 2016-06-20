@@ -1,0 +1,112 @@
+{
+  "world": {
+    "heightmap": "worlds/rockHeightmap.png",
+    "texture": "worlds/rockStone2.png",
+	"skybox": "skyboxes/water/",
+    "object-templates": [
+      {
+        "color": 50,
+        "file": "models/Rocks/Rock5.obj",
+        "collision":  true
+      },
+      {
+        "color": 60,
+        "file": "models/Rocks/Rock6.obj",
+        "collision":  true
+      },
+      {
+        "color": 70,
+        "file": "models/Rocks/Rock7.obj",
+        "collision":  true
+      },
+      {
+        "color": 80,
+        "file": "models/Rocks/Rock8.obj",
+        "collision":  true
+      },
+      {
+        "color": 90,
+        "file": "models/Rocks/Rock9.obj",
+        "collision":  true
+      },
+      {
+        "color": 100,
+        "file": "models/Rocks/Rock10.obj",
+        "collision":  true
+      },
+      {
+        "color": 160,
+        "file": "models/Rocks/InvisBall.obj",
+        "collision":  true
+      },
+      {
+        "color": 170,
+        "file": "models/Rocks/DraakHoofd.obj",
+        "collision":  true
+      },
+      {
+        "color": 180,
+        "file": "models/Rocks/DragonWall1.obj",
+        "collision":  true
+      },
+      {
+        "color": 190,
+        "file": "models/Rocks/Cave1.obj",
+        "collision":  false
+      },
+      {
+        "color": 200,
+        "file": "models/Rocks/SpikeRock2.obj",
+        "collision":  false
+      },
+      {
+        "color": 210,
+        "file": "models/Rocks/SpikeRock1.obj",
+        "collision":  false
+      },
+      {
+        "color": 220,
+        "file": "models/Rocks/SpikeRock3.obj",
+        "collision":  false
+      },
+      {
+        "color": 230,
+        "file": "models/Rocks/SpikeRock4.obj",
+        "collision":  false
+      },
+      {
+        "color": 240,
+        "file": "models/Rocks/SpikeRock5.obj",
+        "collision":  false
+      }
+    ]
+  },
+  "player": {
+    "startposition": [ 1, 5, 20 ]
+  },
+  "objects": [ ],
+  "portal": {     
+    "file": "models/Teleporter/Teleporter.obj",
+    "pos": [ 10, 5, 10 ]    
+  },
+  "enemies": [
+  {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 20, 5, 10 ],
+      "scale": 0.01
+  }],
+  "crystal": {
+    "full texture": "models/crystal/Crystal.obj",
+    "empty texture": "models/crystal/PickedUpCrystal.obj",
+    "instances": [
+      {
+        "pos": [ 31, 5, 33 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 40, 5, 40 ],
+        "rot": [ 0, 0, 0 ]
+      }
+    ]
+  }
+}

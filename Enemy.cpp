@@ -20,6 +20,7 @@ Enemy::Enemy(const std::string &fileName,
 	radius = 10;
 	hasTarget = false;
 	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/Sound.wav", false);
+	attack = false;
 }
 
 
@@ -83,6 +84,8 @@ void Enemy::update(float delta)
 		length = sqrt(dx*dx + dz*dz);
 		if (length > 1)
 		{
+			attack = false;
+
 			dx /= length;
 			dz /= length;
 
@@ -92,6 +95,11 @@ void Enemy::update(float delta)
 			position.x += dx;
 			position.z += dz;
 		}
+		else
+		{	
+			attack = true;
+		}
+
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}
 

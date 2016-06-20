@@ -12,6 +12,15 @@ Interface::Interface()
 	crystalWidth = 20;
 	crystalHeight = 50;
 	crystalOffset = 5;
+	maxCrystals = 0;
+}
+
+Interface::Interface(int maxCrystal)
+{
+	crystalWidth = 20;
+	crystalHeight = 50;
+	crystalOffset = 5;
+	maxCrystals = maxCrystal;
 }
 
 
@@ -78,18 +87,23 @@ void Interface::draw()
 	glColor4f(1.0f, 1.0f, 0.1f, 1.0);
 	Util::glutBitmapString("Level: " + std::to_string(player->level), 490, 900);
 
-	int cw, ch, offset;
-	cw = 20;
-	ch = 50;
-	offset = 5;
-	for (int i = 0; i < player->crystals; i++)
+	for (int i = 0; i < maxCrystals; i++)
 	{
 		glBegin(GL_QUADS);
-		glColor4f(0, 1.0f, 1.0f, 1.0f);
+
+		if(i < player->crystals)
+			glColor4f(0, 1.0f, 1.0f, 1.0f);
+		else
+			glColor4f(0, 0.4f, 0.4f, 1.0f);
+
 		glVertex2f(975 - crystalWidth / 2	, crystalOffset*i + crystalHeight*i);
 		glVertex2f(975 - crystalWidth		, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
 
-		glColor4f(0, 0.8f, 0.8f, 1.0f);
+		if (i < player->crystals)
+			glColor4f(0, 0.7f, 0.7f, 1.0f);
+		else
+			glColor4f(0, 0.2f, 0.2f, 1.0f);
+
 		glVertex2f(975 - crystalWidth / 2	, crystalHeight + crystalOffset*i + crystalHeight*i);
 		glVertex2f(975						, crystalHeight / 2 + crystalOffset*i + crystalHeight*i);
 		glEnd();
