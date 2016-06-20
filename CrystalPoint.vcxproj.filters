@@ -166,6 +166,9 @@
     <None Include="worlds\small.json">
       <Filter>Source Files\json</Filter>
     </None>
+    <None Include="worlds\rock.json">
+      <Filter>Source Files\json</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="WAVE\test1.wav">

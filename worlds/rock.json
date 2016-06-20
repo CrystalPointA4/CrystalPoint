@@ -3,6 +3,7 @@
     "heightmap": "worlds/rockHeightmap.png",
     "texture": "worlds/rockStone2.png",
 	"skybox": "skyboxes/water/",
+	"music":  "WAVE/test2.wav",
     "object-templates": [
       {
         "color": 50,
