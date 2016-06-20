@@ -22,6 +22,9 @@
     <Filter Include="Source Files\json">
       <UniqueIdentifier>{9c655946-3f99-44ea-bc97-2817656954e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Serial">
+      <UniqueIdentifier>{98128574-9e08-4c28-9372-8d50b6e1a101}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -87,6 +90,21 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\serial\src\impl\list_ports\list_ports_win.cc">
+      <Filter>Source Files\Serial</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\serial\src\impl\win.cc">
+      <Filter>Source Files\Serial</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\serial\src\serial.cc">
+      <Filter>Source Files\Serial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -150,6 +168,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\serial\include\serial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\serial\include\v8stdint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\serial\include\impl\win.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
