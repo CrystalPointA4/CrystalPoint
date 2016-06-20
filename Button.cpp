@@ -22,6 +22,8 @@ Button::Button(const std::string & text, Vec2f position, float width, float heig
 
 Button::~Button()
 {
+	if (action != nullptr)
+		delete action;
 }
 
 void Button::draw(void)
