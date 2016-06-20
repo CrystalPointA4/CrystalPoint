@@ -37,7 +37,7 @@ HeightMap::HeightMap(const std::string &file, World* world)
 			Vec3f ca(0, heightAt(x, y + 1) - heightAt(x, y), 1);
 			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
 
-			if (valueAt(x, y, GREEN) > 0)
+			if (valueAt(x, y, GREEN) > 5)
 			{
 				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)).first, Vec3f(x, heightAt(x, y), y), Vec3f(0, 0, 0), 1, world->getObjectFromValue(valueAt(x, y, GREEN)).second));
 			}
