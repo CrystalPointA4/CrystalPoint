@@ -211,6 +211,8 @@ World::World(const std::string &fileName):
 World::~World()
 {
 	delete heightmap;
+	music->Stop();
+	delete music;
 	delete skybox;
 }
 
