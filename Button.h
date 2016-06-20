@@ -7,6 +7,8 @@ private:
 	float width, height;	
 	Vec3f background;
 	Vec2f planePosition;
+	bool cursorOnButton;
+	float alfa;
 public:
 	Button(const std::string &text, Vec2f position, float width, float height);
 	~Button();

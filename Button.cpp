@@ -9,6 +9,8 @@ Button::Button(const std::string & text, Vec2f position, float width, float heig
 	this->height = height;
 	this->planePosition = position;
 
+	cursorOnButton = false;
+	alfa = 0.5f;
 	background = Vec3f(10, 10, 10);
 	//foreground = Vec3f(255, 255, 255);
 	this->setColor(Vec3f(255, 255, 255));
@@ -24,7 +26,7 @@ Button::~Button()
 void Button::draw(void)
 {
 	
-	glColor4f(background.x/255.0f, background.y / 255.0f, background.z / 255.0f, 1.0f);
+	glColor4f(background.x/255.0f, background.y / 255.0f, background.z / 255.0f, alfa);
 
 	glBegin(GL_QUADS);
 	glVertex2f(planePosition.x, planePosition.y);
@@ -39,8 +41,16 @@ void Button::draw(void)
 }
 
 void Button::update(int x, int y)
-{
-	//Nothing
+{	
+	cursorOnButton =
+		(x > planePosition.x && x < planePosition.x + width) &&
+		y > planePosition.y && y < planePosition.y + height;
+
+
+	if (cursorOnButton)
+		alfa = 1.0f;
+	else
+		alfa = 0.5f;
 }
 
 void Button::setForeground(Vec3f color)
