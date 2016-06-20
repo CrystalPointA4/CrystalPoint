@@ -210,6 +210,7 @@
     <Media Include="WAVE\Sound.wav" />
     <Media Include="WAVE\test.wav" />
     <Media Include="WAVE\test2.wav" />
+    <Media Include="WAVE\test3.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

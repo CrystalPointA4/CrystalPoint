@@ -174,13 +174,16 @@
     <Media Include="WAVE\bond.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="WAVE\jpark.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
     <Media Include="WAVE\test.wav">
       <Filter>Resource Files</Filter>
     </Media>
     <Media Include="WAVE\test2.wav">
       <Filter>Resource Files</Filter>
     </Media>
-    <Media Include="WAVE\jpark.wav">
+    <Media Include="WAVE\test3.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
