@@ -25,6 +25,14 @@ void Menu::draw(void)
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_TEXTURE_2D);
 
+	glColor4f(60/255.0f, 60/255.0f, 60/255.0f, 0.8f);
+	glBegin(GL_QUADS);
+	glVertex2f(0,0);
+	glVertex2f(0, CrystalPoint::height);
+	glVertex2f(CrystalPoint::width, CrystalPoint::height);
+	glVertex2f(CrystalPoint::width, 0);
+	glEnd();
+
 
 	for (MenuElement* e : elements)
 	{

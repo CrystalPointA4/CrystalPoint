@@ -41,7 +41,9 @@ public:
 	float lastFrameTime;
 
 	static SoundSystem& GetSoundSystem() { return sound_system; }
+	
 
 private:
 	static SoundSystem sound_system;
+	void buildMenu();
 };

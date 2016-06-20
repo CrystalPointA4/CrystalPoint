@@ -14,6 +14,7 @@ Cursor::Cursor()
 
 Cursor::~Cursor()
 {
+	
 }
 
 Cursor* Cursor::getInstance(void)
