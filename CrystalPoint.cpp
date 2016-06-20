@@ -9,6 +9,7 @@
 #include "Menu.h"
 #include "Text.h"
 #include "Vector.h"
+#include "Button.h"
 
 int CrystalPoint::width = 0;
 int CrystalPoint::height = 0;
@@ -22,7 +23,8 @@ void CrystalPoint::init()
 	cursor = Cursor::getInstance();
 
 	menu = new Menu();
-	menu->AddMenuElement(new Text("Hello", Vec2f(10, 10)));
+	menu->AddMenuElement(new Text("Hello", Vec2f(10, 18)));
+	menu->AddMenuElement(new Button("Start", Vec2f(1920 / 2, 1080 / 2), 100, 50));
 
 	lastFrameTime = 0;
 
@@ -44,7 +46,7 @@ void CrystalPoint::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	worldhandler->draw();
+	//worldhandler->draw();
 	menu->draw();
 
 	glutSwapBuffers();

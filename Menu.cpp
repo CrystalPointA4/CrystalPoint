@@ -1,5 +1,6 @@
 #include <GL\freeglut.h>
 #include "Menu.h"
+#include "CrystalPoint.h"
 
 Menu::Menu()
 {
@@ -16,7 +17,7 @@ void Menu::draw(void)
 	//Switch view to Ortho
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, 1000, 1000, 0, -10, 10);
+	glOrtho(0, CrystalPoint::width, CrystalPoint::height, 0, -10, 10);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 

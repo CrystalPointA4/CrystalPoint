@@ -11,7 +11,7 @@ public:
 	MenuElement(Vec2f position);
 	~MenuElement();
 
-	virtual void draw(void) = 0;
-	virtual void update(int x, int y) = 0;
+	virtual void draw(void) {};
+	virtual void update(int x, int y) {};
 };
 

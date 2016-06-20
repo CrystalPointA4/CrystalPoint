@@ -9,6 +9,6 @@ private:
 	~Util();
 public:
 	static GLuint loadTexture(const std::string &filename);
-	static inline void glutBitmapString(const std::string str, int x, int y);
+	static void glutBitmapString(std::string str, int x, int y);
 };
 

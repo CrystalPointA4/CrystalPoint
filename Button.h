@@ -9,7 +9,7 @@ private:
 	Vec3f foreground;
 	Vec3f background;
 public:
-	Button(std::string &text, Vec2f position, float width, float height);
+	Button(const std::string &text, Vec2f position, float width, float height);
 	~Button();
 
 	void draw(void);
