@@ -1,8 +1,17 @@
 #include "Sound.h"
 
 #include <iostream>
+#ifdef WIN32
 #include <windows.h>
 #include <al.h>
+#else
+#include <AL/al.h>
+typedef unsigned long DWORD;
+typedef unsigned short WORD;
+typedef unsigned int UNINT32;
+typedef unsigned char BYTE;
+#endif
+
 
 Sound::Sound(const char* inWavPath, bool inLooping):
 	buffer_id(0),

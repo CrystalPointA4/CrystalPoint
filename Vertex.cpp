@@ -18,22 +18,22 @@ Vertex::~Vertex()
 {
 }
 
-Vertex Vertex::operator/(float &other)
+Vertex Vertex::operator/(const float &other) const
 {
 	return Vertex(x / other, y / other, z / other, normalX, normalY, normalZ, texX, texY);
 }
 
-Vertex Vertex::operator*(Vertex & other)
+Vertex Vertex::operator*(const Vertex & other) const
 {
 	return Vertex(x*other.x, y*other.y, z*other.z, normalX, normalY, normalZ, texX, texY);
 }
 
-Vertex Vertex::operator*(float & other)
+Vertex Vertex::operator*(const float & other) const
 {
 	return Vertex(x*other, y*other, z*other, normalX, normalY, normalZ, texX, texY);
 }
 
-Vertex Vertex::operator+(Vertex & other)
+Vertex Vertex::operator+(const Vertex & other) const
 {
 	return Vertex(x+other.x, y+other.y, z+other.z, normalX, normalY, normalZ, texX, texY);
 }
