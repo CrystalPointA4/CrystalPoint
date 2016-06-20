@@ -40,6 +40,7 @@ void CrystalPoint::draw()
 	glLoadIdentity();
 
 	worldhandler->draw();
+	player->draw();
 
 	//cursor->draw();
 
@@ -78,6 +79,32 @@ void CrystalPoint::update()
 	if (keyboardState.keys['s']) player->setPosition(270, deltaTime*speed, false);
 	if (keyboardState.keys['q']) player->setPosition(1, deltaTime*speed, true);
 	if (keyboardState.keys['e']) player->setPosition(-1, deltaTime*speed, true);
+
+	Controller *leftcontroller = controller.getLeftController();
+	if (leftcontroller != nullptr) {
+		Vec2f *leftControllerJoystick = &leftcontroller->joystick;
+
+		if (leftcontroller->joystickButton) {
+			controller.rumble(leftcontroller->controllerId, 100, 100);
+		}
+
+		if (leftControllerJoystick->y > 0.3) {
+			player->setPosition(270, leftControllerJoystick->y*deltaTime, false);
+		}
+		else if (leftControllerJoystick->y < -0.3) {
+			player->setPosition(90, leftControllerJoystick->y*-1 * deltaTime, false);
+		}
+		if (leftControllerJoystick->x > 0.3) {
+			player->setPosition(180, leftControllerJoystick->x*deltaTime, false);
+		}
+		else if (leftControllerJoystick->x < -0.3) {
+			player->setPosition(0, leftControllerJoystick->x*-1 * deltaTime, false);
+		}
+
+		player->leftWeapon->rotateWeapon(Vec3f(leftcontroller->ypr.y + 140, 0, -leftcontroller->ypr.z));
+
+	}
+
 
 	if (!worldhandler->isPlayerPositionValid())
 		player->position = oldPosition;

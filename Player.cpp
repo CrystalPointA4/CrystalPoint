@@ -12,6 +12,9 @@ Player::Player()
 	xp = 75;
 	level = 10;
 	crystals = 0;
+
+	leftWeapon = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj", 1, position, rotation, Vec3f(4.5, -8, -1), Vec3f(-2.0f, 6.0f, -2.1f), Vec2f(170, 70), Vec2f(20, -80));
+	leftWeapon->rotateWeapon(Vec3f(150, 0, 60));
 }
 
 Player* Player::getInstance()
@@ -42,6 +45,8 @@ void Player::setCamera()
 	glRotatef(rotation.y, 0, 1, 0);
 	glTranslatef(-position.x, -position.y, -position.z);
 
+	leftWeapon->rotate(rotation);
+
 }
 
 void Player::setPosition(float angle, float fac, bool height)
@@ -53,4 +58,10 @@ void Player::setPosition(float angle, float fac, bool height)
 		position.x -= (float)cos((rotation.y + angle) / 180 * M_PI) * fac;
 		position.z -= (float)sin((rotation.y + angle) / 180 * M_PI) * fac;
 	}
+
+	leftWeapon->move(position);
+}
+
+void Player::draw() {
+	leftWeapon->draw();
 }

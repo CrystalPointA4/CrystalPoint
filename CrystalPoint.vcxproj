@@ -178,6 +178,7 @@
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldHandler.cpp" />
   </ItemGroup>
@@ -206,6 +207,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Weapon.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldHandler.h" />
   </ItemGroup>

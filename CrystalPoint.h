@@ -5,6 +5,7 @@ class SoundSystem;
 class Player;
 #include "Vector.h"
 #include "SoundSystem.h"
+#include "ControllerHandler.h"
 
 class KeyboardState
 {
@@ -25,6 +26,7 @@ public:
 
 	WorldHandler* worldhandler;
 	Player* player;
+	ControllerHandler controller;
 
 	static int width, height;
 	KeyboardState keyboardState;
