@@ -1,11 +1,5 @@
 #include "SoundSystem.h"
 
-#include <cstdlib>
-#include <iostream>
-#include <windows.h>
-
-
-
 SoundSystem::SoundSystem():
 	device(nullptr),
 	context(nullptr)
