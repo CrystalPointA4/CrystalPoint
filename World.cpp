@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include "json.h"
 #include "Model.h"
-#include "CrystalPoint.h"
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -179,6 +178,7 @@ World::World(const std::string &fileName):
 	if (!v["world"]["music"].isNull())
 	{
 		music_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
+		music = CrystalPoint::GetSoundSystem().GetSound(music_id);
 	}
 
 	if (!v["portal"].isNull())
@@ -254,7 +254,6 @@ void World::draw()
 
 void World::update(float elapsedTime)
 {
-	Sound* music = CrystalPoint::GetSoundSystem().GetSound(music_id);
 	music->SetPos(player->position, Vec3f());
 
 	if (music->IsPlaying() ==  false)
