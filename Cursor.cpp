@@ -1,5 +1,5 @@
 #include "Cursor.h"
-#include <GL\freeglut.h>
+#include <GL/freeglut.h>
 #include <cmath>
 #include "CrystalPoint.h"
 
