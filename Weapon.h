@@ -12,7 +12,7 @@
 class Weapon {
 public:
     Weapon(std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
-           Vec3f offsetPlayer, Vec3f ankerPoint,
+           Vec3f offsetPlayer, Vec3f ankerPoint, Vec3f collisionPoint,
            Vec2f maxRotation, Vec2f minXRotation);
     ~Weapon();
 
@@ -26,7 +26,7 @@ public:
 
     float scale;
     Vec3f position, rotation, rotationWeapon;
-    Vec3f offsetPlayer, ankerPoint;
+    Vec3f offsetPlayer, ankerPoint, collisionPoint;
     Vec2f maxRotation, minRotation;
 };
 

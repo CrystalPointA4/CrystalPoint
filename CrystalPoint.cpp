@@ -151,6 +151,9 @@ void CrystalPoint::update()
 	}	
 	else
 	{
+        if (keyboardState.keys[27]){
+            glutExit();
+        }
 		menu->update();
 		cursor->update(cursor->mousePosition + mouseOffset);
 	}

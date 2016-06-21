@@ -2,6 +2,7 @@
 #include <cmath>
 #include "Enemy.h"
 #include "Model.h"
+#include "Player.h"
 #include <iostream>
 
 Enemy::Enemy(const std::string &fileName,
@@ -75,6 +76,10 @@ void Enemy::collide(const Entity * entity)
 	position.z = difference.z + entity->position.z;
 }
 
+void Enemy::hit(int damage){
+
+}
+
 void Enemy::update(float delta)
 {
 	music->SetPos(position, Vec3f());
@@ -117,5 +122,18 @@ void Enemy::update(float delta)
 
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}
-
+	Player *player = Player::getInstance();
+	if(inObject(player->leftWeapon->collisionPoint)){
+		if(!isHit){
+			isHit = true;
+			hit(player->leftWeapon->damage);
+		}
+	}else if(inObject(player->rightWeapon->collisionPoint)){
+		if(!isHit){
+			isHit = true;
+			hit(player->rightWeapon->damage);
+		}
+	}else{
+		isHit = false;
+	}
 }

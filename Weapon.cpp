@@ -10,7 +10,7 @@
 
 
 Weapon::Weapon(std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
-               Vec3f offsetPlayer, Vec3f ankerPoint,
+               Vec3f offsetPlayer, Vec3f ankerPoint, Vec3f collisionPoint,
                Vec2f maxRotation, Vec2f minRotation){
     weaponmodel = Model::load(modelFilename);
     rotate(rotation);
@@ -21,6 +21,7 @@ Weapon::Weapon(std::string modelFilename, float scale, Vec3f location, Vec2f rot
     this->ankerPoint = ankerPoint;
     this->maxRotation = maxRotation;
     this->minRotation = minRotation;
+    this->collisionPoint = collisionPoint;
 };
 
 Weapon::~Weapon(){
@@ -72,7 +73,7 @@ void Weapon::draw(){
 
         //Test code for finding anker point
         glColor3ub(255, 255, 0);
-        glTranslatef(ankerPoint.x, ankerPoint.y, ankerPoint.z);
+        glTranslatef(collisionPoint.x, collisionPoint.y, collisionPoint.z);
         glBegin(GL_LINES);
         glVertex2f(0, 4);
         glVertex2f(0, -4);
