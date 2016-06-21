@@ -72,12 +72,12 @@
     ]
   },
   "player": {
-    "startposition": [ 270, 5, 330 ]
+    "startposition": [ 325, 5,  495 ]
   },
   "objects": [ ],
   "portal": {     
     "file": "models/Teleporter/Teleporter.obj",
-    "pos": [ 10, 5, 10 ]    
+    "pos": [ 394, 5, 482 ]    
   },
   "enemies": [
     {

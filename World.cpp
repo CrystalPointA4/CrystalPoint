@@ -200,7 +200,7 @@ World::World(const std::string &fileName):
 				v["portal"]["rot"][1].asFloat(),
 				v["portal"]["rot"][0].asFloat());
 
-		float scale = 1.0f;
+		float scale = 2.0f;
 		if (!v["portal"]["scale"].isNull())
 			scale = !v["portal"]["scale"].asFloat();
 
@@ -288,7 +288,7 @@ void World::update(float elapsedTime)
 				continue;
 			}
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z);
 		
 		if(!remove)
 			count++;
