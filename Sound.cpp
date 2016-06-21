@@ -154,3 +154,14 @@ bool Sound::IsPlaying()
 	return (state == AL_PLAYING);
 }
 
+bool Sound::IsStopped()
+{
+	ALenum state;
+
+	alGetSourcei(source_id, AL_SOURCE_STATE, &state);
+
+	std::cout << "MUSIC STATE: " << state << std::endl;
+
+	return (state == AL_STOPPED);
+}
+

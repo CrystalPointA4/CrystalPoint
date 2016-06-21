@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include <string>
+#include "CrystalPoint.h"
 
 class Portal :
 	public Entity
@@ -12,8 +13,15 @@ public:
 		const float &scale);
 	~Portal();
 
+	bool enter(float deltaTime);
+
 	void collide();
 	int maxCrystals;
 	bool mayEnter;
+private:
+	int sound_id;
+	Sound* music;
+	bool started;
+	float delay;
 };
 

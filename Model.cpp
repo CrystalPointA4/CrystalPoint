@@ -369,6 +369,7 @@ void Model::unload(Model* model)
 			{
 				delete m.second.first;
 				cache.erase(cache.find(m.first));
+				break;
 			}
 
 		}
@@ -377,8 +378,5 @@ void Model::unload(Model* model)
 
 Model::~Model(void)
 {
-	for (auto m : cache)
-	{
-		delete m.second.first;
-	}
+
 }
