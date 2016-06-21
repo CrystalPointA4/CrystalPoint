@@ -1,4 +1,4 @@
-#include <GL\freeglut.h>
+#include <GL/freeglut.h>
 #include "Menu.h"
 #include "CrystalPoint.h"
 

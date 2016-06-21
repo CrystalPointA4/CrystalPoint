@@ -89,13 +89,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile />
-      <AdditionalIncludeDirectories>freeglut/include; openAL/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib/serial;freeglut/include; openAL/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>freeglut/lib; openAL/libs/Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>setupapi.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,13 +105,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile />
-      <AdditionalIncludeDirectories>freeglut/include;C:\Program Files (x86)\OpenAL 1.1 SDK\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib/serial;freeglut/include;C:\Program Files (x86)\OpenAL 1.1 SDK\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>freeglut/lib;C:\Program Files (x86)\OpenAL 1.1 SDK\libs\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>setupapi.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,7 +123,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile />
-      <AdditionalIncludeDirectories>freeglut/include; openAL/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib/serial;freeglut/include; openAL/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +131,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>freeglut/lib; openAL/libs/Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>setupapi.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,7 +143,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile />
-      <AdditionalIncludeDirectories>freeglut/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib/serial;freeglut/include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,10 +151,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>freeglut/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>setupapi.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="ControllerHandler.cpp" />
     <ClCompile Include="Crystal.cpp" />
     <ClCompile Include="CrystalPoint.cpp" />
     <ClCompile Include="Cursor.cpp" />
@@ -164,6 +167,9 @@
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="LevelObject.cpp" />
+    <ClCompile Include="lib\serial\src\impl\list_ports\list_ports_win.cc" />
+    <ClCompile Include="lib\serial\src\impl\win.cc" />
+    <ClCompile Include="lib\serial\src\serial.cc" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuElement.cpp" />
@@ -177,11 +183,14 @@
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="ControllerHandler.h" />
     <ClInclude Include="Crystal.h" />
     <ClInclude Include="CrystalPoint.h" />
     <ClInclude Include="Cursor.h" />
@@ -191,6 +200,9 @@
     <ClInclude Include="Interface.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="LevelObject.h" />
+    <ClInclude Include="lib\serial\include\impl\win.h" />
+    <ClInclude Include="lib\serial\include\serial.h" />
+    <ClInclude Include="lib\serial\include\v8stdint.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuElement.h" />
@@ -205,6 +217,7 @@
     <ClInclude Include="Util.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Weapon.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldHandler.h" />
   </ItemGroup>

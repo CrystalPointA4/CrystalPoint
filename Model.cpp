@@ -7,6 +7,7 @@
 #include <string>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 
 //Prototypes
 std::vector<std::string> split(std::string str, std::string sep);

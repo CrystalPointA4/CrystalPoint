@@ -7,6 +7,7 @@ class Cursor;
 class Menu;
 #include "Vector.h"
 #include "SoundSystem.h"
+#include "ControllerHandler.h"
 
 class KeyboardState
 {
@@ -27,8 +28,8 @@ public:
 
 	WorldHandler* worldhandler;
 	Player* player;
+	ControllerHandler controller;
 	Cursor* cursor;
-
 	Menu* menu;
 
 	static int width, height;
