@@ -12,7 +12,7 @@
 	"music": "WAVE/world1.wav"
   },
   "player": {
-    "startposition": [ 20, 5, 20 ]
+    "startposition": [ 20, 0, 20 ]
   },
   "objects": [ ],
   "portal": {     
@@ -25,12 +25,16 @@
       "pos": [ 20, 5, 10 ],
       "scale": 0.01,
       "music": "WAVE/ghostEnemy.wav"
+      "health": 10,
+      "damage": 2
     },
     {
       "file": "models/squid/Blooper.obj",
       "pos": [ 30, 10, 10 ],
       "scale": 0.01,
       "music": "WAVE/ghostEnemy.wav"
+      "health": 15,
+      "damage": 2
   }],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",

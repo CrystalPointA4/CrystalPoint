@@ -68,15 +68,18 @@ void CrystalPoint::update()
 		
 	if (state)
 	{
+		Player* player = Player::getInstance();
+
 		if (keyboardState.special[GLUT_KEY_LEFT] && !prevKeyboardState.special[GLUT_KEY_LEFT])
 			worldhandler->PreviousWorld();
 		if (keyboardState.special[GLUT_KEY_RIGHT] && !prevKeyboardState.special[GLUT_KEY_RIGHT])
 			worldhandler->NextWorld();
+		if (keyboardState.special[GLUT_KEY_UP] && !prevKeyboardState.special[GLUT_KEY_UP])
+			player->NextLeftWeapon();
+		if (keyboardState.special[GLUT_KEY_DOWN] && !prevKeyboardState.special[GLUT_KEY_DOWN])
+			player->PreviousLeftWeapon();
 		if (keyboardState.keys[27])
 			state = false;
-		
-
-		Player* player = Player::getInstance();
 
 		//testing code
 		if (keyboardState.keys['u'])
@@ -144,9 +147,13 @@ void CrystalPoint::update()
 		if (player->rotation.x < -90)
 			player->rotation.x = -90;
 
+		player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+
 		if (!worldhandler->isPlayerPositionValid())
 			player->position = oldPosition;
-		player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+		/*else if (player->position.y > oldPosition.y + 1.2)
+			player->position = oldPosition;
+		*/
 		worldhandler->update(deltaTime);
 	}	
 	else
