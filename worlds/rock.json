@@ -2,6 +2,7 @@
   "world": {
     "heightmap": "worlds/rockHeightmap.png",
     "texture": "worlds/rockStone.png",
+    "loadingscreen": "worlds/loadingScreen_picture.png",
 	"skybox": "skyboxes/water/",
 	"music": "WAVE/world1.wav",
     "object-templates": [
