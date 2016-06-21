@@ -48,3 +48,11 @@ Sound* SoundSystem::GetSound(unsigned int inID)
 		return nullptr;
 	return sounds[inID];
 }
+
+void SoundSystem::UnloadSound(unsigned int inID)
+{
+	if (inID > sounds.size())
+		return;
+	delete sounds[inID];
+	//sounds.erase(sounds.begin() + inID);
+}
