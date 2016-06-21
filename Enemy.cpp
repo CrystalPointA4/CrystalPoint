@@ -83,7 +83,11 @@ void Enemy::collide(const Entity * entity)
 }
 
 void Enemy::hit(int damage){
+	health -= damage;
+}
 
+bool Enemy::isDead(){
+	return health < 0;
 }
 
 void Enemy::update(float delta)
