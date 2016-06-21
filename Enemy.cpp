@@ -7,6 +7,8 @@
 
 Enemy::Enemy(const std::string &fileName,
 	const std::string &fileMusic,
+	float damage,
+	float health,
 	const Vec3f &position,
 	const Vec3f &rotation,
 	const float &scale)
@@ -19,7 +21,11 @@ Enemy::Enemy(const std::string &fileName,
 	target = position;
 	speed = 1;
 	radius = 10;
-	xp = 10;
+
+	xp = health;
+	this->health = health;
+	this->damage = damage;
+
 	hasTarget = false;
 	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound(fileMusic.c_str(), false);
 	music = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);

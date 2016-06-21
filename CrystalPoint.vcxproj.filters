@@ -238,6 +238,9 @@
     <None Include="worlds\rock.json">
       <Filter>Source Files\json</Filter>
     </None>
+    <None Include="weapons.json">
+      <Filter>Source Files\json</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Media Include="WAVE\Sound.wav">
