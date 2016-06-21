@@ -24,6 +24,8 @@ private:
 	Interface* interface;
 	Skybox* skybox;
 	Portal* portal;
+
+	bool nextworld;
 	
 	int music_id,maxCrystals,maxEnemies;
 
