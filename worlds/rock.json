@@ -1,9 +1,9 @@
 {
   "world": {
     "heightmap": "worlds/rockHeightmap.png",
-    "texture": "worlds/rockStone2.png",
+    "texture": "worlds/rockStone.png",
 	"skybox": "skyboxes/water/",
-	"music":  "WAVE/world1.wav",
+	"music": "WAVE/world1.wav",
     "object-templates": [
       {
         "color": 50,
@@ -13,9 +13,9 @@
       {
         "color": 60,
         "file": "models/Rocks/Rock6.obj",
-        "collision":  true
+        "collision": true
       },
-      {
+            {
         "color": 70,
         "file": "models/Rocks/Rock7.obj",
         "collision":  true
@@ -36,24 +36,14 @@
         "collision":  true
       },
       {
-        "color": 160,
-        "file": "models/Rocks/InvisBall.obj",
-        "collision":  true
-      },
-      {
         "color": 170,
         "file": "models/Rocks/DraakHoofd.obj",
-        "collision":  true
+        "collision":  false
       },
       {
         "color": 180,
         "file": "models/Rocks/DragonWall1.obj",
         "collision":  true
-      },
-      {
-        "color": 190,
-        "file": "models/Rocks/Cave1.obj",
-        "collision":  false
       },
       {
         "color": 200,
@@ -83,30 +73,231 @@
     ]
   },
   "player": {
-    "startposition": [ 20, 5, 20 ]
+    "startposition": [ 325, 5,  495 ]
   },
   "objects": [ ],
   "portal": {     
     "file": "models/Teleporter/Teleporter.obj",
-    "pos": [ 10, 5, 10 ]    
+    "pos": [ 394, 5, 482 ]    
   },
   "enemies": [
-  {
-	"file": "models/squid/Blooper.obj",
-	"pos": [ 30, 10, 10 ],
-	"scale": 0.01,
-	"music": "WAVE/ghostEnemy.wav"
-  }],
+    {
+      "file": "models/Enemies/Monkey.obj",
+      "pos": [ 80, 0, 670 ],
+      "scale": 1,
+      "music": "WAVE/ape.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/Monkey.obj",
+      "pos": [ 213, 0, 348 ],
+      "scale": 1.25,
+      "music": "WAVE/ape.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobRock.obj",
+      "pos": [437,0,600],
+      "scale": 0.75,
+      "music": "WAVE/letsRock.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobRock.obj",
+      "pos": [540,0,681],
+      "scale": 0.75,
+      "music": "WAVE/letsRock.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobRock.obj",
+      "pos": [594,0,575],
+      "scale": 0.75,
+      "music": "WAVE/letsRock.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobRock.obj",
+      "pos": [666,0,631],
+      "scale": 0.75,
+      "music": "WAVE/letsRock.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobRock.obj",
+      "pos": [ 603, 0, 562 ],
+      "scale": 0.75,
+      "music": "WAVE/letsRock.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
+      "pos": [217,0,547],
+      "scale": 1,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
+      "pos": [87,0,500],
+      "scale": 1,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
+      "pos": [59,0,470],
+      "scale": 1,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
+      "pos": [46,0,358],
+      "scale": 1,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
+      "pos": [66,0,254],
+      "scale": 1,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
+      "pos": [ 44, 0, 250 ],
+      "scale": 1,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [363,0,343],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [333,0,263],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [243,0,218],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [289,0,123],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [628,0,397],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [618,0,416],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [660,0,432],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [639,0,442],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    },
+        {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [613,0,447],
+      "scale": 1,
+      "music": "WAVE/hedge.wav",
+      "health": 10,
+      "damage": 1
+    }
+    
+
+  ],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
     "empty texture": "models/crystal/PickedUpCrystal.obj",
     "instances": [
       {
-        "pos": [ 31, 5, 33 ],
+        "pos": [630,0,430],
         "rot": [ 0, 0, 0 ]
       },
       {
-        "pos": [ 40, 5, 40 ],
+        "pos": [650,0,630],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [60,0,680],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [55,0,230],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [190,0,290],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [290,0,475],
+        "rot": [ 0, 0, 0 ]
+      },
+            {
+        "pos": [690,0,280],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [670,0,80],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [480,0,550],
         "rot": [ 0, 0, 0 ]
       }
     ]
