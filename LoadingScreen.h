@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <GL\freeglut.h>
 
 class LoadingScreen
 {
@@ -11,7 +12,11 @@ public:
 	void rise();
 	int points;
 
+	GLuint textureId;
+	void setTexture(const std::string fileName);
+
 private:
 	const std::string loading = "Loaded: ";
+
 };
 
