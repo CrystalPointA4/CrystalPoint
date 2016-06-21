@@ -18,6 +18,7 @@ Player::Player()
 	maxXp = 100;
 	level = 5;
 	crystals = 0;
+    hit = false;
 
 	loadWeapons();
 

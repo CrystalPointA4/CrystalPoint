@@ -125,6 +125,9 @@ void CrystalPoint::update()
                 leftcontroller->lastButton = leftcontroller->button;
                 controller.rumble(leftcontroller->controllerId, 100, 200);
                 player->NextLeftWeapon();
+            }else if(!leftcontroller->lastJoystickButton && leftcontroller->joystickButton){
+                leftcontroller->lastJoystickButton = leftcontroller->joystickButton;
+                player->hit = true;
             }
 
 		}
