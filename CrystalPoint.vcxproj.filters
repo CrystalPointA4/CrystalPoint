@@ -243,10 +243,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="WAVE\Sound.wav">
+    <Media Include="WAVE\Crystal.wav">
       <Filter>Resource Files</Filter>
     </Media>
-    <Media Include="WAVE\bond.wav">
+    <Media Include="WAVE\portal.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="WAVE\ghostEnemy.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="WAVE\world1.wav">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>

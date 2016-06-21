@@ -327,6 +327,7 @@ void World::update(float elapsedTime)
 
 	if (remove)
 	{
+		delete enemies[count];
 		player->XpUp(enemies[count]->xp);
 		enemies.erase(enemies.begin() + count);
 		player->HpUp(10);		

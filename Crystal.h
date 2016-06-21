@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include <string>
+#include "CrystalPoint.h"
 
 class Crystal :
 	public Entity
@@ -14,6 +15,8 @@ public:
 	void draw();
 	void collide();
 private:
+	int sound_id;
+	Sound* music;
 	Model* filled;
 	Model* empty;
 };
