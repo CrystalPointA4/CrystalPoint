@@ -133,16 +133,19 @@ void Enemy::update(float delta)
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}
 	Player *player = Player::getInstance();
-	if(inObject(player->leftWeapon->collisionPoint)){
+
+	if(inObject(player->position + player->leftWeapon->collisionPoint)){
 		if(!isHit){
 			isHit = true;
 			hit(player->leftWeapon->damage);
 		}
+		std::cout << "HIT1";
 	}else if(inObject(player->rightWeapon->collisionPoint)){
 		if(!isHit){
 			isHit = true;
 			hit(player->rightWeapon->damage);
 		}
+		std::cout << "HIT2";
 	}else{
 		isHit = false;
 	}

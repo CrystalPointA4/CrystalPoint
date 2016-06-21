@@ -28,6 +28,7 @@ public:
     Vec3f position, rotation, rotationWeapon;
     Vec3f offsetPlayer, ankerPoint, collisionPoint;
     Vec2f maxRotation, minRotation;
+
 };
 
 

@@ -320,7 +320,9 @@ void World::update(float elapsedTime)
 			}
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
-		
+		if(enemy->isDead()){
+			remove = true;
+		}
 		if(!remove)
 			count++;
 	}

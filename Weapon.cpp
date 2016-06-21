@@ -22,6 +22,8 @@ Weapon::Weapon(std::string modelFilename, float scale, Vec3f location, Vec2f rot
     this->maxRotation = maxRotation;
     this->minRotation = minRotation;
     this->collisionPoint = collisionPoint;
+
+    this->damage = 1;
 };
 
 Weapon::~Weapon(){
@@ -46,6 +48,22 @@ void Weapon::move(Vec3f location){
     position = location;
 }
 
+Vec3f multiply(float matrix[16], Vec3f vec)
+{
+    Vec3f result;
+
+    for(int i = 0; i < 4; i++)
+    {
+        for(int p = 0; p < 4; p++)
+        {
+            result[i] += matrix[i * p] * vec[p];
+        }
+    }
+
+    return result;
+}
+
+
 void Weapon::draw(){
     if (weaponmodel != nullptr)
     {
@@ -67,13 +85,27 @@ void Weapon::draw(){
         glRotatef(rotationWeapon.x, 1, 0, 0);
         glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
 
-        glScalef(scale, scale, scale);
 
         weaponmodel->draw();
 
-        //Test code for finding anker point
-        glColor3ub(255, 255, 0);
+        //Test code for finding anchor point
         glTranslatef(collisionPoint.x, collisionPoint.y, collisionPoint.z);
+
+        float matrix[16];
+        glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
+
+        Vec3f point = multiply(matrix, Vec3f(1,1,1));
+
+
+        glScalef(scale, scale, scale);
+
+
+        glPopMatrix();
+
+        glPushMatrix();
+
+        glTranslatef(point.x, point.y, point.z);
+        glColor3ub(255, 255, 0);
         glBegin(GL_LINES);
         glVertex2f(0, 4);
         glVertex2f(0, -4);
@@ -82,6 +114,8 @@ void Weapon::draw(){
         glEnd();
 
         glPopMatrix();
-
     }
 }
+
+
+
