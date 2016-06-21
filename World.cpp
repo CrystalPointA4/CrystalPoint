@@ -304,6 +304,9 @@ void World::update(float elapsedTime)
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{
+            if(player->hit)
+                enemy->hit(player->leftWeapon->damage);
+
 			for (auto e : entities)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
@@ -315,8 +318,7 @@ void World::update(float elapsedTime)
 
 			if (enemy->attack)
 			{
-				remove = true;
-				continue;
+                player->HpDown(enemy->damage / 4);
 			}
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
@@ -330,7 +332,7 @@ void World::update(float elapsedTime)
 	if (remove)
 	{
 		delete enemies[count];
-		player->XpUp(enemies[count]->xp);
+		player->XpUp(enemies[count]->xp*2);
 		enemies.erase(enemies.begin() + count);
 		player->HpUp(10);		
 	}
@@ -342,6 +344,8 @@ void World::update(float elapsedTime)
 		if (portal->enter(elapsedTime))
 			nextworld = true;
 	}
+
+    player->hit = false;
 		
 }
 
