@@ -314,8 +314,12 @@ void World::update(float elapsedTime)
 			count++;
 	}
 
-	if(remove)
+	if (remove)
+	{
+		delete enemies[count];
 		enemies.erase(enemies.begin() + count);
+	}
+
 
 	skybox->update(elapsedTime, maxEnemies - enemies.size(), maxEnemies);
 

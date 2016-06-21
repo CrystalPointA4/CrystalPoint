@@ -3,7 +3,7 @@
     "heightmap": "worlds/rockHeightmap.png",
     "texture": "worlds/rockStone2.png",
 	"skybox": "skyboxes/water/",
-	"music":  "WAVE/test2.wav",
+	"music":  "WAVE/world1.wav",
     "object-templates": [
       {
         "color": 50,
@@ -95,7 +95,7 @@
       "file": "models/squid/Blooper.obj",
       "pos": [ 20, 5, 10 ],
       "scale": 0.01,
-      "music": "WAVE/enemy.wav"
+      "music": "WAVE/ghostEnemy.wav"
   }],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
