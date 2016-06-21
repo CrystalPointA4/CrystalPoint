@@ -16,6 +16,7 @@ public:
 	bool hasTarget;
 	Vec3f target;
 	float speed,radius;
+	int xp;
 	bool attack;
 
 	void update(float);

@@ -54,5 +54,5 @@ void SoundSystem::UnloadSound(unsigned int inID)
 	if (inID > sounds.size())
 		return;
 	delete sounds[inID];
-//	sounds.erase[inID];
+	//sounds.erase(sounds.begin() + inID);
 }

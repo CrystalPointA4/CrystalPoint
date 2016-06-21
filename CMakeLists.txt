@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(CrystalPoint)
 
-file(GLOB SOURCE_FILES
+file(GLOB_RECURSE SOURCE_FILES
         "*.h"
         "*.cpp"
+        "*.cc"
         )
 
 add_executable(CrystalPoint ${SOURCE_FILES})

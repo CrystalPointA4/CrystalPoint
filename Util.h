@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <GL\freeglut.h>
+#include <GL/freeglut.h>
 
 class Util
 {
