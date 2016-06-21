@@ -10,14 +10,16 @@
 
 World::World(const std::string &fileName)
 {
-	ls.draw();
+	ls.rise();
 	nextworld = false;
 
 	//Store player instance
 	player = Player::getInstance();
+	ls.rise();
 
 	//Create the interface
 	interface = new Interface();
+	ls.rise();
 
 	//Open world json file
 	std::ifstream file(fileName);
@@ -26,6 +28,7 @@ World::World(const std::string &fileName)
 
 	json::Value v = json::readJson(file);
 	file.close();
+	ls.rise();
 
 	//Check file
 	if(v["world"].isNull() || v["world"]["heightmap"].isNull() || v["world"]["skybox"].isNull())
@@ -50,23 +53,28 @@ World::World(const std::string &fileName)
 			cancollide = objt["collision"].asBool();
 
 		objecttemplates.push_back(std::pair<int, std::pair<std::string, bool>>(objt["color"], std::pair<std::string, bool>(objt["file"], cancollide)));
+		ls.rise();
 	}
 
 	//Generate heightmap for this world
 	heightmap = new HeightMap(v["world"]["heightmap"].asString(), this);
+	ls.rise();
 
 	//Load skybox
 	skybox = new Skybox(15000.0f, v["world"]["skybox"].asString());
 	skybox->init();
+	ls.rise();
 
 	//Map different texture to heightmap if available
 	if(!v["world"]["texture"].isNull())
 		heightmap->SetTexture(v["world"]["texture"].asString());
+	ls.rise();
 
 	//Set player starting position
 	player->position.x = v["player"]["startposition"][0].asFloat();
 	player->position.z = v["player"]["startposition"][2].asFloat();
 	player->position.y = heightmap->GetHeight(player->position.x, player->position.z);
+	ls.rise();
 
 	//Load and place objects into world
 	for (auto object : v["objects"])
@@ -99,6 +107,7 @@ World::World(const std::string &fileName)
 		position.y = getHeight(position.x, position.z);
 
 		entities.push_back(new LevelObject(object["file"].asString(), position, rotation, scale, hasCollision));
+		ls.rise();
 	}
 
 	maxEnemies = 0;
@@ -141,6 +150,7 @@ World::World(const std::string &fileName)
 
 		maxEnemies++;
 		enemies.push_back(new Enemy(e["file"].asString(), e["music"].asString(), e["damage"].asFloat(), e["health"].asFloat(), position, rotation, scale));
+		ls.rise();
 	}
 	maxCrystals = 0;
 	if (!v["crystal"].isNull())
@@ -184,6 +194,7 @@ World::World(const std::string &fileName)
 				Crystal *c = new Crystal(filled, empty, position, rotation, scale);
 								
 				entities.push_back(c);
+				ls.rise();
 			}
 			interface->maxCrystals = maxCrystals;
 		}
@@ -193,6 +204,7 @@ World::World(const std::string &fileName)
 	{
 		sound_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
 		music = CrystalPoint::GetSoundSystem().GetSound(sound_id);
+		ls.rise();
 	}
 
 	if (!v["portal"].isNull())
@@ -218,6 +230,7 @@ World::World(const std::string &fileName)
 		portal = new Portal(v["portal"]["file"], pos, rot, scale);
 		entities.push_back(portal);
 		portal->maxCrystals = maxCrystals;
+		ls.rise();
 	}
 }
 

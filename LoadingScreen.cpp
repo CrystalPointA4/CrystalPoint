@@ -2,9 +2,11 @@
 #include <GL\freeglut.h>
 #include "CrystalPoint.h"
 #include "Util.h"
+#include <ostream>
 
 LoadingScreen::LoadingScreen()
 {
+	points = 0;
 }
 
 
@@ -33,14 +35,24 @@ void LoadingScreen::draw()
 	glVertex2f(CrystalPoint::width, 0);
 	glEnd();
 	
-		glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
+	glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
 	
-		Util::glutBitmapString(loading,
-			CrystalPoint::width / 2 - Util::glutTextWidth(loading),
-			CrystalPoint::height / 2 - 7);
+	std::ostringstream oss;
+
+	oss << loading << points << std::endl;
+
+	Util::glutBitmapString(oss.str(),
+		CrystalPoint::width / 2 - Util::glutTextWidth(oss.str()),
+		CrystalPoint::height / 2 - 7);
 	
 		
 	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 	glutSwapBuffers();
+}
+
+void LoadingScreen::rise()
+{
+	points++;
+	draw();
 }

@@ -8,8 +8,10 @@ public:
 	~LoadingScreen();
 
 	void draw();
+	void rise();
+	int points;
 
 private:
-	const std::string loading = "Loading...";
+	const std::string loading = "Loaded: ";
 };
 
