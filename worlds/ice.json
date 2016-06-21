@@ -41,14 +41,14 @@
         "collision": true
       },
       {
-        "color": 214,
-        "file": "models/trees/tree5.obj",
-        "collision": true
-      },
-      {
         "color": 215,
         "file": "models/grass/grass.obj",
         "collision": false
+      },
+      {
+        "color": 214,
+        "file": "models/trees/tree5.obj",
+        "collision": true
       }
     ]
   },
