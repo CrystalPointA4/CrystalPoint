@@ -10,6 +10,7 @@
 
 World::World(const std::string &fileName)
 {
+	ls.draw();
 	nextworld = false;
 
 	//Store player instance
