@@ -222,6 +222,7 @@
     <ClInclude Include="WorldHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="weapons.json" />
     <None Include="worlds\fire.json" />
     <None Include="worlds\ice.json" />
     <None Include="worlds\rock.json" />

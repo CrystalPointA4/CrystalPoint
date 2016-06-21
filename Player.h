@@ -1,12 +1,23 @@
 #pragma once
 #include "Vector.h"
 #include "Weapon.h"
+#include "json.h"
+
+#include <vector>
 
 class Player
 {
 private:
 	static Player* instance;
 	void levelUp();
+
+	std::vector<Weapon*> leftweapons;
+	std::vector<Weapon*> rightweapons;
+	void loadWeapons(void);
+
+	int currentrightweapon;
+	int currentleftweapon;
+
 public:
 	Player();
 	~Player();
@@ -34,4 +45,9 @@ public:
 	void HpUp(int);
 	void HpDown(int);
 	void XpUp(int);
+
+	void PreviousRightWeapon(void);
+	void NextRightWeapon(void);
+	void PreviousLeftWeapon(void);
+	void NextLeftWeapon(void);
 };

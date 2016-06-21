@@ -9,18 +9,25 @@
 #include <cmath>
 
 
-Weapon::Weapon(std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
+Weapon::Weapon(std::string name, int damage, Element e, std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
                Vec3f offsetPlayer, Vec3f ankerPoint,
-               Vec2f maxRotation, Vec2f minRotation){
+               Vec2f maxRotation, Vec2f minRotation,
+			   Vec3f collision){
+
     weaponmodel = Model::load(modelFilename);
     rotate(rotation);
     move(location);
     this->scale = scale;
 
+	this->name = name;
+	this->damage = damage;
+	this->element = e;
+
     this->offsetPlayer = offsetPlayer;
     this->ankerPoint = ankerPoint;
     this->maxRotation = maxRotation;
     this->minRotation = minRotation;
+	this->collision = collision;
 };
 
 Weapon::~Weapon(){

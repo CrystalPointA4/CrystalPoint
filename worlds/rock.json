@@ -83,7 +83,7 @@
     ]
   },
   "player": {
-    "startposition": [ 1, 5, 20 ]
+    "startposition": [ 20, 5, 20 ]
   },
   "objects": [ ],
   "portal": {     
