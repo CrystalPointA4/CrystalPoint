@@ -27,6 +27,7 @@ Enemy::Enemy(const std::string &fileName,
 
 Enemy::~Enemy()
 {
+	music->Stop();
 	CrystalPoint::GetSoundSystem().UnloadSound(hit_sound_id);
 	if (model)
 		Model::unload(model);
@@ -106,8 +107,6 @@ void Enemy::update(float delta)
 		{	
 			attack = true;
 		}
-
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}
-
 }

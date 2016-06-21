@@ -92,10 +92,10 @@
   },
   "enemies": [
   {
-      "file": "models/squid/Blooper.obj",
-      "pos": [ 20, 5, 10 ],
-      "scale": 0.01,
-      "music": "WAVE/ghostEnemy.wav"
+	"file": "models/squid/Blooper.obj",
+	"pos": [ 30, 10, 10 ],
+	"scale": 0.01,
+	"music": "WAVE/ghostEnemy.wav"
   }],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
