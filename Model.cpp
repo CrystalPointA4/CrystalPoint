@@ -1,6 +1,5 @@
 #include "Model.h"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 #include <iostream>
@@ -8,6 +7,7 @@
 #include <string>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 
 //Prototypes
 std::vector<std::string> split(std::string str, std::string sep);
@@ -138,7 +138,7 @@ Model::Model(std::string fileName)
 		radius = fmax(radius, (center.x - v.x) * (center.x - v.x) + (center.z - v.z) * (center.z - v.z));
 	radius = sqrt(radius);
 
-	for each(ObjGroup *group in groups)
+	for (ObjGroup *group : groups)
 	{
 		Optimise(group);
 	}
@@ -148,7 +148,7 @@ void Model::Optimise(ObjGroup *t)
 {
 	for (Face &face : t->faces)
 	{
-		for each(auto &vertex in face.vertices)
+		for (auto &vertex : face.vertices)
 		{
 			t->VertexArray.push_back(Vertex(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z,
 				normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z,

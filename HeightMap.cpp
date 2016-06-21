@@ -1,6 +1,6 @@
 #include "HeightMap.h"
 #include "stb_image.h"
-#include "vector.h"
+#include "Vector.h"
 
 #include "LevelObject.h"
 
@@ -127,6 +127,7 @@ float HeightMap::GetHeight(float x, float y)
 	float labda3 = 1 - labda1 - labda2;
 
 	Vertex z = a * labda1 + b * labda2 + c * labda3;
+//	Vertex z = (a * labda1) + (b * labda2) ;
 
 	return z.y;
 }

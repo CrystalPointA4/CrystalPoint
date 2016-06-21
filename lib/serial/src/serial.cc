@@ -35,40 +35,40 @@ using serial::flowcontrol_t;
 
 class Serial::ScopedReadLock {
 public:
-  ScopedReadLock(SerialImpl *pimpl) : pimpl_(pimpl) {
-    this->pimpl_->readLock();
-  }
-  ~ScopedReadLock() {
-    this->pimpl_->readUnlock();
-  }
+    ScopedReadLock(SerialImpl *pimpl) : pimpl_(pimpl) {
+      this->pimpl_->readLock();
+    }
+    ~ScopedReadLock() {
+      this->pimpl_->readUnlock();
+    }
 private:
-  // Disable copy constructors
-  ScopedReadLock(const ScopedReadLock&);
-  const ScopedReadLock& operator=(ScopedReadLock);
+    // Disable copy constructors
+    ScopedReadLock(const ScopedReadLock&);
+    const ScopedReadLock& operator=(ScopedReadLock);
 
-  SerialImpl *pimpl_;
+    SerialImpl *pimpl_;
 };
 
 class Serial::ScopedWriteLock {
 public:
-  ScopedWriteLock(SerialImpl *pimpl) : pimpl_(pimpl) {
-    this->pimpl_->writeLock();
-  }
-  ~ScopedWriteLock() {
-    this->pimpl_->writeUnlock();
-  }
+    ScopedWriteLock(SerialImpl *pimpl) : pimpl_(pimpl) {
+      this->pimpl_->writeLock();
+    }
+    ~ScopedWriteLock() {
+      this->pimpl_->writeUnlock();
+    }
 private:
-  // Disable copy constructors
-  ScopedWriteLock(const ScopedWriteLock&);
-  const ScopedWriteLock& operator=(ScopedWriteLock);
-  SerialImpl *pimpl_;
+    // Disable copy constructors
+    ScopedWriteLock(const ScopedWriteLock&);
+    const ScopedWriteLock& operator=(ScopedWriteLock);
+    SerialImpl *pimpl_;
 };
 
 Serial::Serial (const string &port, uint32_t baudrate, serial::Timeout timeout,
                 bytesize_t bytesize, parity_t parity, stopbits_t stopbits,
                 flowcontrol_t flowcontrol)
- : pimpl_(new SerialImpl (port, baudrate, bytesize, parity,
-                                           stopbits, flowcontrol))
+        : pimpl_(new SerialImpl (port, baudrate, bytesize, parity,
+                                 stopbits, flowcontrol))
 {
   pimpl_->setTimeout(timeout);
 }
@@ -164,7 +164,7 @@ Serial::readline (string &buffer, size_t size, string eol)
   ScopedReadLock lock(this->pimpl_);
   size_t eol_len = eol.length ();
   uint8_t *buffer_ = static_cast<uint8_t*>
-                              (alloca (size * sizeof (uint8_t)));
+  (alloca (size * sizeof (uint8_t)));
   size_t read_so_far = 0;
   while (true)
   {
@@ -174,7 +174,7 @@ Serial::readline (string &buffer, size_t size, string eol)
       break; // Timeout occured on reading 1 byte
     }
     if (string (reinterpret_cast<const char*>
-         (buffer_ + read_so_far - eol_len), eol_len) == eol) {
+                (buffer_ + read_so_far - eol_len), eol_len) == eol) {
       break; // EOL found
     }
     if (read_so_far == size) {
@@ -200,7 +200,7 @@ Serial::readlines (size_t size, string eol)
   std::vector<std::string> lines;
   size_t eol_len = eol.length ();
   uint8_t *buffer_ = static_cast<uint8_t*>
-    (alloca (size * sizeof (uint8_t)));
+  (alloca (size * sizeof (uint8_t)));
   size_t read_so_far = 0;
   size_t start_of_line = 0;
   while (read_so_far < size) {
@@ -209,24 +209,24 @@ Serial::readlines (size_t size, string eol)
     if (bytes_read == 0) {
       if (start_of_line != read_so_far) {
         lines.push_back (
-          string (reinterpret_cast<const char*> (buffer_ + start_of_line),
-            read_so_far - start_of_line));
+                string (reinterpret_cast<const char*> (buffer_ + start_of_line),
+                        read_so_far - start_of_line));
       }
       break; // Timeout occured on reading 1 byte
     }
     if (string (reinterpret_cast<const char*>
-         (buffer_ + read_so_far - eol_len), eol_len) == eol) {
+                (buffer_ + read_so_far - eol_len), eol_len) == eol) {
       // EOL found
       lines.push_back(
-        string(reinterpret_cast<const char*> (buffer_ + start_of_line),
-          read_so_far - start_of_line));
+              string(reinterpret_cast<const char*> (buffer_ + start_of_line),
+                     read_so_far - start_of_line));
       start_of_line = read_so_far;
     }
     if (read_so_far == size) {
       if (start_of_line != read_so_far) {
         lines.push_back(
-          string(reinterpret_cast<const char*> (buffer_ + start_of_line),
-            read_so_far - start_of_line));
+                string(reinterpret_cast<const char*> (buffer_ + start_of_line),
+                       read_so_far - start_of_line));
       }
       break; // Reached the maximum read length
     }

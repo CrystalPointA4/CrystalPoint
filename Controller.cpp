@@ -8,6 +8,7 @@ Controller::Controller(int controllerId) {
     this->controllerId = controllerId;
     this->ypr = Vec3f();
     this->joystick = Vec2f();
+    this->setConnected(false);
     this->setConnected(true);
 }
 

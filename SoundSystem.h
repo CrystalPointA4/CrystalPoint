@@ -1,9 +1,16 @@
 #pragma once
 
 #include <vector>
+
+#ifdef WIN32
 #include <al.h>
 #include <alc.h>
-#include "vector.h"
+#else
+#include <AL/al.h>
+#include <AL/alc.h>
+#endif
+
+#include "Vector.h"
 #include "Sound.h"
 
 

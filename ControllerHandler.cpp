@@ -4,9 +4,6 @@
 
 #include "ControllerHandler.h"
 #include <iostream>
-#include <stdlib.h>
-#include <chrono>
-#include <thread>
 
 /*
  * String split helper functions
@@ -30,10 +27,24 @@ ControllerHandler::ControllerHandler(){
 };
 
 Controller* ControllerHandler::getLeftController(void){
-    for (auto e : controllers)
+    for (int i = 0; i < 4; i++)
     {
-        if(e != nullptr && e->isConnected()){
-            return e;
+        if(controllers[i] != nullptr && controllers[i]->isConnected()){
+            return controllers[i];
+        }
+    }
+    return nullptr;
+}
+
+Controller* ControllerHandler::getRightController(void){
+    bool c1found = false;
+    for (int i = 0; i < 4; i++)
+    {
+        if(controllers[i] != nullptr && controllers[i]->isConnected()){
+            if(c1found){
+                return controllers[i];
+            }
+            c1found = true;
         }
     }
     return nullptr;
@@ -107,8 +118,8 @@ void ControllerHandler::commandControllerData(std::vector<std::string> data) {
         c->ypr.y = std::stoi(data[6])/100.0f;
         c->ypr.z = std::stoi(data[7])/100.0f;
 
-        c->joystick.x = std::stoi(data[2])/3000.0f;
-        c->joystick.y = std::stoi(data[3])/3000.0f;
+        c->joystick.x = std::stoi(data[2])/2000.0f;
+        c->joystick.y = std::stoi(data[3])/2000.0f;
         c->joystickButton = !(data[4] == "0");
 
         c->magnetSwitch = !(data[9] == "0");
@@ -128,9 +139,10 @@ void ControllerHandler::commandControllerEvent(std::vector<std::string> data) {
 }
 
 void ControllerHandler::commandControllerList(std::vector<std::string> data) {
-   for(unsigned int i = 1; i < data.size() -1; i++){
+   for(unsigned int i = 1; i < data.size() - 1; i++){
        int controllerId = std::stoi(data[i]);
        controllers[controllerId] = new Controller(controllerId);
+       rumble(controllerId, 100, 100);
    }
    if(basestationFound)
 	 baseStation->write("start\n");

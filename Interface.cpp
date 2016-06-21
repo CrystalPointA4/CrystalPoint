@@ -1,13 +1,11 @@
 #include "Interface.h"
-#include <GL\freeglut.h>
+#include <GL/freeglut.h>
 #include "CrystalPoint.h"
 
 #include <string>
 
 #include "Player.h"
-
-//Prototype
-void glutBitmapString(std::string str, int x, int y);
+#include "Util.h"
 
 Interface::Interface()
 {
@@ -87,7 +85,7 @@ void Interface::draw()
 
 	//Text: level
 	glColor4f(1.0f, 1.0f, 0.1f, 1.0);
-	glutBitmapString("Level: " + std::to_string(player->level), 490, 900);
+	Util::glutBitmapString("Level: " + std::to_string(player->level), 490, 900);
 
 	for (int i = 0; i < maxCrystals; i++)
 	{
@@ -118,13 +116,4 @@ void Interface::draw()
 void Interface::update(float deltaTime)
 {
 
-}
-
-void glutBitmapString(std::string str, int x, int y)
-{
-	glRasterPos2f(x, y);
-	for (int i = 0; i < str.size(); i++)
-	{
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, str[i]);
-	}
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vector.h"
+#include "Vector.h"
 
 class Sound
 {
@@ -13,6 +13,7 @@ public:
 	void Play();
 	void Pause();
 	void Stop();
+	bool IsPlaying();
 
 private:
 	unsigned int buffer_id;

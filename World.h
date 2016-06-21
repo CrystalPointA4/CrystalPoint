@@ -8,6 +8,7 @@
 #include "Interface.h"
 #include "Crystal.h"
 #include "Skybox.h"
+#include "CrystalPoint.h"
 #include "Portal.h"
 
 class Entity;
@@ -16,6 +17,7 @@ class World
 {
 private:
 	std::vector<std::pair<int, std::pair<std::string, bool>>> objecttemplates;
+	Sound* music;
 
 	Player* player;
 	HeightMap* heightmap;

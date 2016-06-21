@@ -1,6 +1,7 @@
 #include "cmath"
 #include <GL/freeglut.h>
 
+#include "Util.h"
 #include "stb_image.h"
 #include "Skybox.h"
 #include <string>
@@ -25,12 +26,12 @@ Skybox::~Skybox()
 
 void Skybox::init() 
 {
-	skybox[SKY_LEFT] = loadTexture(folder + "left.png");
-	skybox[SKY_BACK] = loadTexture(folder + "back.png");
-	skybox[SKY_RIGHT] = loadTexture(folder + "right.png");
-	skybox[SKY_FRONT] = loadTexture(folder + "front.png");
-	skybox[SKY_TOP] = loadTexture(folder + "top.png");
-	skybox[SKY_BOTTOM] = loadTexture(folder + "bottom.png");
+	skybox[SKY_LEFT] = Util::loadTexture(folder + "left.png");
+	skybox[SKY_BACK] = Util::loadTexture(folder + "back.png");
+	skybox[SKY_RIGHT] = Util::loadTexture(folder + "right.png");
+	skybox[SKY_FRONT] = Util::loadTexture(folder + "front.png");
+	skybox[SKY_TOP] = Util::loadTexture(folder + "top.png");
+	skybox[SKY_BOTTOM] = Util::loadTexture(folder + "bottom.png");
 }
 
 void Skybox::draw()

@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include "json.h"
 #include "Model.h"
-#include "CrystalPoint.h"
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -179,9 +178,7 @@ World::World(const std::string &fileName):
 	if (!v["world"]["music"].isNull())
 	{
 		music_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
-		Sound* music = CrystalPoint::GetSoundSystem().GetSound(music_id);
-		music->SetPos(Vec3f(), Vec3f());
-		music->Play();
+		music = CrystalPoint::GetSoundSystem().GetSound(music_id);
 	}
 
 	if (!v["portal"].isNull())
@@ -214,7 +211,10 @@ World::World(const std::string &fileName):
 World::~World()
 {
 	delete heightmap;
+	music->Stop();
+	delete music;
 	delete skybox;
+	delete portal;
 }
 
 std::pair<std::string, bool> World::getObjectFromValue(int val)
@@ -235,7 +235,7 @@ float World::getHeight(float x, float y)
 
 void World::draw()
 {
-	player->setCamera();
+
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -243,6 +243,9 @@ void World::draw()
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
 	skybox->draw();
+
+	player->setCamera();
+	player->draw();
 
 	heightmap->Draw();
 
@@ -257,6 +260,12 @@ void World::draw()
 
 void World::update(float elapsedTime)
 {
+	music->SetPos(player->position, Vec3f());
+
+	if (music->IsPlaying() ==  false)
+	{
+		music->Play();
+	}
 	for (auto &entity : entities)
 		entity->update(elapsedTime);
 

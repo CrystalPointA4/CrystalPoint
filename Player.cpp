@@ -15,6 +15,9 @@ Player::Player()
 
 	leftWeapon = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj", 1, position, rotation, Vec3f(4.5, -8, -1), Vec3f(-2.0f, 6.0f, -2.1f), Vec2f(170, 70), Vec2f(20, -80));
 	leftWeapon->rotateWeapon(Vec3f(150, 0, 60));
+
+	rightWeapon = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj", 1, position, rotation, Vec3f(3, -8, -1), Vec3f(-2.0f, 6.0f, -2.1f), Vec2f(170, 70), Vec2f(20, -80));
+	rightWeapon->rotateWeapon(Vec3f(150, 0, 60));
 }
 
 Player* Player::getInstance()
@@ -64,4 +67,5 @@ void Player::setPosition(float angle, float fac, bool height)
 
 void Player::draw() {
 	leftWeapon->draw();
+	rightWeapon->draw();
 }
