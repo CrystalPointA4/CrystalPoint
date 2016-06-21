@@ -30,7 +30,7 @@ Enemy::~Enemy()
 	if (model)
 		Model::unload(model);
 
-	delete music;
+	CrystalPoint::GetSoundSystem().UnloadSound(hit_sound_id);
 }
 
 void Enemy::draw()

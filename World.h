@@ -27,7 +27,7 @@ private:
 
 	bool nextworld;
 	
-	int music_id,maxCrystals,maxEnemies;
+	int sound_id,maxCrystals,maxEnemies;
 
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;

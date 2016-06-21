@@ -8,8 +8,7 @@
 #include <algorithm>
 #include "WorldHandler.h"
 
-World::World(const std::string &fileName):
-	music_id(-1)
+World::World(const std::string &fileName)
 {
 	nextworld = false;
 
@@ -183,8 +182,8 @@ World::World(const std::string &fileName):
 
 	if (!v["world"]["music"].isNull())
 	{
-		music_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
-		music = CrystalPoint::GetSoundSystem().GetSound(music_id);
+		sound_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
+		music = CrystalPoint::GetSoundSystem().GetSound(sound_id);
 	}
 
 	if (!v["portal"].isNull())
@@ -218,7 +217,7 @@ World::~World()
 {
 	delete heightmap;
 	music->Stop();
-	delete music;
+	CrystalPoint::GetSoundSystem().UnloadSound(sound_id);
 	delete skybox;	
 	delete portal;
 }
