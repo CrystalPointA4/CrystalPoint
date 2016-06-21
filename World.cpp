@@ -11,6 +11,8 @@
 World::World(const std::string &fileName):
 	music_id(-1)
 {
+	nextworld = false;
+
 	//Store player instance
 	player = Player::getInstance();
 
@@ -121,12 +123,16 @@ World::World(const std::string &fileName):
 		if (e["file"].isNull())
 			std::cout << "Invalid world file: enemies file - " << fileName << "\n";
 
+		//Music
+		if (e["music"].isNull())
+			std::cout << "Invalid world file: enemies music - " << fileName << "\n";
+
 		//Create
 		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
 		position.y = getHeight(position.x, position.z) + 2.0f;
 
 		maxEnemies++;
-		enemies.push_back(new Enemy(e["file"].asString(), position, rotation, scale));
+		enemies.push_back(new Enemy(e["file"].asString(), e["music"].asString(), position, rotation, scale));
 	}
 	maxCrystals = 0;
 	if (!v["crystal"].isNull())
@@ -213,7 +219,7 @@ World::~World()
 	delete heightmap;
 	music->Stop();
 	delete music;
-	delete skybox;
+	delete skybox;	
 	delete portal;
 }
 
@@ -239,7 +245,10 @@ void World::draw()
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-	float lightAmbient[4] = { 0.2, 0.2, 0.2, 1 };
+
+	GLfloat lightAmbient[] = { 0.05, 0.05, 0.05, 0 };
+	GLfloat light_diffuse[] = { 0.9, 0.9, 0.9, 0 };
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
 	skybox->draw();
@@ -257,6 +266,12 @@ void World::draw()
 
 void World::update(float elapsedTime)
 {
+	if (nextworld)
+	{
+		WorldHandler::getInstance()->NextWorld();
+		return;
+	}
+
 	music->SetPos(player->position, Vec3f());
 
 	if (music->IsPlaying() ==  false)
@@ -310,7 +325,11 @@ void World::update(float elapsedTime)
 	skybox->update(elapsedTime, maxEnemies - enemies.size(), maxEnemies);
 
 	if (portal->mayEnter)
-		WorldHandler::getInstance()->NextWorld();
+	{
+		if (portal->enter(elapsedTime))
+			nextworld = true;
+	}
+		
 }
 
 void World::addLevelObject(LevelObject* obj)

@@ -8,7 +8,7 @@
 class Enemy : public Entity
 {
 public:
-	Enemy(const std::string &fileName,const Vec3f &position,Vec3f &rotation,const float &scale);
+	Enemy(const std::string &fileName, const std::string &fileMusic, const Vec3f &position, const Vec3f &rotation, const float &scale);
 	~Enemy();
 
 	Sound* music;

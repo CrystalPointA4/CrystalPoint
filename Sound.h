@@ -14,6 +14,7 @@ public:
 	void Pause();
 	void Stop();
 	bool IsPlaying();
+	bool IsStopped();
 
 private:
 	unsigned int buffer_id;

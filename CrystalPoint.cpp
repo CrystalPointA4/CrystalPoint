@@ -17,8 +17,6 @@ int CrystalPoint::height = 0;
 SoundSystem CrystalPoint::sound_system;
 bool state = false;
 
-
-
 void CrystalPoint::init()
 {
 	player = Player::getInstance();
@@ -51,9 +49,9 @@ void CrystalPoint::draw()
 
 	
 	worldhandler->draw();
+	
 	if(!state)
 		menu->draw();
-
 	glutSwapBuffers();
 }
 
@@ -64,6 +62,9 @@ void CrystalPoint::update()
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
+	if (keyboardState.keys[27] && !prevKeyboardState.keys[27])
+		state = !state;
+		
 	if (state)
 	{
 		if (keyboardState.special[GLUT_KEY_LEFT] && !prevKeyboardState.special[GLUT_KEY_LEFT])
