@@ -8,9 +8,11 @@ Player* Player::instance = NULL;
 Player::Player()
 {
 	speed = 10;
-	health = 50;
-	xp = 75;
-	level = 10;
+	maxHp = 100;
+	health = maxHp;
+	xp = 0;
+	maxXp = 100;
+	level = 1;
 	crystals = 0;
 
 	leftWeapon = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj", 1, position, rotation, Vec3f(4.5, -8, -1), Vec3f(-2.0f, 6.0f, -2.1f), Vec2f(170, 70), Vec2f(20, -80));
@@ -70,4 +72,47 @@ void Player::setPosition(float angle, float fac, bool height)
 void Player::draw() {
 	leftWeapon->draw();
 	rightWeapon->draw();
+}
+
+void Player::HpDown(int damage)
+{
+	int newHealth = health - damage;
+	if (newHealth <= 0)
+	{
+		exit(0);
+	}
+	health = newHealth;
+}
+
+void Player::HpUp(int hp)
+{
+	if (health != maxHp)
+	{
+		int newHealth = health + hp;
+		if (newHealth >= maxHp)
+		{
+			newHealth = maxHp;
+		}
+		health = newHealth;
+	}	
+}
+
+void Player::XpUp(int xpUp)
+{
+	float newXp = xp + xpUp;
+	if (newXp >= maxXp)
+	{
+		newXp -= maxXp;		
+		levelUp();
+	}
+	xp = newXp;
+}
+
+
+void Player::levelUp()
+{
+	level++;
+	maxXp += 50;
+	maxHp += 10;
+	health = maxHp;
 }

@@ -70,7 +70,7 @@ private:
 	Model(std::string filename);
 	~Model(void);
 
-public:
+	public:
 
 	static std::map<std::string, std::pair<Model*, int> > cache;
 	static Model* load(const std::string &fileName);

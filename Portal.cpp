@@ -15,6 +15,13 @@ Portal::Portal(const std::string &fileName,
 	this->scale = scale;
 	this->canCollide = true;
 
+	started = false;
+	delay = 0;
+
+	sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/portal.wav", false);
+	music = CrystalPoint::GetSoundSystem().GetSound(sound_id);
+	music->SetPos(position, Vec3f());
+
 	mayEnter = false;
 	maxCrystals = 0;
 }
@@ -22,6 +29,8 @@ Portal::Portal(const std::string &fileName,
 
 Portal::~Portal()
 {
+//	Model::unload(model);
+//	delete music;
 }
 
 void Portal::collide()
@@ -31,4 +40,23 @@ void Portal::collide()
 		canCollide = false;
 		mayEnter = true;
 	}
+}
+
+bool Portal::enter(float deltaTime)
+{
+	if (delay > 3 && started)
+	{
+		delete music;
+		delay = 0;
+		return true;
+	}
+
+	if (delay == 0 && !started)
+	{
+		music->Play();
+		started = true;
+	}
+
+	delay += deltaTime;
+	return false;
 }

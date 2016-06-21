@@ -5,8 +5,9 @@
 #include <iostream>
 
 Enemy::Enemy(const std::string &fileName,
+	const std::string &fileMusic,
 	const Vec3f &position,
-	Vec3f &rotation,
+	const Vec3f &rotation,
 	const float &scale)
 {
 	model = Model::load(fileName);
@@ -17,8 +18,9 @@ Enemy::Enemy(const std::string &fileName,
 	target = position;
 	speed = 1;
 	radius = 10;
+	xp = 10;
 	hasTarget = false;
-	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/enemy.wav", false);
+	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound(fileMusic.c_str(), false);
 	music = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
 	attack = false;
 }
@@ -26,8 +28,11 @@ Enemy::Enemy(const std::string &fileName,
 
 Enemy::~Enemy()
 {
+	
 	if (model)
 		Model::unload(model);
+
+	delete music;
 }
 
 void Enemy::draw()
