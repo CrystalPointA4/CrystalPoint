@@ -319,7 +319,7 @@ void World::update(float elapsedTime)
 				continue;
 			}
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z);
 		
 		if(!remove)
 			count++;
