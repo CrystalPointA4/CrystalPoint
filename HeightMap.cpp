@@ -21,7 +21,7 @@ HeightMap::HeightMap(const std::string &file, World* world)
 
 	auto heightAt = [&](int x, int y)
 	{
-		return (imgData[(x + y * width) * 4 ] / 256.0f) * 50.0f;
+		return (imgData[(x + y * width) * 4] / 256.0f) * 50.0f;
 	};
 
 	auto valueAt = [&](int x, int y, int offset = 0)

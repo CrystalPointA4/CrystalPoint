@@ -1,6 +1,6 @@
 {
   "world": {
-    "heightmap": "worlds/rockHeightmap.png",
+    "heightmap": "worlds/rockHeightmapTest.png",
     "texture": "worlds/rockStone3.png",
 	"skybox": "skyboxes/water/",
     "object-templates": [
@@ -12,9 +12,9 @@
       {
         "color": 60,
         "file": "models/Rocks/Rock6.obj",
-        "collision":  true
+        "collision": true
       },
-      {
+            {
         "color": 70,
         "file": "models/Rocks/Rock7.obj",
         "collision":  true
@@ -80,11 +80,17 @@
     "pos": [ 10, 5, 10 ]    
   },
   "enemies": [
-  {
-      "file": "models/squid/Blooper.obj",
-      "pos": [ 20, 5, 10 ],
-      "scale": 0.01
-  }],
+    {
+      "file": "models/Bob/Bob.obj",
+      "pos": [ 270, 0, 370 ],
+      "scale": 0.5
+    },
+        {
+      "file": "models/Enemies/Squid.obj",
+      "pos": [ 270, 0, 390 ],
+      "scale": 1
+    }
+  ],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
     "empty texture": "models/crystal/PickedUpCrystal.obj",
