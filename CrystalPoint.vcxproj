@@ -216,8 +216,11 @@
     <None Include="worlds\worlds.json" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="WAVE\bond.wav" />
-    <Media Include="WAVE\Sound.wav" />
+    <Media Include="WAVE\Crystal.wav" />
+    <Media Include="WAVE\ghostEnemy.wav" />
+    <Media Include="WAVE\portal.wav" />
+    <Media Include="WAVE\test1.wav" />
+    <Media Include="WAVE\test2.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
