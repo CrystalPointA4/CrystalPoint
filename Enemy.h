@@ -19,7 +19,9 @@ public:
 	float health;
 	float damage;
 	int xp;
-	bool attack;
+	bool canAttack;
+	float lastAttacked;
+	bool attack();
 
 	void update(float);
 	void draw();

@@ -313,7 +313,7 @@ void World::update(float elapsedTime)
 
 		//Al deze code zou in enemy moeten staan
 		enemy->inEyeSight(player->position);
-
+		
 
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
@@ -326,12 +326,11 @@ void World::update(float elapsedTime)
 					break;
 				}
 			}
+		}
 
-			if (enemy->attack)
-			{
-				remove = true;
-				continue;
-			}
+		if (enemy->attack())
+		{			
+			player->HpDown(enemy->damage);
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
 		
@@ -342,7 +341,8 @@ void World::update(float elapsedTime)
 	if (remove)
 	{
 		player->XpUp(enemies[count]->xp);
-		delete enemies[count];		
+		delete enemies[count];
+		
 		enemies.erase(enemies.begin() + count);
 		player->HpUp(10);		
 	}

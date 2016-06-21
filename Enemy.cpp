@@ -28,7 +28,9 @@ Enemy::Enemy(const std::string &fileName,
 	hasTarget = false;
 	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound(fileMusic.c_str(), false);
 	music = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
-	attack = false;
+	canAttack = false;
+	lastAttacked = 0;
+	
 }
 
 
@@ -80,6 +82,17 @@ void Enemy::collide(const Entity * entity)
 	position.z = difference.z + entity->position.z;
 }
 
+bool Enemy::attack()
+{
+	float timeNow = glutGet(GLUT_ELAPSED_TIME)/1000.0f;
+	if (canAttack && timeNow - lastAttacked > 0.8)
+	{
+		lastAttacked = timeNow;
+		return true;
+	}
+	return false;
+}
+
 void Enemy::update(float delta)
 {
 	music->SetPos(position, Vec3f());
@@ -99,7 +112,7 @@ void Enemy::update(float delta)
 		length = sqrt(dx*dx + dz*dz);
 		if (length > 1)
 		{
-			attack = false;
+			canAttack = false;
 
 			dx /= length;
 			dz /= length;
@@ -112,7 +125,7 @@ void Enemy::update(float delta)
 		}
 		else
 		{	
-			attack = true;
+			canAttack = true;
 		}
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
 	}
