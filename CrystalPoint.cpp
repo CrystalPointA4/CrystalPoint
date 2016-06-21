@@ -24,7 +24,7 @@ void CrystalPoint::init()
 	cursor = Cursor::getInstance();
 
 	menu = new Menu();
-	buildMenu();
+	menuIsBuild = false;
 
 	lastFrameTime = 0;
 	state = true;
@@ -158,6 +158,11 @@ void CrystalPoint::update()
 	}	
 	else
 	{
+		if (!menuIsBuild)
+		{
+			buildMenu();
+			menuIsBuild = true;
+		}
 		menu->update();
 		cursor->update(cursor->mousePosition + mouseOffset);
 	}
@@ -172,7 +177,7 @@ void CrystalPoint::update()
 
 void CrystalPoint::buildMenu()
 {
-	Button* start = new Button("Resume", Vec2f(1920 / 2 - 50, 1080 / 2 - 30), 100, 50);
+	Button* start = new Button("Resume", Vec2f(width / 2 - 50, height / 2 - 30), 100, 50);
 	auto toWorld = [](Button* b)
 	{
 		state = true;
@@ -181,13 +186,14 @@ void CrystalPoint::buildMenu()
 	menu->AddMenuElement(start);
 
 
-	Button* test = new Button("Exit", Vec2f(1920 / 2 - 50, 1080 / 2 + 30), 100, 50);
+	Button* test = new Button("Exit", Vec2f(width / 2 - 50, height / 2 + 30), 100, 50);
 	test->addAction([](Button* b)
 	{
 		exit(0);
 	});
 	menu->AddMenuElement(test);
-	Text* t = new Text("Pause", Vec2f(1920 / 2 - Util::glutTextWidth("Pause") / 2, 1080 / 2 - 75));
+
+	Text* t = new Text("Pause", Vec2f(width / 2 - Util::glutTextWidth("Pause") / 2, height / 2 - 75));
 	t->setColor(Vec3f(255, 255, 0));
 	menu->AddMenuElement(t);
 }
