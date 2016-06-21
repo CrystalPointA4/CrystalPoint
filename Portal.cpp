@@ -30,7 +30,7 @@ Portal::Portal(const std::string &fileName,
 Portal::~Portal()
 {
 //	Model::unload(model);
-//	delete music;
+	CrystalPoint::GetSoundSystem().UnloadSound(sound_id);
 }
 
 void Portal::collide()
@@ -46,7 +46,6 @@ bool Portal::enter(float deltaTime)
 {
 	if (delay > 3 && started)
 	{
-		delete music;
 		delay = 0;
 		return true;
 	}

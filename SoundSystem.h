@@ -24,6 +24,7 @@ public:
 
 	unsigned int LoadSound(const char* inWavPath, bool inLooping);
 	Sound* GetSound(unsigned int inID);
+	void UnloadSound(unsigned int inID);
 
 private:
 	ALCdevice* device;
