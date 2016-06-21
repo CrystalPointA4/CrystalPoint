@@ -120,8 +120,13 @@ void ControllerHandler::commandControllerData(std::vector<std::string> data) {
 
             c->joystick.x = std::stoi(data[2])/2000.0f;
             c->joystick.y = std::stoi(data[3])/2000.0f;
-            c->joystickButton = !(data[4] == "0");
 
+            c->lastButton = c->button;
+            c->lastJoystickButton = c->joystickButton;
+            c->lastMagetSwitch = c->magnetSwitch;
+
+            c->joystickButton = !(data[4] == "0");
+            c->button = !(data[8] == "0");
             c->magnetSwitch = !(data[9] == "0");
         }
     }

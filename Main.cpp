@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
 		if (button == GLUT_LEFT_BUTTON)
 			Cursor::getInstance()->state = state;
 
+
 			//std::cout << "Left button is down" << std::endl;
 	};
 
