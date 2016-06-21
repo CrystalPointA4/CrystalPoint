@@ -53,12 +53,12 @@
     ]
   },
   "player": {
-    "startposition": [ 375, 5, 375 ]
+    "startposition": [ 385, 5, 375]
   },
   "objects": [ ],
   "portal": {     
     "file": "models/Teleporter/Teleporter.obj",
-    "pos": [ 385, 5, 366 ]    
+    "pos": [ 380, 5, 385 ]    
   },
   "enemies": [
   {
@@ -72,11 +72,19 @@
     "empty texture": "models/crystal/PickedUpCrystal.obj",
     "instances": [
       {
-        "pos": [ 31, 5, 33 ],
+        "pos": [ 255, 5, 225 ],
         "rot": [ 0, 0, 0 ]
       },
       {
-        "pos": [ 40, 5, 40 ],
+        "pos": [ 250, 5, 540 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 250, 5, 490 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 480, 5, 500 ],
         "rot": [ 0, 0, 0 ]
       }
     ]
