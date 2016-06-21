@@ -300,8 +300,12 @@ void World::update(float elapsedTime)
 			count++;
 	}
 
-	if(remove)
+	if (remove)
+	{
+		player->XpUp(enemies[count]->xp);
 		enemies.erase(enemies.begin() + count);
+		player->HpUp(10);		
+	}
 
 	skybox->update(elapsedTime, maxEnemies - enemies.size(), maxEnemies);
 
