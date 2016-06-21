@@ -140,16 +140,57 @@
       "pos": [66,0,254],
       "scale": 1
     },
-        {
+    {
       "file": "models/Enemies/SquidRock.obj",
-      "pos": [44,0,250],
+      "pos": [ 44, 0, 250 ],
       "scale": 1
     },
     {
       "file": "models/Enemies/VincentRock.obj",
-      "pos": [ 270, 0, 470 ],
+      "pos": [363,0,343],
       "scale": 1
     },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [333,0,263],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [243,0,218],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [289,0,123],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [628,0,397],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [618,0,416],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [660,0,432],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [639,0,442],
+      "scale": 1
+    },
+        {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [613,0,447],
+      "scale": 1
+    }
+    
 
   ],
   "crystal": {
