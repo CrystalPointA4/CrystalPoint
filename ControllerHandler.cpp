@@ -113,16 +113,17 @@ void ControllerHandler::commandDebug(std::vector<std::string> data) {
 void ControllerHandler::commandControllerData(std::vector<std::string> data) {
     if(data.size() == 10){
         Controller* c = controllers[std::stoi(data[1])];
+        if(c != nullptr && c->isConnected()){
+            c->ypr.x = std::stoi(data[5])/100.0f;
+            c->ypr.y = std::stoi(data[6])/100.0f;
+            c->ypr.z = std::stoi(data[7])/100.0f;
 
-        c->ypr.x = std::stoi(data[5])/100.0f;
-        c->ypr.y = std::stoi(data[6])/100.0f;
-        c->ypr.z = std::stoi(data[7])/100.0f;
+            c->joystick.x = std::stoi(data[2])/2000.0f;
+            c->joystick.y = std::stoi(data[3])/2000.0f;
+            c->joystickButton = !(data[4] == "0");
 
-        c->joystick.x = std::stoi(data[2])/2000.0f;
-        c->joystick.y = std::stoi(data[3])/2000.0f;
-        c->joystickButton = !(data[4] == "0");
-
-        c->magnetSwitch = !(data[9] == "0");
+            c->magnetSwitch = !(data[9] == "0");
+        }
     }
 }
 

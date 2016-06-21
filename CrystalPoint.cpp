@@ -101,16 +101,16 @@ void CrystalPoint::update()
 
 
 			if (leftControllerJoystick->y > 0.3) {
-				player->setPosition(270, leftControllerJoystick->y * deltaTime, false);
+				player->setPosition(270, leftControllerJoystick->y * deltaTime * 2.0f, false);
 			}
 			else if (leftControllerJoystick->y < -0.3) {
-				player->setPosition(90, leftControllerJoystick->y * -1 * deltaTime, false);
+				player->setPosition(90, leftControllerJoystick->y * -1 * deltaTime * 2.0f, false);
 			}
 			if (leftControllerJoystick->x > 0.3) {
-				player->setPosition(180, leftControllerJoystick->x * deltaTime, false);
+				player->setPosition(180, leftControllerJoystick->x * deltaTime * 2.0f, false);
 			}
 			else if (leftControllerJoystick->x < -0.3) {
-				player->setPosition(0, leftControllerJoystick->x * -1 * deltaTime, false);
+				player->setPosition(0, leftControllerJoystick->x * -1 * deltaTime * 2.0f, false);
 			}
 
 			player->leftWeapon->rotateWeapon(Vec3f(leftcontroller->ypr.y + 140, 0, -leftcontroller->ypr.z));
@@ -120,11 +120,11 @@ void CrystalPoint::update()
 		if(rightcontroller != nullptr){
 			Vec2f *rightControllerJoystick = &rightcontroller->joystick;
 			if (rightControllerJoystick->y > 0.3 || rightControllerJoystick->y < -0.3) {
-				player->rotation.x += rightcontroller->joystick.y/2;
+				player->rotation.x += rightcontroller->joystick.y/4;
 			}
 
 			if (rightControllerJoystick->x > 0.3 || rightControllerJoystick->x < -0.3) {
-				player->rotation.y += rightcontroller->joystick.x/2;
+				player->rotation.y += rightcontroller->joystick.x/4;
 			}
             player->rightWeapon->rotateWeapon(Vec3f(rightcontroller->ypr.y + 140, 0, -rightcontroller->ypr.z));
         }
