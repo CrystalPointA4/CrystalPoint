@@ -1,67 +1,135 @@
-newmtl Rock1:pasted__pasted__lambert3SG1
-illum 4
-Kd 0.45 0.45 0.45
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl Rock2:pasted__pasted__lambert3SG1
-illum 4
-Kd 0.45 0.45 0.45
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl Rock3:pasted__pasted__lambert3SG1
-illum 4
-Kd 0.45 0.45 0.45
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl Rock4:pasted__pasted__lambert3SG1
-illum 4
-Kd 0.45 0.45 0.45
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-Ni 1.00
 newmtl initialShadingGroup
 illum 4
-Kd 0.50 0.50 0.50
+Kd 0.22 0.22 0.22
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
 newmtl lambert2SG
 illum 4
-Kd 0.11 0.07 0.00
+Kd 0.50 0.32 0.25
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
 newmtl lambert3SG
 illum 4
-Kd 0.50 0.35 0.00
+Kd 0.45 0.45 0.45
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
 newmtl lambert4SG
 illum 4
-Kd 0.13 0.14 0.16
+Kd 0.12 0.12 0.12
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
 newmtl lambert5SG
 illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert7SG
+illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd Naamloos.png
+map_Kd Stones.png
 Ni 1.00
 newmtl pasted__lambert4SG
 illum 4
-Kd 0.13 0.14 0.16
+Kd 0.12 0.12 0.12
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
-newmtl pasted__pasted__lambert3SG1
+newmtl pasted__lambert4SG1
 illum 4
-Kd 0.45 0.45 0.45
+Kd 0.12 0.12 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__lambert4SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd DH4m07o.gif
+Ni 1.00
+newmtl pasted__lambert5SG
+illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__lambert5SG1
+illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__lambert5SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd kappa.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert4SG
+illum 4
+Kd 0.12 0.12 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert4SG1
+illum 4
+Kd 0.12 0.12 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert4SG2
+illum 4
+Kd 0.12 0.12 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert4SG3
+illum 4
+Kd 0.12 0.12 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert5SG
+illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert5SG1
+illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert5SG2
+illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__lambert5SG3
+illum 4
+Kd 0.10 0.05 0.02
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert4SG
+illum 4
+Kd 0.12 0.12 0.12
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert5SG
+illum 4
+Kd 0.10 0.05 0.02
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 1.00
