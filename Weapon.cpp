@@ -13,6 +13,7 @@ Weapon::Weapon(std::string name, int damage, Element e, std::string modelFilenam
                Vec3f offsetPlayer, Vec3f ankerPoint,
                Vec2f maxRotation, Vec2f minRotation,
 			   Vec3f collision){
+
     weaponmodel = Model::load(modelFilename);
     rotate(rotation);
     move(location);

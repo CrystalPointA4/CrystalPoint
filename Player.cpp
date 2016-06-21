@@ -16,14 +16,16 @@ Player::Player()
 	health = maxHp;
 	xp = 0;
 	maxXp = 100;
-	level = 1;
+	level = 5;
 	crystals = 0;
 
 	loadWeapons();
 
+	currentleftweapon = 0;
 	leftWeapon = leftweapons[0];
 	leftWeapon->rotateWeapon(Vec3f(150, 0, 60));
 
+	currentrightweapon = 0;
 	rightWeapon = rightweapons[0];
 	rightWeapon->rotateWeapon(Vec3f(150, 0, 60));
 }
@@ -179,4 +181,41 @@ void Player::loadWeapons()
 		rightweapons.push_back(rweapon);
 	}
 	
+}
+
+void Player::PreviousRightWeapon()
+{
+	currentrightweapon--;
+
+	if (currentrightweapon < 0)
+		currentrightweapon = (rightweapons.size() > level ? level - 1 : rightweapons.size() - 1);
+
+	rightWeapon = rightweapons[currentrightweapon];
+}
+void Player::NextRightWeapon(void)
+{
+	currentrightweapon++;
+
+	if (currentrightweapon > level - 1 || currentrightweapon > rightweapons.size() - 1)
+		currentrightweapon = 0;
+
+	rightWeapon = rightweapons[currentrightweapon];
+}
+void Player::PreviousLeftWeapon(void)
+{
+	currentleftweapon--;
+
+	if (currentleftweapon < 0)
+		currentleftweapon = (leftweapons.size() > level ? level - 1 : leftweapons.size() - 1);
+
+	leftWeapon = leftweapons[currentleftweapon];
+}
+void Player::NextLeftWeapon(void)
+{
+	currentleftweapon++;
+
+	if (currentleftweapon > level - 1 || currentleftweapon > leftweapons.size() - 1)
+		currentleftweapon = 0;
+
+	leftWeapon = leftweapons[currentleftweapon];
 }

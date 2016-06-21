@@ -4,7 +4,7 @@
       "name": "Fire reaper",
       "damage": 1,
       "element": "fire",
-      "file": "models/weapons/ZwaardMetTextures/TextureZwaard.obj",
+      "file": "models/weapons/ZwaardMetTextures2/TextureZwaard.obj",
 
       "anchor": [ -2.0, 6.0, -2.1 ],
       "collision": [ 0, 0, 0 ],
@@ -21,7 +21,7 @@
     {
       "name": "Ice breaker",
       "damage": 2,
-      "element": "ice",
+      "element": "water",
       "file": "models/weapons/ZwaardMetTextures/TextureZwaard.obj",
 
       "anchor": [ -2.0, 6.0, -2.1 ],
