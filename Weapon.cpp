@@ -29,7 +29,6 @@ Weapon::Weapon(std::string name, int damage, Element e, std::string modelFilenam
     this->minRotation = minRotation;
     this->collisionPoint = collisionPoint;
 
-    this->damage = 1;
 };
 
 Weapon::~Weapon(){
@@ -75,6 +74,7 @@ void Weapon::draw(){
     {
         glPushMatrix();
 
+
         //Player position and rotation
         glTranslatef(position.x, position.y, position.z);
         glRotatef(rotation.x, 1, 0, 0);
@@ -84,13 +84,23 @@ void Weapon::draw(){
         //offset from player
         glTranslatef(offsetPlayer.x, offsetPlayer.y, offsetPlayer.z);
 
+        glScalef(scale, scale, scale);
+
         //Rotate weapon itself, from specific anker point
         glTranslatef(ankerPoint.x, ankerPoint.y, ankerPoint.z);
         glRotatef(rotationWeapon.z, 0, 0, 1);
         glRotatef(rotationWeapon.y, 0, 1, 0);
         glRotatef(rotationWeapon.x, 1, 0, 0);
-        glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
+/*
+        glColor3ub(255, 255, 0);
+        glBegin(GL_LINES);
+        glVertex2f(0, 4);
+        glVertex2f(0, -4);
+        glVertex2f(4, 0);
+        glVertex2f(-4, 0);
+        glEnd();*/
 
+        glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
 
         weaponmodel->draw();
 
@@ -103,21 +113,11 @@ void Weapon::draw(){
         Vec3f point = multiply(matrix, Vec3f(1,1,1));
 
 
-        glScalef(scale, scale, scale);
-
-
         glPopMatrix();
 
         glPushMatrix();
 
-        glTranslatef(point.x, point.y, point.z);
-        glColor3ub(255, 255, 0);
-        glBegin(GL_LINES);
-        glVertex2f(0, 4);
-        glVertex2f(0, -4);
-        glVertex2f(4, 0);
-        glVertex2f(-4, 0);
-        glEnd();
+
 
         glPopMatrix();
     }

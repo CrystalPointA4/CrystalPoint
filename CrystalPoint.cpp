@@ -64,7 +64,7 @@ void CrystalPoint::update()
 	lastFrameTime = frameTime;
 
 	if (keyboardState.keys[27] && !prevKeyboardState.keys[27])
-		state = !state;
+        state = !state;
 
 	Controller *rightcontroller = controller.getRightController();
 	Controller *leftcontroller = controller.getLeftController();
@@ -78,7 +78,7 @@ void CrystalPoint::update()
 		if (keyboardState.special[GLUT_KEY_RIGHT] && !prevKeyboardState.special[GLUT_KEY_RIGHT])
 			worldhandler->NextWorld();
 		if (keyboardState.special[GLUT_KEY_UP] && !prevKeyboardState.special[GLUT_KEY_UP])
-			player->NextLeftWeapon();
+			player->NextRightWeapon();
 		if (keyboardState.special[GLUT_KEY_DOWN] && !prevKeyboardState.special[GLUT_KEY_DOWN])
 			player->PreviousLeftWeapon();
 		if (keyboardState.keys[27])
@@ -149,7 +149,7 @@ void CrystalPoint::update()
                 controller.rumble(rightcontroller->controllerId, 100, 200);
                 player->NextRightWeapon();
             }
-            
+
             player->rightWeapon->rotateWeapon(Vec3f(rightcontroller->ypr.y + 140, 0, -rightcontroller->ypr.z));
         }
 
@@ -162,9 +162,6 @@ void CrystalPoint::update()
 
 		if (!worldhandler->isPlayerPositionValid())
 			player->position = oldPosition;
-		/*else if (player->position.y > oldPosition.y + 1.2)
-			player->position = oldPosition;
-		*/
 		worldhandler->update(deltaTime);
 	}	
 	else

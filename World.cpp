@@ -249,6 +249,7 @@ float World::getHeight(float x, float y)
 void World::draw()
 {
 
+	player->setCamera();
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -260,7 +261,6 @@ void World::draw()
 
 	skybox->draw();
 
-	player->setCamera();
 	player->draw();
 
 	heightmap->Draw();
