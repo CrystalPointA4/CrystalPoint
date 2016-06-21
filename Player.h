@@ -1,12 +1,20 @@
 #pragma once
 #include "Vector.h"
 #include "Weapon.h"
+#include "json.h"
+
+#include <vector>
 
 class Player
 {
 private:
 	static Player* instance;
 	void levelUp();
+
+	std::vector<Weapon*> leftweapons;
+	std::vector<Weapon*> rightweapons;
+	void loadWeapons(void);
+
 public:
 	Player();
 	~Player();

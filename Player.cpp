@@ -3,6 +3,10 @@
 #include "Player.h"
 #include <GL/freeglut.h>
 
+#include <string>
+#include <iostream>
+#include <fstream>
+
 Player* Player::instance = NULL;
 
 Player::Player()
@@ -15,10 +19,12 @@ Player::Player()
 	level = 1;
 	crystals = 0;
 
-	leftWeapon = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj", 1, position, rotation, Vec3f(4.5, -8, -1), Vec3f(-2.0f, 6.0f, -2.1f), Vec2f(170, 70), Vec2f(20, -80));
+	loadWeapons();
+
+	leftWeapon = leftweapons[0];
 	leftWeapon->rotateWeapon(Vec3f(150, 0, 60));
 
-	rightWeapon = new Weapon("models/weapons/ZwaardMetTextures/TextureZwaard.obj", 1, position, rotation, Vec3f(0.5, -8, -1), Vec3f(-2.0f, 6.0f, -2.1f), Vec2f(170, 70), Vec2f(20, -80));
+	rightWeapon = rightweapons[0];
 	rightWeapon->rotateWeapon(Vec3f(150, 0, 60));
 }
 
@@ -115,4 +121,62 @@ void Player::levelUp()
 	maxXp += 50;
 	maxHp += 10;
 	health = maxHp;
+}
+
+void Player::loadWeapons()
+{
+	std::string fileName = "weapons.json";
+
+	//Open world json file
+	std::ifstream file(fileName);
+	if (!file.is_open())
+		std::cout << "Error, can't open world file - " << fileName << "\n";
+
+	json::Value v = json::readJson(file);
+	file.close();
+
+	//Check file
+	if (v["weapons"].isNull())
+		std::cout << "Invalid weapons file: " << fileName << "\n";
+
+	//Load object templates
+	for (auto w : v["weapons"])
+	{
+		Weapon* lweapon;
+		Weapon* rweapon;
+
+		std::string name = w["name"].asString();
+		std::string fileN = w["file"].asString();
+		float damage = w["damage"].asFloat();
+
+		Weapon::Element e = Weapon::FIRE;
+
+		if(w["element"].asString() == "fire")
+			e = Weapon::FIRE;
+		else if (w["element"].asString() == "water")
+			e = Weapon::WATER;
+		else if (w["element"].asString() == "earth")
+			e = Weapon::EARTH;
+		else if (w["element"].asString() == "air")
+			e = Weapon::AIR;
+		else
+			e = Weapon::FIRE;
+
+
+		Vec3f leftoffset = Vec3f(w["left"]["offset"][0].asFloat(), w["left"]["offset"][1].asFloat(), w["left"]["offset"][2].asFloat());
+		Vec3f rightoffset = Vec3f(w["right"]["offset"][0].asFloat(), w["right"]["offset"][1].asFloat(), w["right"]["offset"][2].asFloat());
+
+		Vec3f anchor = Vec3f(w["anchor"][0].asFloat(), w["anchor"][1].asFloat(), w["anchor"][2].asFloat());
+		Vec3f collision = Vec3f(w["collision"][0].asFloat(), w["collision"][1].asFloat(), w["collision"][2].asFloat());
+
+		Vec2f maxRot = Vec2f(w["maxRotation"][0].asFloat(), w["maxRotation"][1].asFloat());
+		Vec2f minRot = Vec2f(w["minRotation"][0].asFloat(), w["minRotation"][1].asFloat());
+
+		lweapon = new Weapon(name, damage, e, fileN, 1, position, rotation, leftoffset, anchor, maxRot, minRot, collision);
+		rweapon = new Weapon(name, damage, e, fileN, 1, position, rotation, rightoffset, anchor, maxRot, minRot, collision);
+
+		leftweapons.push_back(lweapon);
+		rightweapons.push_back(rweapon);
+	}
+	
 }

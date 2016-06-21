@@ -144,9 +144,13 @@ void CrystalPoint::update()
 		if (player->rotation.x < -90)
 			player->rotation.x = -90;
 
+		player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+
 		if (!worldhandler->isPlayerPositionValid())
 			player->position = oldPosition;
-		player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+		/*else if (player->position.y > oldPosition.y + 1.2)
+			player->position = oldPosition;
+		*/
 		worldhandler->update(deltaTime);
 	}	
 	else
