@@ -243,12 +243,14 @@ void World::draw()
 {
 	player->setCamera();
 
-	float lightPosition[4] = { 0, 2, 1, 0 };
+	float lightPosition[4] = { 0, 12, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
 	GLfloat lightAmbient[] = { 0.05, 0.05, 0.05, 0 };
 	GLfloat light_diffuse[] = { 0.9, 0.9, 0.9, 0 };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	GLfloat mat_specular[] = { 0.15, 0.15, 0.15, 0 };
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
 	skybox->draw();
