@@ -11,17 +11,23 @@
 
 class Weapon {
 public:
-    Weapon(std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
-           Vec3f offsetPlayer, Vec3f ankerPoint, Vec3f collisionPoint,
-           Vec2f maxRotation, Vec2f minXRotation);
+	enum Element {FIRE, WATER, EARTH, AIR};
+
+    Weapon(std::string name, int damage, Element element, std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
+           Vec3f offsetPlayer, Vec3f ankerPoint,
+           Vec2f maxRotation, Vec2f minXRotation,
+		   Vec3f collisionPoint);
     ~Weapon();
 
     void draw();
     void rotateWeapon(Vec3f rotation);
     void rotate(Vec2f rotation);
     void move(Vec3f location);
-
+	
+	std::string name;
     unsigned int damage;
+	Element element;
+
     Model* weaponmodel;
 
     float scale;

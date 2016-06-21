@@ -71,15 +71,18 @@ void CrystalPoint::update()
 
 	if (state)
 	{
+		Player* player = Player::getInstance();
+
 		if (keyboardState.special[GLUT_KEY_LEFT] && !prevKeyboardState.special[GLUT_KEY_LEFT])
 			worldhandler->PreviousWorld();
 		if (keyboardState.special[GLUT_KEY_RIGHT] && !prevKeyboardState.special[GLUT_KEY_RIGHT])
 			worldhandler->NextWorld();
+		if (keyboardState.special[GLUT_KEY_UP] && !prevKeyboardState.special[GLUT_KEY_UP])
+			player->NextLeftWeapon();
+		if (keyboardState.special[GLUT_KEY_DOWN] && !prevKeyboardState.special[GLUT_KEY_DOWN])
+			player->PreviousLeftWeapon();
 		if (keyboardState.keys[27])
 			state = false;
-		
-
-		Player* player = Player::getInstance();
 
 		//testing code
 		if (keyboardState.keys['u'])
@@ -106,10 +109,6 @@ void CrystalPoint::update()
 		if (leftcontroller != nullptr) {
 			Vec2f *leftControllerJoystick = &leftcontroller->joystick;
 
-			if (leftcontroller->joystickButton) {
-				controller.rumble(leftcontroller->controllerId, 100, 100);
-			}
-
 			if (leftControllerJoystick->y > 0.3 || leftControllerJoystick->y < -0.3) {
 				player->rotation.x += leftControllerJoystick->y/4;
 			}
@@ -122,7 +121,12 @@ void CrystalPoint::update()
 
 			if(leftcontroller->button && leftcontroller->joystickButton){
 				state = !state;
-			}
+			}else if(!leftcontroller->lastButton && leftcontroller->button){
+                leftcontroller->lastButton = leftcontroller->button;
+                controller.rumble(leftcontroller->controllerId, 100, 200);
+                player->NextLeftWeapon();
+            }
+
 		}
 		if(rightcontroller != nullptr){
 			Vec2f *rightControllerJoystick = &rightcontroller->joystick;
@@ -140,6 +144,12 @@ void CrystalPoint::update()
 				player->setPosition(0, rightControllerJoystick->x * -1 * deltaTime * 2.0f, false);
 			}
 
+            if(!rightcontroller->lastButton && rightcontroller->button){
+                rightcontroller->lastButton = rightcontroller->button;
+                controller.rumble(rightcontroller->controllerId, 100, 200);
+                player->NextRightWeapon();
+            }
+            
             player->rightWeapon->rotateWeapon(Vec3f(rightcontroller->ypr.y + 140, 0, -rightcontroller->ypr.z));
         }
 
@@ -148,9 +158,13 @@ void CrystalPoint::update()
 		if (player->rotation.x < -90)
 			player->rotation.x = -90;
 
+		player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+
 		if (!worldhandler->isPlayerPositionValid())
 			player->position = oldPosition;
-		player->position.y = worldhandler->getHeight(player->position.x, player->position.z) + 1.7f;
+		/*else if (player->position.y > oldPosition.y + 1.2)
+			player->position = oldPosition;
+		*/
 		worldhandler->update(deltaTime);
 	}	
 	else

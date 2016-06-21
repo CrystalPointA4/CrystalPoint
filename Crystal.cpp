@@ -7,18 +7,22 @@ Crystal::Crystal(const std::string & filled, const std::string & empty, const Ve
 {
 	this->filled = Model::load(filled);
 	this->empty = Model::load(empty);
-	model = this->filled;
-	
+	model = this->filled;	
 
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;
 	this->canCollide = true;
 	isFilled = true;
+
+	sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/Crystal.wav", false);
+	music = CrystalPoint::GetSoundSystem().GetSound(sound_id);
+	music->SetPos(position, Vec3f());
 }
 
 Crystal::~Crystal()
 {
+	CrystalPoint::GetSoundSystem().UnloadSound(sound_id);
 	if (model)
 		Model::unload(model);
 
@@ -41,6 +45,7 @@ void Crystal::collide()
 {
 	if (isFilled)
 	{
+		music->Play();
 		Player::getInstance()->crystals++;
 		isFilled = false;
 		model = empty;

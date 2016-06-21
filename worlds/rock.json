@@ -3,7 +3,7 @@
     "heightmap": "worlds/rockHeightmap.png",
     "texture": "worlds/rockStone2.png",
 	"skybox": "skyboxes/water/",
-	"music":  "WAVE/test2.wav",
+	"music":  "WAVE/world1.wav",
     "object-templates": [
       {
         "color": 50,
@@ -83,7 +83,7 @@
     ]
   },
   "player": {
-    "startposition": [ 1, 5, 20 ]
+    "startposition": [ 20, 5, 20 ]
   },
   "objects": [ ],
   "portal": {     
@@ -92,10 +92,10 @@
   },
   "enemies": [
   {
-      "file": "models/squid/Blooper.obj",
-      "pos": [ 20, 5, 10 ],
-      "scale": 0.01,
-      "music": "WAVE/enemy.wav"
+	"file": "models/squid/Blooper.obj",
+	"pos": [ 30, 10, 10 ],
+	"scale": 0.01,
+	"music": "WAVE/ghostEnemy.wav"
   }],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",

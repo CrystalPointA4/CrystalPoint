@@ -9,7 +9,7 @@
         "collision": true
       }
     ],
-	"music": "WAVE/test1.wav"
+	"music": "WAVE/world1.wav"
   },
   "player": {
     "startposition": [ 20, 0, 20 ]
@@ -24,7 +24,7 @@
       "file": "models/squid/Blooper.obj",
       "pos": [ 20, 5, 10 ],
       "scale": 0.01,
-      "music": "WAVE/enemy.wav",
+      "music": "WAVE/ghostEnemy.wav",
       "health": 10,
       "damage": 2
     },
@@ -32,13 +32,13 @@
       "file": "models/squid/Blooper.obj",
       "pos": [ 30, 10, 10 ],
       "scale": 0.01,
-      "music": "WAVE/enemy.wav",
+      "music": "WAVE/ghostEnemy.wav",
       "health": 15,
       "damage": 2
   }],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
-    "empty texture": "models/crystal/PickedUpCrystal.obj",
+	"empty texture": "models/crystal/PickedUpCrystal.obj",
     "instances": [
       {
         "pos": [ 31, 5, 33 ],

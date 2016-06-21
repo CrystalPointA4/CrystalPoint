@@ -87,6 +87,10 @@ void Interface::draw()
 	glColor4f(1.0f, 1.0f, 0.1f, 1.0);
 	Util::glutBitmapString("Level: " + std::to_string(player->level), 490, 900);
 
+	//Text: weapons
+	Util::glutBitmapString(player->leftWeapon->name, 850, 900);
+	Util::glutBitmapString(player->rightWeapon->name, 10, 900);
+
 	for (int i = 0; i < maxCrystals; i++)
 	{
 		glBegin(GL_QUADS);
