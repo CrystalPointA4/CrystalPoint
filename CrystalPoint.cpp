@@ -71,8 +71,19 @@ void CrystalPoint::update()
 			worldhandler->PreviousWorld();
 		if (keyboardState.special[GLUT_KEY_RIGHT] && !prevKeyboardState.special[GLUT_KEY_RIGHT])
 			worldhandler->NextWorld();
+		if (keyboardState.keys[27])
+			state = false;
+		
 
 		Player* player = Player::getInstance();
+
+		//testing code
+		if (keyboardState.keys['u'])
+			player->HpUp(1);
+		if (keyboardState.keys['i'])
+			player->HpDown(1);
+		if (keyboardState.keys['o'])
+			player->XpUp(1);
 
 		player->rotation.y += mouseOffset.x / 10.0f;
 		player->rotation.x += mouseOffset.y / 10.0f;

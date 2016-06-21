@@ -7,6 +7,7 @@ class Player
 {
 private:
 	static Player* instance;
+	void levelUp();
 public:
 	Player();
 	~Player();
@@ -23,10 +24,14 @@ public:
 	Model* leftWeapon;
 	Model* rightWeapon;
 
-	float health;
-	float xp;
+	float health, maxHp;
+	float xp, maxXp;
 	int level;
 	int crystals;
 
 	float speed;
+
+	void HpUp(int);
+	void HpDown(int);
+	void XpUp(int);
 };

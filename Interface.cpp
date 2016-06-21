@@ -60,8 +60,8 @@ void Interface::draw()
 	glVertex2f(250, 965);
 
 	glColor4f(1.0f, 0.5f, 0.5f, 1.0);
-	glVertex2f(250 + (player->health / 100 * 500), 965);
-	glVertex2f(250 + (player->health / 100 * 500), 980);
+	glVertex2f(250 + (player->health / player->maxHp * 500), 965);
+	glVertex2f(250 + (player->health / player->maxHp * 500), 980);
 	glEnd();
 
 	//XP bar
@@ -79,8 +79,8 @@ void Interface::draw()
 	glVertex2f(250, 935);
 
 	glColor4f(1.0f, 1.0f, 0.5f, 1.0);
-	glVertex2f(250 + (player->xp / 100 * 500), 935);
-	glVertex2f(250 + (player->xp / 100 * 500), 950);
+	glVertex2f(250 + (player->xp / player->maxXp * 500), 935);
+	glVertex2f(250 + (player->xp / player->maxXp * 500), 950);
 	glEnd();
 
 	//Text: level

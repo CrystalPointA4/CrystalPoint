@@ -18,6 +18,7 @@ Enemy::Enemy(const std::string &fileName,
 	target = position;
 	speed = 1;
 	radius = 10;
+	xp = 10;
 	hasTarget = false;
 	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound(fileMusic.c_str(), false);
 	music = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
@@ -27,6 +28,7 @@ Enemy::Enemy(const std::string &fileName,
 
 Enemy::~Enemy()
 {
+	
 	if (model)
 		Model::unload(model);
 
