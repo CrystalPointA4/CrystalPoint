@@ -29,28 +29,51 @@ HeightMap::HeightMap(const std::string &file, World* world)
 		return imgData[(x + y * width) * 4 + offset];
 	};
 
+	std::vector<std::vector<Vec3f>> faceNormals(width-1, std::vector<Vec3f>(height-1, Vec3f(0,1,0)));
+	for (int y = 0; y < height - 1; y++)
+	{
+		for (int x = 0; x < width - 1; x++)
+		{
+			int offsets[4][2] = { { 0, 0 },{ 1, 0 },{ 1, 1 },{ 0, 1 } };
+			Vec3f ca(0, heightAt(x, y + 1) - heightAt(x, y), 1);
+			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
+			Vec3f normal = ca.cross(ba);
+			normal.Normalize();
+			faceNormals[x][y] = normal;
+		}
+	}
+
 	for (int y = 0; y < height-1; y++)
 	{
 		for (int x = 0; x < width-1; x++)
 		{
 			int offsets[4][2] = { { 0, 0 },{ 1, 0 },{ 1, 1 },{ 0, 1 } };
-			Vec3f ca(0, heightAt(x, y + 1) - heightAt(x, y), 1);
-			Vec3f ba(1, heightAt(x + 1, y) - heightAt(x, y), 0);
 
 			if (valueAt(x, y, GREEN) > 0)
 			{
 				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)).first, Vec3f(x, heightAt(x, y), y), Vec3f(0, 0, 0), 1, world->getObjectFromValue(valueAt(x, y, GREEN)).second));
 			}
 
-			Vec3f normal = ca.cross(ba);
-			normal.Normalize();
-
 			for (int i = 0; i < 4; i++)
 			{
-				float h = heightAt(x + offsets[i][0], y + offsets[i][1]);
-				vertices.push_back(Vertex{ (float)(x + offsets[i][0]), h, (float)(y + offsets[i][1]),
+				int xx = x + offsets[i][0];
+				int yy = y + offsets[i][1];
+
+				Vec3f normal(0, 0, 0);
+				if(xx < width-1 && yy < height-1)
+					normal = normal + faceNormals[xx][yy];
+				if(xx > 0 && yy < height-1)
+					normal = normal + faceNormals[xx-1][yy];
+				if (xx > 0 && yy > 0)
+					normal = normal + faceNormals[xx-1][yy-1];
+				if (yy > 0 && xx < width-1)
+					normal = normal + faceNormals[xx][yy-1];
+				normal.Normalize();
+
+				float h = heightAt(xx, yy);
+				vertices.push_back(Vertex{ (float)(xx), h, (float)(yy),
 									normal.x, normal.y, normal.z,
-									(x + offsets[i][0]) / (float)height, (y + offsets[i][1]) / (float)width } );
+									(xx) / (float)height, (yy) / (float)width } );
 			}
 		}
 	}
