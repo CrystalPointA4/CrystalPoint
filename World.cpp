@@ -249,6 +249,7 @@ float World::getHeight(float x, float y)
 void World::draw()
 {
 
+	player->setCamera();
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -260,7 +261,6 @@ void World::draw()
 
 	skybox->draw();
 
-	player->setCamera();
 	player->draw();
 
 	heightmap->Draw();
@@ -304,6 +304,9 @@ void World::update(float elapsedTime)
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{
+            if(player->hit)
+                enemy->hit(player->leftWeapon->damage);
+
 			for (auto e : entities)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
@@ -315,12 +318,13 @@ void World::update(float elapsedTime)
 
 			if (enemy->attack)
 			{
-				remove = true;
-				continue;
+                player->HpDown(enemy->damage / 4);
 			}
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z);
-		
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		if(enemy->isDead()){
+			remove = true;
+		}
 		if(!remove)
 			count++;
 	}
@@ -328,7 +332,7 @@ void World::update(float elapsedTime)
 	if (remove)
 	{
 		delete enemies[count];
-		player->XpUp(enemies[count]->xp);
+		player->XpUp(enemies[count]->xp*2);
 		enemies.erase(enemies.begin() + count);
 		player->HpUp(10);		
 	}
@@ -340,6 +344,8 @@ void World::update(float elapsedTime)
 		if (portal->enter(elapsedTime))
 			nextworld = true;
 	}
+
+    player->hit = false;
 		
 }
 
@@ -360,3 +366,4 @@ bool World::isPlayerPositionValid()
 	}
 	return true;
 }
+
