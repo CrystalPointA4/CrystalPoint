@@ -126,12 +126,20 @@ World::World(const std::string &fileName)
 		if (e["music"].isNull())
 			std::cout << "Invalid world file: enemies music - " << fileName << "\n";
 
+		//Damage
+		if (e["damage"].isNull())
+			std::cout << "Invalid world file: enemies damage - " << fileName << "\n";
+
+		//Health
+		if (e["health"].isNull())
+			std::cout << "Invalid world file: enemies health - " << fileName << "\n";
+
 		//Create
 		Vec3f position(e["pos"][0].asFloat(), e["pos"][1].asFloat(), e["pos"][2].asFloat());
 		position.y = getHeight(position.x, position.z) + 2.0f;
 
 		maxEnemies++;
-		enemies.push_back(new Enemy(e["file"].asString(), e["music"].asString(), position, rotation, scale));
+		enemies.push_back(new Enemy(e["file"].asString(), e["music"].asString(), e["damage"].asFloat(), e["health"].asFloat(), position, rotation, scale));
 	}
 	maxCrystals = 0;
 	if (!v["crystal"].isNull())
