@@ -126,7 +126,8 @@ void CrystalPoint::update()
 			if (rightControllerJoystick->x > 0.3 || rightControllerJoystick->x < -0.3) {
 				player->rotation.y += rightcontroller->joystick.x/2;
 			}
-		}
+            player->rightWeapon->rotateWeapon(Vec3f(rightcontroller->ypr.y + 140, 0, -rightcontroller->ypr.z));
+        }
 
 		if (player->rotation.x > 90)
 			player->rotation.x = 90;
