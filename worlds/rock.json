@@ -37,7 +37,7 @@
       {
         "color": 170,
         "file": "models/Rocks/DraakHoofd.obj",
-        "collision":  true
+        "collision":  false
       },
       {
         "color": 180,
@@ -81,12 +81,22 @@
   },
   "enemies": [
     {
-      "file": "models/Bob/Bob.obj",
-      "pos": [ 270, 0, 370 ],
-      "scale": 0.5
+      "file": "models/Bob/BobRock.obj",
+      "pos": [ 270, 0, 410 ],
+      "scale": 0.75
     },
-        {
-      "file": "models/Enemies/Squid.obj",
+    {
+      "file": "models/Enemies/Monkey.obj",
+      "pos": [ 270, 0, 440 ],
+      "scale": 1
+    },
+            {
+      "file": "models/Enemies/VincentRock.obj",
+      "pos": [ 270, 0, 470 ],
+      "scale": 1
+    },
+    {
+      "file": "models/Enemies/SquidRock.obj",
       "pos": [ 270, 0, 390 ],
       "scale": 1
     }
@@ -96,11 +106,39 @@
     "empty texture": "models/crystal/PickedUpCrystal.obj",
     "instances": [
       {
-        "pos": [ 31, 5, 33 ],
+        "pos": [630,0,430],
         "rot": [ 0, 0, 0 ]
       },
       {
-        "pos": [ 40, 5, 40 ],
+        "pos": [650,0,630],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [60,0,680],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [55,0,230],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [190,0,290],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [290,0,475],
+        "rot": [ 0, 0, 0 ]
+      },
+            {
+        "pos": [690,0,280],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [670,0,80],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [480,0,550],
         "rot": [ 0, 0, 0 ]
       }
     ]
