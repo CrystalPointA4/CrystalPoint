@@ -44,20 +44,6 @@ Enemy::~Enemy()
 void Enemy::draw()
 {
 	Entity::draw();
-	glPushMatrix();
-	
-	glTranslatef(position.x, position.y, position.z);
-
-	glBegin(GL_LINE_LOOP);
-	for (int i = 0; i < 360; i++)
-	{
-		//convert degrees into radians
-		float degInRad = i*(M_PI / 180.0);
-		glVertex3f(cos(degInRad)*radius, 1*scale,sin(degInRad)*radius);
-	}
-	glEnd();
-
-	glPopMatrix();
 }
 
 void Enemy::inEyeSight(Vec3f & TargetPosition)
@@ -127,7 +113,7 @@ void Enemy::update(float delta)
 	}
 	Player *player = Player::getInstance();
 
-	if(inObject(player->position + player->leftWeapon->collisionPoint)){
+/*	if(inObject(player->position + player->leftWeapon->collisionPoint)){
 		if(!isHit){
 			isHit = true;
 			hit(player->leftWeapon->damage);
@@ -141,5 +127,5 @@ void Enemy::update(float delta)
 		std::cout << "HIT2";
 	}else{
 		isHit = false;
-	}
+	}*/
 }

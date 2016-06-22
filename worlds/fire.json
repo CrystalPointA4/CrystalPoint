@@ -1,41 +1,193 @@
 {
   "world": {
-    "heightmap": "worlds/hell.png",
-    "texture":  "worlds/helltexture.png",
-    "skybox": "skyboxes/peaceful/",
-    "object-templates": [
-      {
-        "color": 100,
-        "file": "models/boom/Boom.obj",
-        "collision": true
-      }
-    ],
-	"music": "WAVE/bond.wav"
+    "heightmap": "worlds/FireHeightmap.png",
+    "texture": "worlds/FireTexture.png",
+	"skybox": "skyboxes/water/",
+	"music": "WAVE/world1.wav",
+    "object-templates": []
   },
   "player": {
-    "startposition": [ 1, 5, 20 ]
+    "startposition": [ 350, 0,  130 ]
   },
   "objects": [ ],
   "portal": {     
     "file": "models/Teleporter/Teleporter.obj",
-    "pos": [ 10, 5, 10 ]    
+    "pos": [ 245, 0, 326 ]    
   },
   "enemies": [
-  {
-      "file": "models/squid/Blooper.obj",
-      "pos": [ 20, 5, 10 ],
-      "scale": 0.01
-  }],
+    {
+      "file": "models/Enemies/Monkey.obj",
+      "pos": [ 520, 0, 123 ],
+      "scale": 1.25,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobFire.obj",
+      "pos": [530,0,501],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobFire.obj",
+      "pos": [582,0,576],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Bob/BobFire.obj",
+      "pos": [ 500, 0, 641 ],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [295,0,541],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [390,0,542],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [510,0,130],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [440,0,260],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [555,0,275],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [390,0,357],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [370,0,412],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [230,0,474],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/VincentFire.obj",
+      "pos": [ 450, 0, 551 ],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidFire.obj",
+      "pos": [383,0,666],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidFire.obj",
+      "pos": [251,0,690],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidFire.obj",
+      "pos": [178,0,561],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+    {
+      "file": "models/Enemies/SquidFire.obj",
+      "pos": [147,0,392],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    },
+                {
+      "file": "models/Enemies/SquidFire.obj",
+      "pos": [209,0,333],
+      "scale": 0.75,
+      "music": "WAVE/ghostEnemy.wav",
+      "health": 10,
+      "damage": 1
+    }
+
+  ],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
     "empty texture": "models/crystal/PickedUpCrystal.obj",
     "instances": [
       {
-        "pos": [ 31, 5, 33 ],
+        "pos": [ 560, 0, 150 ],
         "rot": [ 0, 0, 0 ]
       },
       {
-        "pos": [ 40, 5, 40 ],
+        "pos": [ 610, 0, 260 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 580, 0, 460 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 210, 0, 450 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 510, 0, 680 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 180, 0, 310 ],
         "rot": [ 0, 0, 0 ]
       }
     ]

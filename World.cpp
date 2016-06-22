@@ -39,7 +39,7 @@ World::World(const std::string &fileName)
 		std::cout << "Invalid world file: objects - " << fileName << "\n";
 	if (v["enemies"].isNull())
 		std::cout << "Invalid world file: enemies - " << fileName << "\n";
-	if (v["crystals"].isNull())
+	if (v["crystal"].isNull())
 		std::cout << "Invalid world file: crystals - " << fileName << "\n";
 
 	//Load object templates
@@ -202,7 +202,7 @@ World::World(const std::string &fileName)
 		if (!v["portal"]["pos"].isNull())
 			pos = Vec3f(v["portal"]["pos"][0].asFloat(),
 				v["portal"]["pos"][1].asFloat(),
-				v["portal"]["pos"][0].asFloat());
+				v["portal"]["pos"][2].asFloat());
 
 		pos.y = getHeight(pos.x, pos.z);
 
@@ -210,7 +210,7 @@ World::World(const std::string &fileName)
 		if (!v["portal"]["rot"].isNull())
 			pos = Vec3f(v["portal"]["rot"][0].asFloat(),
 				v["portal"]["rot"][1].asFloat(),
-				v["portal"]["rot"][0].asFloat());
+				v["portal"]["rot"][2].asFloat());
 
 		float scale = 1.0f;
 		if (!v["portal"]["scale"].isNull())
@@ -255,7 +255,6 @@ float World::getHeight(float x, float y)
 
 void World::draw()
 {
-
 	player->setCamera();
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
@@ -266,8 +265,10 @@ void World::draw()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
-	skybox->draw();
+	GLfloat mat_specular[] = { 0.15, 0.15, 0.15, 0 };
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 
+	skybox->draw();
 	player->draw();
 
 	heightmap->Draw();
@@ -325,13 +326,13 @@ void World::update(float elapsedTime)
 
 			if (enemy->attack)
 			{
-                player->HpDown(enemy->damage / 4);
+                player->HpDown(enemy->damage / 2.0f);
 			}
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
-		if(enemy->isDead()){
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 1.7f;
+		
+		if (enemy->isDead())
 			remove = true;
-		}
 		if(!remove)
 			count++;
 	}
