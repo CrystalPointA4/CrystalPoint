@@ -1,0 +1,92 @@
+{
+  "world": {
+    "heightmap": "worlds/watermap.png",
+    "texture": "worlds/watertexture.png",
+	"skybox": "skyboxes/water/",
+	"music":  "WAVE/test2.wav",
+    "object-templates": [
+      {
+        "color": 205,
+        "file": "models/puddle/Puddle.obj",
+        "collision": true
+      },
+      {
+        "color": 220,
+        "file": "models/islands/isle.obj",
+        "collision": false
+      },
+      {
+        "color": 223,
+        "file": "models/islands/isle2.obj",
+        "collision": false
+      },
+      {
+        "color": 210,
+        "file": "models/trees/tree1.obj",
+        "collision": true
+      },
+      {
+        "color": 211,
+        "file": "models/trees/tree2.obj",
+        "collision": true
+      },
+      {
+        "color": 212,
+        "file": "models/trees/tree3.obj",
+        "collision": true
+      },
+      {
+        "color": 213,
+        "file": "models/trees/tree4.obj",
+        "collision": true
+      },
+      {
+        "color": 215,
+        "file": "models/grass/grass.obj",
+        "collision": false
+      },
+      {
+        "color": 214,
+        "file": "models/trees/tree5.obj",
+        "collision": true
+      }
+    ]
+  },
+  "player": {
+    "startposition": [ 385, 20, 375]
+  },
+  "objects": [ ],
+  "portal": {     
+    "file": "models/Teleporter/Teleporter.obj",
+    "pos": [ 380, 5, 385 ]    
+  },
+  "enemies": [
+  {
+      "file": "models/squid/Blooper.obj",
+      "pos": [ 350, 5, 350 ],
+      "scale": 0.01,
+      "music": "WAVE/enemy.wav"
+  }],
+  "crystal": {
+    "full texture": "models/crystal/Crystal.obj",
+    "empty texture": "models/crystal/PickedUpCrystal.obj",
+    "instances": [
+      {
+        "pos": [ 255, 5, 225 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 250, 5, 540 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 250, 5, 490 ],
+        "rot": [ 0, 0, 0 ]
+      },
+      {
+        "pos": [ 480, 5, 500 ],
+        "rot": [ 0, 0, 0 ]
+      }
+    ]
+  }
+}

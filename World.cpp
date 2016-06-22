@@ -278,9 +278,13 @@ void World::draw()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
 
-	skybox->draw();
+	GLfloat mat_specular[] = { 0.15, 0.15, 0.15, 0 };
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+
+
 
 	player->setCamera();
+	skybox->draw();
 	player->draw();
 
 	heightmap->Draw();
