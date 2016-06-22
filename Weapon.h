@@ -16,7 +16,7 @@ public:
     Weapon(std::string name, int damage, Element element, std::string modelFilename, float scale, Vec3f location, Vec2f rotation,
            Vec3f offsetPlayer, Vec3f ankerPoint,
            Vec2f maxRotation, Vec2f minXRotation,
-		   Vec3f collision);
+		   Vec3f collisionPoint);
     ~Weapon();
 
     void draw();
@@ -32,8 +32,9 @@ public:
 
     float scale;
     Vec3f position, rotation, rotationWeapon;
-    Vec3f offsetPlayer, ankerPoint, collision;
+    Vec3f offsetPlayer, ankerPoint, collisionPoint;
     Vec2f maxRotation, minRotation;
+
 };
 
 

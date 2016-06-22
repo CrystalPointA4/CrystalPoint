@@ -9,6 +9,7 @@ public:
     Vec3f ypr;
     Vec2f joystick;
     bool button, joystickButton, magnetSwitch;
+    bool lastButton, lastJoystickButton, lastMagetSwitch;
     int controllerId;
 
     void setConnected(bool connected);

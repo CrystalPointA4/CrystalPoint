@@ -10,7 +10,6 @@
 #include "Skybox.h"
 #include "CrystalPoint.h"
 #include "Portal.h"
-#include "LoadingScreen.h"
 
 class Entity;
 
@@ -33,8 +32,6 @@ private:
 	std::vector<Entity*> entities;
 	std::vector<Enemy*> enemies;
 	//std::vector<Crystal*> crystals;
-
-	LoadingScreen ls;
 public:
 	World(const std::string &fileName);
 	~World();

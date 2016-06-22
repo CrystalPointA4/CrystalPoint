@@ -18,6 +18,7 @@ Player::Player()
 	maxXp = 100;
 	level = 1;
 	crystals = 0;
+    hit = false;
 
 	loadWeapons();
 
@@ -150,6 +151,7 @@ void Player::loadWeapons()
 		std::string name = w["name"].asString();
 		std::string fileN = w["file"].asString();
 		float damage = w["damage"].asFloat();
+		float scale = w["scale"].asFloat();
 
 		Weapon::Element e = Weapon::FIRE;
 
@@ -174,8 +176,8 @@ void Player::loadWeapons()
 		Vec2f maxRot = Vec2f(w["maxRotation"][0].asFloat(), w["maxRotation"][1].asFloat());
 		Vec2f minRot = Vec2f(w["minRotation"][0].asFloat(), w["minRotation"][1].asFloat());
 
-		lweapon = new Weapon(name, damage, e, fileN, 1, position, rotation, leftoffset, anchor, maxRot, minRot, collision);
-		rweapon = new Weapon(name, damage, e, fileN, 1, position, rotation, rightoffset, anchor, maxRot, minRot, collision);
+		lweapon = new Weapon(name, damage, e, fileN, scale, position, rotation, leftoffset, anchor, maxRot, minRot, collision);
+		rweapon = new Weapon(name, damage, e, fileN, scale, position, rotation, rightoffset, anchor, maxRot, minRot, collision);
 
 		leftweapons.push_back(lweapon);
 		rightweapons.push_back(rweapon);
@@ -191,6 +193,8 @@ void Player::PreviousRightWeapon()
 		currentrightweapon = (rightweapons.size() > level ? level - 1 : rightweapons.size() - 1);
 
 	rightWeapon = rightweapons[currentrightweapon];
+	rightWeapon->move(position);
+	rightWeapon->rotate(rotation);
 }
 void Player::NextRightWeapon(void)
 {
@@ -200,6 +204,8 @@ void Player::NextRightWeapon(void)
 		currentrightweapon = 0;
 
 	rightWeapon = rightweapons[currentrightweapon];
+	rightWeapon->move(position);
+	rightWeapon->rotate(rotation);
 }
 void Player::PreviousLeftWeapon(void)
 {
@@ -209,6 +215,8 @@ void Player::PreviousLeftWeapon(void)
 		currentleftweapon = (leftweapons.size() > level ? level - 1 : leftweapons.size() - 1);
 
 	leftWeapon = leftweapons[currentleftweapon];
+	leftWeapon->move(position);
+	leftWeapon->rotate(rotation);
 }
 void Player::NextLeftWeapon(void)
 {
@@ -218,4 +226,6 @@ void Player::NextLeftWeapon(void)
 		currentleftweapon = 0;
 
 	leftWeapon = leftweapons[currentleftweapon];
+	leftWeapon->move(position);
+	leftWeapon->rotate(rotation);
 }

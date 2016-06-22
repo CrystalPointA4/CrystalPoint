@@ -43,7 +43,6 @@ public:
 
 	static SoundSystem& GetSoundSystem() { return sound_system; }
 	
-	bool menuIsBuild;
 
 private:
 	static SoundSystem sound_system;
