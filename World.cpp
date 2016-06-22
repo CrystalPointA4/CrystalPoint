@@ -321,11 +321,11 @@ void World::update(float elapsedTime)
 				}
 			}
 
-		if (enemy->attack)
-		{			
+			if (enemy->attack)
+			{
                 player->HpDown(enemy->damage / 4);
 			}
-		}
+
 			remove = true;
 			continue;
 		}
