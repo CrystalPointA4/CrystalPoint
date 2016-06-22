@@ -326,10 +326,10 @@ void World::update(float elapsedTime)
 
 			if (enemy->attack)
 			{
-                player->HpDown(enemy->damage / 2.0f);
+                player->HpDown(enemy->damage);
 			}
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 1.7f;
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 0.5f;
 		
 		if (enemy->isDead())
 			remove = true;
