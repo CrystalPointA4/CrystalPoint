@@ -91,27 +91,11 @@ void Weapon::draw(){
         glRotatef(rotationWeapon.z, 0, 0, 1);
         glRotatef(rotationWeapon.y, 0, 1, 0);
         glRotatef(rotationWeapon.x, 1, 0, 0);
-/*
-        glColor3ub(255, 255, 0);
-        glBegin(GL_LINES);
-        glVertex2f(0, 4);
-        glVertex2f(0, -4);
-        glVertex2f(4, 0);
-        glVertex2f(-4, 0);
-        glEnd();*/
-
         glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
 
-        weaponmodel->draw();
+        glScalef(scale, scale, scale);
 
-        //Test code for finding anchor point
-        glTranslatef(collisionPoint.x, collisionPoint.y, collisionPoint.z);
-
-        float matrix[16];
-        glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
-
-        Vec3f point = multiply(matrix, Vec3f(1,1,1));
-
+		weaponmodel->draw();
 
         glPopMatrix();
 

@@ -40,7 +40,7 @@ Crystal::~Crystal()
 
 void Crystal::draw()
 {	
-	crystalRot -= 3.0f;
+	crystalRot -= 0.5f;
 	rotation = Vec3f(0, crystalRot, 0);
 	Entity::draw();	
 }

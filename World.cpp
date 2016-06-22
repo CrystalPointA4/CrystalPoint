@@ -248,7 +248,6 @@ float World::getHeight(float x, float y)
 
 void World::draw()
 {
-
 	player->setCamera();
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
