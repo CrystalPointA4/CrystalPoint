@@ -75,17 +75,7 @@ void Weapon::draw(){
 
         glScalef(scale, scale, scale);
 
-        weaponmodel->draw();
-
-        //Test code for finding anker point
-        glColor3ub(255, 255, 0);
-        glTranslatef(ankerPoint.x, ankerPoint.y, ankerPoint.z);
-        glBegin(GL_LINES);
-        glVertex2f(0, 4);
-        glVertex2f(0, -4);
-        glVertex2f(4, 0);
-        glVertex2f(-4, 0);
-        glEnd();
+		weaponmodel->draw();
 
         glPopMatrix();
 
