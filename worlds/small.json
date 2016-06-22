@@ -1,7 +1,6 @@
 {
   "world": {
     "heightmap": "worlds/small.png",
-    "loadingscreen": "worlds/loadingScreen_picture.png",
     "skybox": "skyboxes/water/",
     "object-templates": [
       {
@@ -13,7 +12,7 @@
 	"music": "WAVE/world1.wav"
   },
   "player": {
-    "startposition": [ 20, 0, 20 ]
+    "startposition": [ -10, -10, -10 ]
   },
   "objects": [ ],
   "portal": {     
