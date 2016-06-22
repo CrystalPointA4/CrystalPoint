@@ -16,7 +16,7 @@ Player::Player()
 	health = maxHp;
 	xp = 0;
 	maxXp = 100;
-	level = 5;
+	level = 1;
 	crystals = 0;
 
 	loadWeapons();

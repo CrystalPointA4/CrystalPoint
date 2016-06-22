@@ -49,7 +49,7 @@ HeightMap::HeightMap(const std::string &file, World* world)
 		{
 			int offsets[4][2] = { { 0, 0 },{ 1, 0 },{ 1, 1 },{ 0, 1 } };
 
-			if (valueAt(x, y, GREEN) > 0)
+			if (valueAt(x, y, GREEN) > 5)
 			{
 				world->addLevelObject(new LevelObject(world->getObjectFromValue(valueAt(x, y, GREEN)).first, Vec3f(x, heightAt(x, y), y), Vec3f(0, 0, 0), 1, world->getObjectFromValue(valueAt(x, y, GREEN)).second));
 			}

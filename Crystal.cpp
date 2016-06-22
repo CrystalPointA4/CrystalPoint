@@ -18,6 +18,8 @@ Crystal::Crystal(const std::string & filled, const std::string & empty, const Ve
 	sound_id = CrystalPoint::GetSoundSystem().LoadSound("WAVE/Crystal.wav", false);
 	music = CrystalPoint::GetSoundSystem().GetSound(sound_id);
 	music->SetPos(position, Vec3f());
+
+	crystalRot = 0;
 }
 
 Crystal::~Crystal()
@@ -38,6 +40,8 @@ Crystal::~Crystal()
 
 void Crystal::draw()
 {	
+	crystalRot -= 3.0f;
+	rotation = Vec3f(0, crystalRot, 0);
 	Entity::draw();	
 }
 

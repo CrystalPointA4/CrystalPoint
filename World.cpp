@@ -40,7 +40,7 @@ World::World(const std::string &fileName)
 		std::cout << "Invalid world file: objects - " << fileName << "\n";
 	if (v["enemies"].isNull())
 		std::cout << "Invalid world file: enemies - " << fileName << "\n";
-	if (v["crystals"].isNull())
+	if (v["crystal"].isNull())
 		std::cout << "Invalid world file: crystals - " << fileName << "\n";
 	
 

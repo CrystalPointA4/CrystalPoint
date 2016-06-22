@@ -1,6 +1,7 @@
 {
   "world": {
     "heightmap": "worlds/small.png",
+    "loadingscreen": "worlds/loadingScreen_picture.png",
     "skybox": "skyboxes/water/",
     "object-templates": [
       {
