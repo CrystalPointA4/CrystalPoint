@@ -57,7 +57,9 @@ void ControllerHandler::SearchBasestation(void){
     while( iter != devices_found.end() )
     {
         serial::PortInfo device = *iter++;
-        if(device.hardware_id == "USB VID:PID=10c4:ea60 SNR=02133"){
+		std::cout << device.hardware_id << " "<< device.port << std::endl;
+
+		if(device.hardware_id == "USB\\VID_10C4&PID_EA60&REV_0100"){
             basestationFound = true;
             baseStation = new serial::Serial(device.port, BasestationBaudrate, serial::Timeout::simpleTimeout(1000));
             break;
@@ -92,7 +94,7 @@ void ControllerHandler::BasestationReader() {
             std::string basestationMessage = baseStation->readline();
             std::vector<std::string> basestationMessageSplit = split(basestationMessage, '|');
             if(basestationMessageSplit.size() > 1){ //Valid message
-                std::cout << "DEBUG: Message received. Length: " << basestationMessageSplit.size() << " Type: " << basestationMessageSplit[0] << " Message: " << basestationMessage;
+                //std::cout << "DEBUG: Message received. Length: " << basestationMessageSplit.size() << " Type: " << basestationMessageSplit[0] << " Message: " << basestationMessage;
                 int messageId = std::stoi(basestationMessageSplit[0]);
                 switch(messageId){
                     //commandList[messageId](basestationMessageSplit);
