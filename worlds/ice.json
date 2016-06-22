@@ -65,7 +65,9 @@
       "file": "models/squid/Blooper.obj",
       "pos": [ 350, 5, 350 ],
       "scale": 0.01,
-      "music": "WAVE/enemy.wav"
+      "music": "WAVE/enemy.wav",
+      "damage": 1,
+      "health": 10
   }],
   "crystal": {
     "full texture": "models/crystal/Crystal.obj",
