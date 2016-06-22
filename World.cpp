@@ -262,9 +262,6 @@ void World::draw()
 	GLfloat mat_specular[] = { 0.15, 0.15, 0.15, 0 };
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 
-
-
-	player->setCamera();
 	skybox->draw();
 	player->draw();
 
@@ -323,14 +320,13 @@ void World::update(float elapsedTime)
 
 			if (enemy->attack)
 			{
-                player->HpDown(enemy->damage / 4);
+                player->HpDown(enemy->damage / 2.0f);
 			}
-
-			remove = true;
-			continue;
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z);
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 1.7f;
 		
+		if (enemy->isDead())
+			remove = true;
 		if(!remove)
 			count++;
 	}
