@@ -9,14 +9,16 @@
 #include "WorldHandler.h"
 
 World::World(const std::string &fileName)
-{
+{		
 	nextworld = false;
 
 	//Store player instance
 	player = Player::getInstance();
+	
 
 	//Create the interface
 	interface = new Interface();
+	
 
 	//Open world json file
 	std::ifstream file(fileName);
@@ -25,6 +27,7 @@ World::World(const std::string &fileName)
 
 	json::Value v = json::readJson(file);
 	file.close();
+	
 
 	//Check file
 	if(v["world"].isNull() || v["world"]["heightmap"].isNull() || v["world"]["skybox"].isNull())
@@ -39,6 +42,13 @@ World::World(const std::string &fileName)
 		std::cout << "Invalid world file: enemies - " << fileName << "\n";
 	if (v["crystal"].isNull())
 		std::cout << "Invalid world file: crystals - " << fileName << "\n";
+	
+
+	if (!v["world"]["loadingscreen"].isNull())
+	{
+		ls.setTexture(v["world"]["loadingscreen"].asString());
+		ls.draw();
+	}	
 
 	//Load object templates
 	for (auto objt : v["world"]["object-templates"])
@@ -49,23 +59,28 @@ World::World(const std::string &fileName)
 			cancollide = objt["collision"].asBool();
 
 		objecttemplates.push_back(std::pair<int, std::pair<std::string, bool>>(objt["color"], std::pair<std::string, bool>(objt["file"], cancollide)));
+		
 	}
 
 	//Generate heightmap for this world
 	heightmap = new HeightMap(v["world"]["heightmap"].asString(), this);
+	
 
 	//Load skybox
 	skybox = new Skybox(15000.0f, v["world"]["skybox"].asString());
 	skybox->init();
+	
 
 	//Map different texture to heightmap if available
 	if(!v["world"]["texture"].isNull())
 		heightmap->SetTexture(v["world"]["texture"].asString());
+	
 
 	//Set player starting position
 	player->position.x = v["player"]["startposition"][0].asFloat();
 	player->position.z = v["player"]["startposition"][2].asFloat();
 	player->position.y = heightmap->GetHeight(player->position.x, player->position.z);
+	
 
 	//Load and place objects into world
 	for (auto object : v["objects"])
@@ -98,6 +113,7 @@ World::World(const std::string &fileName)
 		position.y = getHeight(position.x, position.z);
 
 		entities.push_back(new LevelObject(object["file"].asString(), position, rotation, scale, hasCollision));
+		
 	}
 
 	maxEnemies = 0;
@@ -140,6 +156,7 @@ World::World(const std::string &fileName)
 
 		maxEnemies++;
 		enemies.push_back(new Enemy(e["file"].asString(), e["music"].asString(), e["damage"].asFloat(), e["health"].asFloat(), position, rotation, scale));
+		
 	}
 	maxCrystals = 0;
 	if (!v["crystal"].isNull())
@@ -183,6 +200,7 @@ World::World(const std::string &fileName)
 				Crystal *c = new Crystal(filled, empty, position, rotation, scale);
 								
 				entities.push_back(c);
+				
 			}
 			interface->maxCrystals = maxCrystals;
 		}
@@ -192,6 +210,7 @@ World::World(const std::string &fileName)
 	{
 		sound_id = CrystalPoint::GetSoundSystem().LoadSound(v["world"]["music"].asString().c_str(), true);
 		music = CrystalPoint::GetSoundSystem().GetSound(sound_id);
+		
 	}
 
 	if (!v["portal"].isNull())
@@ -217,6 +236,7 @@ World::World(const std::string &fileName)
 		portal = new Portal(v["portal"]["file"], pos, rot, scale);
 		entities.push_back(portal);
 		portal->maxCrystals = maxCrystals;
+		
 	}
 }
 
@@ -249,7 +269,6 @@ float World::getHeight(float x, float y)
 void World::draw()
 {
 
-	player->setCamera();
 
 	float lightPosition[4] = { 0, 2, 1, 0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -261,6 +280,7 @@ void World::draw()
 
 	skybox->draw();
 
+	player->setCamera();
 	player->draw();
 
 	heightmap->Draw();
@@ -299,14 +319,11 @@ void World::update(float elapsedTime)
 
 		//Al deze code zou in enemy moeten staan
 		enemy->inEyeSight(player->position);
-
+		
 
 		enemy->update(elapsedTime);
 		if (enemy->hasTarget)
 		{
-            if(player->hit)
-                enemy->hit(player->leftWeapon->damage);
-
 			for (auto e : entities)
 			{
 				if (e->canCollide && e->inObject(enemy->position))
@@ -315,24 +332,24 @@ void World::update(float elapsedTime)
 					break;
 				}
 			}
+		}
 
-			if (enemy->attack)
-			{
-                player->HpDown(enemy->damage / 4);
-			}
+		if (enemy->attack)
+		{			
+			remove = true;
+			continue;
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
-		if(enemy->isDead()){
-			remove = true;
-		}
+		
 		if(!remove)
 			count++;
 	}
 
 	if (remove)
 	{
+		player->XpUp(enemies[count]->xp);
 		delete enemies[count];
-		player->XpUp(enemies[count]->xp*2);
+		
 		enemies.erase(enemies.begin() + count);
 		player->HpUp(10);		
 	}
@@ -344,8 +361,6 @@ void World::update(float elapsedTime)
 		if (portal->enter(elapsedTime))
 			nextworld = true;
 	}
-
-    player->hit = false;
 		
 }
 
@@ -366,4 +381,3 @@ bool World::isPlayerPositionValid()
 	}
 	return true;
 }
-

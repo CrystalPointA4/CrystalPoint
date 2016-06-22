@@ -27,8 +27,7 @@ Weapon::Weapon(std::string name, int damage, Element e, std::string modelFilenam
     this->ankerPoint = ankerPoint;
     this->maxRotation = maxRotation;
     this->minRotation = minRotation;
-    this->collisionPoint = collisionPoint;
-
+	this->collision = collision;
 };
 
 Weapon::~Weapon(){
@@ -53,27 +52,10 @@ void Weapon::move(Vec3f location){
     position = location;
 }
 
-Vec3f multiply(float matrix[16], Vec3f vec)
-{
-    Vec3f result;
-
-    for(int i = 0; i < 4; i++)
-    {
-        for(int p = 0; p < 4; p++)
-        {
-            result[i] += matrix[i * p] * vec[p];
-        }
-    }
-
-    return result;
-}
-
-
 void Weapon::draw(){
     if (weaponmodel != nullptr)
     {
         glPushMatrix();
-
 
         //Player position and rotation
         glTranslatef(position.x, position.y, position.z);
@@ -84,44 +66,28 @@ void Weapon::draw(){
         //offset from player
         glTranslatef(offsetPlayer.x, offsetPlayer.y, offsetPlayer.z);
 
-        glScalef(scale, scale, scale);
-
         //Rotate weapon itself, from specific anker point
         glTranslatef(ankerPoint.x, ankerPoint.y, ankerPoint.z);
         glRotatef(rotationWeapon.z, 0, 0, 1);
         glRotatef(rotationWeapon.y, 0, 1, 0);
         glRotatef(rotationWeapon.x, 1, 0, 0);
-/*
+        glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
+
+        glScalef(scale, scale, scale);
+
+        weaponmodel->draw();
+
+        //Test code for finding anker point
         glColor3ub(255, 255, 0);
+        glTranslatef(ankerPoint.x, ankerPoint.y, ankerPoint.z);
         glBegin(GL_LINES);
         glVertex2f(0, 4);
         glVertex2f(0, -4);
         glVertex2f(4, 0);
         glVertex2f(-4, 0);
-        glEnd();*/
-
-        glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
-
-        weaponmodel->draw();
-
-        //Test code for finding anchor point
-        glTranslatef(collisionPoint.x, collisionPoint.y, collisionPoint.z);
-
-        float matrix[16];
-        glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
-
-        Vec3f point = multiply(matrix, Vec3f(1,1,1));
-
+        glEnd();
 
         glPopMatrix();
 
-        glPushMatrix();
-
-
-
-        glPopMatrix();
     }
 }
-
-
-

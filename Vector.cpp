@@ -2,7 +2,6 @@
 #include <cmath>
 #include "Vector.h"
 
-
 Vec3f::Vec3f(float x, float y, float z)
 {
 	this->x = x;

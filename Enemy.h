@@ -21,15 +21,11 @@ public:
 	int xp;
 	bool attack;
 
-	bool isHit;
-
 	void update(float);
 	void draw();
 
 	void inEyeSight(Vec3f &);
 	void collide(const Entity *entity);
-	void hit(int damage);
-	bool isDead(void);
 private:
 	int hit_sound_id;
 };

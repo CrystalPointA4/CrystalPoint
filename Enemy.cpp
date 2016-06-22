@@ -2,7 +2,6 @@
 #include <cmath>
 #include "Enemy.h"
 #include "Model.h"
-#include "Player.h"
 #include <iostream>
 
 Enemy::Enemy(const std::string &fileName,
@@ -29,7 +28,7 @@ Enemy::Enemy(const std::string &fileName,
 	hasTarget = false;
 	hit_sound_id = CrystalPoint::GetSoundSystem().LoadSound(fileMusic.c_str(), false);
 	music = CrystalPoint::GetSoundSystem().GetSound(hit_sound_id);
-	attack = false;
+	attack = false;	
 }
 
 
@@ -81,14 +80,6 @@ void Enemy::collide(const Entity * entity)
 	position.z = difference.z + entity->position.z;
 }
 
-void Enemy::hit(int damage){
-	health -= damage;
-}
-
-bool Enemy::isDead(){
-	return health < 0;
-}
-
 void Enemy::update(float delta)
 {
 	music->SetPos(position, Vec3f());
@@ -124,22 +115,5 @@ void Enemy::update(float delta)
 			attack = true;
 		}
 		rotation.y = atan2f(dx, dz) * 180 / M_PI;		
-	}
-	Player *player = Player::getInstance();
-
-	if(inObject(player->position + player->leftWeapon->collisionPoint)){
-		if(!isHit){
-			isHit = true;
-			hit(player->leftWeapon->damage);
-		}
-		std::cout << "HIT1";
-	}else if(inObject(player->rightWeapon->collisionPoint)){
-		if(!isHit){
-			isHit = true;
-			hit(player->rightWeapon->damage);
-		}
-		std::cout << "HIT2";
-	}else{
-		isHit = false;
 	}
 }

@@ -10,13 +10,12 @@
       "collision": [ 0, 0, 0 ],
       "maxRotation": [ 170, 70 ],
       "minRotation": [ 20, -80 ],
-      "scale": 0.3,
 
       "left": {
-        "offset": [ 1.5, -2.6, 0 ]
+        "offset": [ 4.5, -8, -1 ]
       },
       "right": {
-        "offset": [ -0.1, -2.6, 0 ]
+        "offset": [ 0.5, -8, -1 ]
       }
     },
     {
@@ -29,13 +28,12 @@
       "collision": [ 0, 0, 0 ],
       "maxRotation": [ 170, 70 ],
       "minRotation": [ 20, -80 ],
-      "scale": 0.3,
 
       "left": {
-        "offset": [ 1.5, -2.6, 0 ]
+        "offset": [ 4.5, -8, -1 ]
       },
       "right": {
-        "offset": [ -0.1, -2.6, 0 ]
+        "offset": [ 0.5, -8, -1 ]
       }
     }
   ]

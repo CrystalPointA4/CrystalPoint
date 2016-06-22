@@ -170,6 +170,7 @@
     <ClCompile Include="lib\serial\src\impl\list_ports\list_ports_win.cc" />
     <ClCompile Include="lib\serial\src\impl\win.cc" />
     <ClCompile Include="lib\serial\src\serial.cc" />
+    <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MenuElement.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="lib\serial\include\impl\win.h" />
     <ClInclude Include="lib\serial\include\serial.h" />
     <ClInclude Include="lib\serial\include\v8stdint.h" />
+    <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuElement.h" />

@@ -40,8 +40,6 @@ public:
 	int level;
 	int crystals;
 
-	bool hit;
-
 	float speed;
 
 	void HpUp(int);
