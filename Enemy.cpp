@@ -113,7 +113,7 @@ void Enemy::update(float delta)
 	}
 	Player *player = Player::getInstance();
 
-	if(inObject(player->position + player->leftWeapon->collisionPoint)){
+/*	if(inObject(player->position + player->leftWeapon->collisionPoint)){
 		if(!isHit){
 			isHit = true;
 			hit(player->leftWeapon->damage);
@@ -127,5 +127,5 @@ void Enemy::update(float delta)
 		std::cout << "HIT2";
 	}else{
 		isHit = false;
-	}
+	}*/
 }

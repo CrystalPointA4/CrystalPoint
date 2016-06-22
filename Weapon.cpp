@@ -93,8 +93,6 @@ void Weapon::draw(){
         glRotatef(rotationWeapon.x, 1, 0, 0);
         glTranslatef(-ankerPoint.x, -ankerPoint.y, -ankerPoint.z);
 
-        glScalef(scale, scale, scale);
-
 		weaponmodel->draw();
 
         glPopMatrix();
