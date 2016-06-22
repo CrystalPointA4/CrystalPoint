@@ -334,9 +334,10 @@ void World::update(float elapsedTime)
 			}
 		}
 
-		if (enemy->attack())
+		if (enemy->attack)
 		{			
-			player->HpDown(enemy->damage);
+			remove = true;
+			continue;
 		}
 		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
 		
