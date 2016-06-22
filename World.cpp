@@ -219,7 +219,7 @@ World::World(const std::string &fileName)
 		if (!v["portal"]["pos"].isNull())
 			pos = Vec3f(v["portal"]["pos"][0].asFloat(),
 				v["portal"]["pos"][1].asFloat(),
-				v["portal"]["pos"][0].asFloat());
+				v["portal"]["pos"][2].asFloat());
 
 		pos.y = getHeight(pos.x, pos.z);
 
@@ -227,7 +227,7 @@ World::World(const std::string &fileName)
 		if (!v["portal"]["rot"].isNull())
 			pos = Vec3f(v["portal"]["rot"][0].asFloat(),
 				v["portal"]["rot"][1].asFloat(),
-				v["portal"]["rot"][0].asFloat());
+				v["portal"]["rot"][2].asFloat());
 
 		float scale = 1.0f;
 		if (!v["portal"]["scale"].isNull())
@@ -343,7 +343,7 @@ void World::update(float elapsedTime)
 			remove = true;
 			continue;
 		}
-		enemy->position.y = getHeight(enemy->position.x, enemy->position.z) + 2.0f;
+		enemy->position.y = getHeight(enemy->position.x, enemy->position.z);
 		
 		if(!remove)
 			count++;
