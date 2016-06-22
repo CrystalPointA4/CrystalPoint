@@ -93,6 +93,13 @@ void WorldHandler::update(float deltaTime)
 		world->update(deltaTime);
 }
 
+void WorldHandler::teleportRandom(){
+	Vec2f randomposition = world->randomPosition();
+	printf("test %d %d", randomposition.x, randomposition.y);
+	Player::getInstance()->position = Vec3f(randomposition.x, randomposition.y, world->getHeight(randomposition.x, randomposition.y));
+	Player::getInstance()->setPosition(50,50,true);
+}
+
 bool WorldHandler::isPlayerPositionValid(void)
 {
 	if(!loadingWorld)

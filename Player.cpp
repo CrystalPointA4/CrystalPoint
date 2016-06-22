@@ -86,6 +86,7 @@ void Player::draw() {
 void Player::HpDown(int damage)
 {
 	int newHealth = health - damage;
+    isHit = true;
 	if (newHealth <= 0)
 	{
 		exit(0);

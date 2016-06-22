@@ -6,6 +6,8 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <stdlib.h>
+#include <cstdlib>
 #include "WorldHandler.h"
 
 World::World(const std::string &fileName)
@@ -220,7 +222,12 @@ World::World(const std::string &fileName)
 	}
 }
 
-
+Vec2f World::randomPosition(void){
+    int randNum = rand()%(entities.size() + 1);
+    Vec3f position = entities[randNum]->position;
+    Vec2f position2 = Vec2f(position.x+100, position.y+100);
+    return position2;
+}
 World::~World()
 {
 	delete heightmap;

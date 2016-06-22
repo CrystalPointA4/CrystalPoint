@@ -6,7 +6,8 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-
+#include <stdlib.h>
+#include <time.h>
 #include "Cursor.h"
 
 void configureOpenGL(void);
@@ -15,10 +16,14 @@ CrystalPoint* app;
 
 bool justMoved = false;
 
+
+
 int main(int argc, char* argv[])
 {
 	app = new CrystalPoint();
 	glutInit(&argc, argv);
+
+	srand (time(NULL));
 
 	configureOpenGL();
 
