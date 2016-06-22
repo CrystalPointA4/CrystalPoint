@@ -23,6 +23,7 @@ public:
 
 	void draw(void);
 	void update(float deltaTime);
+	void teleportRandom();
 
 	bool isPlayerPositionValid(void);
 	float getHeight(float x, float y);

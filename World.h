@@ -41,6 +41,7 @@ public:
 	bool isPlayerPositionValid();
 	float getHeight(float x, float y);
 	void addLevelObject(LevelObject* obj);
+	Vec2f randomPosition(void);
 	std::pair<std::string, bool> getObjectFromValue(int i);
 	
 };

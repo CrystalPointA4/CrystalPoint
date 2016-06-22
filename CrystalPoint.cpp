@@ -130,6 +130,14 @@ void CrystalPoint::update()
                 player->hit = true;
             }
 
+            if(player->isHit){
+                controller.rumble(leftcontroller->controllerId, 50, 250);
+            }
+
+            if(!leftcontroller->lastMagetSwitch && leftcontroller->magnetSwitch){
+                worldhandler -> teleportRandom();
+            }
+
 		}
 		if(rightcontroller != nullptr){
 			Vec2f *rightControllerJoystick = &rightcontroller->joystick;
@@ -151,6 +159,15 @@ void CrystalPoint::update()
                 rightcontroller->lastButton = rightcontroller->button;
                 controller.rumble(rightcontroller->controllerId, 100, 200);
                 player->NextRightWeapon();
+            }
+
+            if(player->isHit){
+                controller.rumble(rightcontroller->controllerId, 50, 250);
+                player->isHit = false;
+            }
+
+            if(!rightcontroller->lastMagetSwitch && rightcontroller->magnetSwitch){
+                worldhandler -> teleportRandom();
             }
 
             player->rightWeapon->rotateWeapon(Vec3f(rightcontroller->ypr.y + 140, 0, -rightcontroller->ypr.z));

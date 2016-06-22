@@ -41,6 +41,7 @@ public:
 	int crystals;
 
 	bool hit;
+    bool isHit;
 
 	float speed;
 
